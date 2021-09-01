@@ -1,0 +1,163 @@
+\documentclass{ctexart}
+\IfFontExistsTF{Source Han Serif SC}{
+    \setCJKmainfont{Source Han Serif SC}
+}{
+    \setCJKmainfont{Noto Serif CJK SC}
+}
+\usepackage{unicode-math}
+
+% \setmathfont{NewCMMath-Book.otf}
+\setmainfont{Libertinus Serif}
+\setmathfont{Libertinus Math}
+% \setmathfont{TeX Gyre Pagella Math}[range=bb]
+
+% https://tex.stackexchange.com/questions/307412/redefine-pi-to-pi-with-unicode-math
+\AtBeginDocument{%
+  \let\umathpi\pi
+  \renewcommand\pi{\symup\umathpi}%
+}
+
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{physics}
+\let\set\qty
+\usepackage[shortlabels, inline]{enumitem} % 继承并扩展了enumerate宏包的功能
+\setlist[enumerate, 1]{left=\parindent..0pt, noitemsep, itemindent=1.7\parindent, listparindent=\parindent, label=\arabic*.}
+\setlist[enumerate, 2]{left=1.7\parindent..0pt, noitemsep, itemindent=2.7\parindent, listparindent=2.5\parindent, label=(\arabic*)}
+
+\newcommand{\limit}[2]{\lim\limits_{#1 \to #2}}
+\newcommand{\me}{\symrm{e}}
+\newcommand{\R}{\ensuremath{\symbb{R}}}
+\newcommand{\K}{\ensuremath{\symbb{K}}}
+\newcommand{\N}{\ensuremath{\symbb{N}}}
+
+\NewDocumentCommand\MM{ O{\R} O{n} }{ \ensuremath{\symup{M}_{#2}(#1)} }
+
+\begin{document}
+\begin{enumerate}
+    \item 设 $ \Gamma $ 是由球面 $ x^{2} + y^{2} + z^{2} = a^{2} $ 和平面 $ x + y + z = 0 $ 交成的圆周, 从第一卦限内看 $ \Gamma $, 它的方向是逆时针. 计算第二型曲线积分
+    \begin{align*}
+        \int_{\Gamma} z \dd{x} + x \dd{y} + y \dd{z}.
+    \end{align*}
+    \item 设 $ f(x) $ 在 $ [1, +\infty) $ 上可导, 且 $ \limit{x}{+\infty}f'(x) = +\infty $, 证明 $ f(x) $ 在 $ [1, +\infty) $ 上不一致连续.
+    \item 设 $ \set{a_{n}} $ 为非负递减的数列, 如果级数 $ \sum_{n=0}^{\infty}a_{n} $ 收敛, 那么 $ \limit{n}{\infty} na_{n} = 0 $. 
+    \item 设 $ a, b > 0 $, $ f \in C[0, +\infty) $, 证明:
+    \begin{enumerate}
+        \item  如果 $ \limit{x}{+\infty}f(x) = f(+\infty) $ 存在, 那么
+        \begin{align*}
+            \int_{0}^{+\infty} \frac{f(ax) - f(bx)}{x} \dd{x} = (f(0) - f(+\infty))\ln\frac{b}{a}.
+        \end{align*}
+        \item 如果无穷积分 $ \int_{1}^{+\infty} f(x)/x \dd{x} $ 收敛, 那么
+        \begin{align*}
+            \int_{0}^{+\infty} \frac{f(ax) - f(bx)}{x} \dd{x} = f(0)\ln\frac{b}{a}.
+        \end{align*}
+        \item 如果 $ f(+\infty) $ 存在, 且积分 $ \int_{0}^{1} f(x)/x \dd{x} $ 收敛, 那么
+        \begin{align*}
+            \int_{0}^{+\infty} \frac{f(ax) - f(bx)}{x} \dd{x} = - f(+\infty)\ln\frac{b}{a}.
+        \end{align*}
+    \end{enumerate}
+    \item 计算积分
+    \begin{align*}
+        I(r) = \int_{0}^{\pi} \ln(1 - 2 r \cos x + r^{2}) \dd{x}, \quad \abs{r} <1.
+    \end{align*}
+    \item 设 $ p > 0 $, 讨论积分
+    \begin{align*}
+        \int_{0}^{\infty} \frac{\sin(1/x)}{x^{p}} \dd{x}
+    \end{align*}
+    的敛散性. 
+    \item 求积分 $ \int_{0}^{+\infty} \sin(x)/x \dd{x} $.
+    \item 设 $ f(x) \in C[0, 1] $, 证明
+    \begin{align*}
+        \limit{n}{\infty} \frac{1}{n} \sum_{k=1}^{n} (-1)^{k+1} f\qty(\frac{k}{n}) = 0.
+    \end{align*}
+    \item 证明: 积分 
+    \begin{align*}
+        \int_{0}^{+\infty} \me^{-(\alpha + u^{2})t} \sin(t) \dd{t},\quad \alpha > 0
+    \end{align*}
+    关于 $ u $ 在 $ [0, +\infty) $ 上一致收敛.    
+    \item 证明: 积分 
+    \begin{align*}
+        \int_{0}^{+\infty} \me^{-(\alpha + u^{2})t} \sin(t) \dd{u},\quad \alpha > 0
+    \end{align*}
+    关于 $ t $ 在 $ [0, +\infty) $ 上一致收敛.
+    \item 计算积分 $ \int_{0}^{+\infty} \sin(x^{2}) \dd{x} $.
+    \item 计算积分 $ \int_{0}^{+\infty} \exp(-a x^{2})\cos(bx) \dd{x} $, 其中 $ a > 0,\ b\in \R $.
+    \item 计算积分 $ \int_{0}^{\pi/2} \tan[\alpha](x) \dd{x} $, 其中 $ \abs{\alpha} < 1 $. 
+    \item 设 $ \K $ 是数域, $ A \in \MM[\K][m] $, $ B \in \MM[\K][n] $, 且 $ A, B $ 没有相同的特征值, 证明矩阵方程 $ AX = XB $ 只有零解.
+    \item 设 $ A $ 是 4 阶方阵, 满足 $ \tr(A^{i}) = i\,(i = 1, 2, 3, 4) $, 求 $ \abs{A} $. 
+    \item $ n $ 阶方阵可对角化的充分必要条件.
+    \item 设 $ f(x) $ 在 $ [0, 1] $ 上可积, 在 $ x = 1 $ 处左连续, 证明:
+    \begin{align*}
+        \limit{n}{\infty}\frac{\int_{0}^{1} x^{n} f(x) \dd{x}}{\int_{0}^{1} x^{n} \dd{x}} = f(1).
+    \end{align*}
+    \item 设 $ A \in \MM $, 若 $ A^{2} = AA' $, 证明 $ A $ 为实对称阵.
+    \item 设 $ A, B \in \MM $, 若 $ A^{2} = A $, $ B^{2} = B $ 以及 $ (A + B)^{2} = A + B $, 证明 $ AB = BA = 0 $.  
+    \item 设 $ A, B $ 都是 $ n $ 阶矩阵, 若 $ A^{k} = 0 $, 且 $ AB + BA = B $, 证明 $ B = 0 $. 
+    \item $ A, B $ 是 $ n $ 阶方阵, $ A + B = AB $, 求证
+    \begin{enumerate}
+        \item $ AB = BA $,
+        \item $ \rank(A) = \rank(B) $,
+        \item $ A $ 可对角化当且仅当 $ B $ 可对角化.
+    \end{enumerate}
+    \item 设 $ f(x), g(x) $ 为多项式, 且 $ (f(x), g(x)) = 1 $, $ A $ 是 $ n $ 阶方阵, 求证: $ f(A)g(A) = 0 $ 的充分必要条件为 $ \rank(f(A)) + \rank(g(A)) = n $.
+    \item 设 $ A, B $ 为实对称阵, 求证:
+    \begin{enumerate}
+        \item 若 $ A $ 正定, 则存在实可逆阵 $ P $ 使得 $ P'AP $ 和 $ P'BP $ 同时为对角阵;
+        \item 若 $ A, B $ 半正定, 则 $ \tr(AB) \geqslant 0 $, 并且等号成立当且仅当 $ AB = 0 $.
+    \end{enumerate}
+    \item $ A, B, C \in \MM $, 并且 $ A = B + C $, 其中 $ B $ 为对称阵, $ C $ 为反对称阵, 证明: 若 $ A^{2} = 0 $, 则 $ A = 0 $.
+    \item 求极限 $ \limit{n}{\infty} \sin[2](\pi \sqrt{n^{2} + n}) $.  
+    \item $ f(x) $ 在 $ [a, b] $ 上二阶可导, 证明存在 $ \xi \in (a, b) $, 使得
+    \begin{align*}
+        f(b) - 2f\qty(\frac{a + b}{2}) + f(a) = \frac{1}{4} (b - a)^{2} f''(\xi),
+    \end{align*}
+    \item 设 $ f(x) $ 在 $ [a, b] $ 上二阶可导, 且 $ f(a) = f(b)  = 0 $, 证明对每个 $ x \in (a, b) $, 都存在对应的 $ \xi \in (a, b) $, 使得
+    \begin{align*}
+        f(x) = \frac{f''(\xi)}{2} (x - a) (x - b).
+    \end{align*}
+    \item 设 $ f(x) $ 在 $ [a, b] $ 上三阶可导, 证明存在 $ \xi \in (a, b) $, 使得
+    \begin{align*}
+        f(b) = f(a) + \frac{1}{2} (b - a) [f'(a) + f'(b)] - \frac{1}{12} (b - a)^{3} f'''(\xi).
+    \end{align*}
+    \item $ f(x) $ 在 $ [0, +\infty) $ 非负连续, 单调递减, 求证 $ \set{a_{n}} $ 极限存在, 其中
+    \begin{align*}
+        a_{n} = \sum_{k = 1}^{n} f(k) - \int_{0}^{n} f(x) \dd{x}.
+    \end{align*}
+    \item 求 $ \limit{n}{\infty} n \qty(\pi/4 - x_{n}) $, 其中:
+    \begin{align*}
+        x_{n} = \frac{n}{n^{2} + 1} + \frac{n}{n^{2} + 2^{2}} + \dots + \frac{n}{n^{2} + n^{2}}.
+    \end{align*}
+    \begin{align*}
+       -\frac{1}{2}\cdot\frac{1}{n} \sum_{k=1}^{n} M_{k} 
+       \leqslant  n\qty(\frac{\pi}{4} - x_{n}) \leqslant -\frac{1}{2}\cdot\frac{1}{n} \sum_{k=1}^{n} m_{k}
+    \end{align*}
+    \item 如果级数 $ \sum_{n = 1}^{\infty} a_{n} $ 收敛, $ \limit{n}{\infty} p_{n} = \infty $, 证明极限
+    \begin{align*}
+        \limit{n}{\infty}\frac{a_{1} p_{1} + a_{2} p_{2} + \dots + a_{n} p_{n}}{p_{n}} = 0.
+    \end{align*}
+    \item 如果级数 $ \sum_{n = 1}^{\infty} a_{n} $ 收敛, 证明极限
+    \begin{align*}
+        \limit{n}{\infty}\qty(n! a_{1} a_{2} \dots a_{n})^{1/n} = 0.
+    \end{align*}
+    \item 面积原理
+    \begin{enumerate}
+        \item 设 $ x \geqslant m \in \N^{*} $, $ f $ 是一个非负的递增函数, 则当 $ \xi \geqslant m $ 时有
+        \begin{align*}
+            \abs{\sum_{k = m}^{[\xi]} f(k) - \int_{m}^{\xi} f(x) \dd{x}} \leqslant f(\xi).
+        \end{align*}
+        \item 设 $ x \geqslant m \in \N^{*} $, $ f $ 是一个非负的递减函数, 则极限
+        \begin{align*}
+            \limit{n}{\infty} \qty(\sum_{k = m}^{[\xi]} f(k) - \int_{m}^{\xi} f(x) \dd{x}) = \alpha
+        \end{align*}
+        存在, 且 $ 0 \leqslant \alpha \leqslant f(m) $. 更进一步, 如果 $ \limit{x}{+\infty} f(x) = 0 $, 那么
+        \begin{align*}
+            \abs{\sum_{k = m}^{[\xi]} f(k) - \int_{m}^{\xi} f(x) \dd{x} - \alpha} \leqslant f(\xi - 1),
+        \end{align*} 
+        这里 $ \xi \geqslant m + 1 $. 
+    \end{enumerate}
+    \item 设 $ f(x) $ 在 $ [a, b] $ 上二次可微, 且 $ f(a)f(b) < 0 $, 对任意 $ x \in [a, b] $ 都有 $ f'(x) > 0 $, $ f''(x) > 0 $. 证明序列 $ \set{x_{n}} $ 极限存在, 其中 $ x_{1} \in [a, b] $, $ x_{n + 1} = x_{n} - f(x_{n})/f'(x_{n})\,(n = 1, 2, \dots) $, 进而可以证明此极限为方程 $ f(x) = 0 $ 的根. 
+    \item 设正项级数 $ \sum_{n = 1}^{\infty} a_{n} $ 收敛, 数列 $ \set{y_{n}} : y_{1} = 1,\ 2y_{n + 1} = y_{n} + \sqrt{y_{n}^{2} + a_{n}} $\, $ (n = 1, 2, \dots) $. 证明 $ \set{y_{n}} $ 是单调递增的收敛数列. 
+    \item 设数列 $ \set{x_{n}} $ 满足: 当 $ n < m $ 时, $ \abs{x_{n} - x_{m}} > 1/n $. 证明数列 $ \set{x_{n}} $ 无界.
+    \item 
+\end{enumerate}
+\end{document}
