@@ -6,9 +6,8 @@
 }
 \usepackage{unicode-math}
 
+\usepackage[mono=false]{libertinus-otf}
 % \setmathfont{NewCMMath-Book.otf}
-\setmainfont{Libertinus Serif}
-\setmathfont{Libertinus Math}
 % \setmathfont{TeX Gyre Pagella Math}[range=bb]
 
 % https://tex.stackexchange.com/questions/307412/redefine-pi-to-pi-with-unicode-math
@@ -21,6 +20,7 @@
 \usepackage{amsmath}
 \usepackage{physics}
 \let\set\qty
+\let\vb\symbfit
 \usepackage[shortlabels, inline]{enumitem} % 继承并扩展了enumerate宏包的功能
 \setlist[enumerate, 1]{left=\parindent..0pt, noitemsep, itemindent=1.7\parindent, listparindent=\parindent, label=\arabic*.}
 \setlist[enumerate, 2]{left=1.7\parindent..0pt, noitemsep, itemindent=2.7\parindent, listparindent=2.5\parindent, label=(\arabic*)}
@@ -159,5 +159,33 @@
     \item 设正项级数 $ \sum_{n = 1}^{\infty} a_{n} $ 收敛, 数列 $ \set{y_{n}} : y_{1} = 1,\ 2y_{n + 1} = y_{n} + \sqrt{y_{n}^{2} + a_{n}} $\, $ (n = 1, 2, \dots) $. 证明 $ \set{y_{n}} $ 是单调递增的收敛数列. 
     \item 设数列 $ \set{x_{n}} $ 满足: 当 $ n < m $ 时, $ \abs{x_{n} - x_{m}} > 1/n $. 证明数列 $ \set{x_{n}} $ 无界.
     \item 设 $ f(x) $ 在闭区间 $ [0, 1] $ 上具有二阶导数, 且 $ f(0) = f'(0) = f(1) = 0 $, 证明: 存在 $ \xi \in (0, 1) $, 使得 $ f''(\xi) = f(\xi) $.
+    \item $ n $ 阶方阵的每行之和与每列之和均为 0, 证明其所有代数余子式全相等.
+    \item 设函数 $ f(x) $ 定义在 $ (a, +\infty) $, 且 $ f(x) $ 在每个有限区间 $ (a, b) $ 内都有界, 并满足
+    \begin{align*}
+        \limit{x}{+\infty} \qty(f(x + 1) - f(x)) = A.
+    \end{align*}
+    证明 $ \limit{x}{+\infty} (f(x) / x) = A $. 
+    \item 证明: \begin{enumerate*}[(1)]
+        \item 关于 $ x $ 的方程 $ \sum_{k=1}^{n} \me^{kx} = n + 1 $ 在 $ (0, 1) $ 上存在唯一的实根 $ a_{n} $;
+        \item 数列 $ \set{a_{n}} $ 收敛, 并求其极限.
+    \end{enumerate*}
+    \item 设 $ a > 0 $, 求积分
+    \begin{align*}
+        \int_{0}^{\pi/2} \frac{1}{\sqrt{x}} \dd{x} \int_{\sqrt{x}}^{\sqrt{\pi/2}} \frac{1}{1 + \tan^{a}y^{2}} \dd{y}
+    \end{align*}
+    \item $ \alpha, \beta $ 是 $ n $ 维列向量, $ A $ 是 $ n $ 阶方阵, 求证: $ \abs{A + \alpha\beta'} = \abs{A} + \beta'A^{*}\alpha $ . 
+    \item 设 $ A \in \R^{3\times 2} $, $ B \in \R^{2\times3} $, 且
+    \begin{align*}
+        AB = \begin{pmatrix}
+            8 & 2 & -2 \\
+            2 & 5 & 4 \\
+            -2 & 4 & 5
+        \end{pmatrix},
+    \end{align*}
+    求证 $ BA = 9 I $. 
+    \item $ A \in \MM $, $ A^{2} = A $, 若对任意列向量 $ x $, 都有 $ x'A'Ax \leqslant x'x $, 证明 $ A' = A $.    
+    \item 证明对任意 $ m \times n $ 矩阵 $ A $, 都有 $ \rank(AA') = \rank(A) $.  
 \end{enumerate}
 \end{document}
+
+% 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
