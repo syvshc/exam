@@ -1,4 +1,4 @@
-\documentclass{ctexart}
+\documentclass[fontset=none]{ctexart}
 \IfFontExistsTF{Source Han Serif SC}{
     \setCJKmainfont{Source Han Serif SC}
 }{
@@ -32,6 +32,7 @@
 \newcommand{\N}{\ensuremath{\symbb{N}}}
 
 \NewDocumentCommand\MM{ O{\R} O{n} }{ \ensuremath{\symup{M}_{#2}(#1)} }
+\DeclareMathOperator{\diag}{diag} 
 
 \begin{document}
 \begin{enumerate}
@@ -185,6 +186,20 @@
     求证 $ BA = 9 I $. 
     \item $ A \in \MM $, $ A^{2} = A $, 若对任意列向量 $ x $, 都有 $ x'A'Ax \leqslant x'x $, 证明 $ A' = A $.    
     \item 证明对任意 $ m \times n $ 矩阵 $ A $, 都有 $ \rank(AA') = \rank(A) $.  
+    \item (极分解) 对可逆阵 $ A \in \MM $, 证明
+    \begin{enumerate}
+        \item 存在正交阵 $ P $, 正定阵 $ B $, 满足 $ A = PB $.
+        \item 存在正交阵 $ Q_{1}, Q_{2} $, 使得 $ Q_{1} A Q_{2} = \diag(\lambda_{1}, \lambda_{2}, \dots, \lambda_{n}) $, 并且 $ \lambda_{1}^{2}, \lambda_{2}^{2}, \dots, \lambda_{n}^{2} $ 是 $ A'A $ 的特征值. 
+    \end{enumerate}
+    \item $ f(x) \in C[a, b] $, 证明函数 $ m(x) = \min\limits_{a \leqslant \xi \leqslant x}f(\xi) $ 在 $ [a, b] $ 连续.
+    \item $ f(x) $ 在 $ (0, +\infty) $ 上二阶可导, 且 $ \limit{x}{+\infty} f(x) $ 存在, $ f''(x) $ 有界, 证明 $ \limit{x}{+\infty} f'(x) = 0 $.
+    \item $ f(x) $ 在 $ \R $ 上三阶连续可导, 且对任意的 $ h > 0 $, 有
+    \begin{align*}
+        \frac{f(x + h) - f(x)}{h} = f'\qty(x + \frac{h}{2})
+    \end{align*}
+    求证: $ f(x) $ 为次数至多为 2 的多项式.
+    \item 设 $ A' = A $, 证明 $ A $ 可逆当且仅当存在矩阵 $ B $ 使得 $ AB + B'A $ 正定.
+    \item 设 $ f(x) $ 在 $ [a, b] $ 上可微, $ f(a) = 0 $, 并且存在实数 $ A > 0 $, 使得对任意 $ x \in [a, b] $, 都有 $ \abs{f'(x)} \leqslant A \abs{f(x)} $, 证明在 $ [a, b] $ 上, $ f(x) \equiv 0 $. 
 \end{enumerate}
 \end{document}
 
