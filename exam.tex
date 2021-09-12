@@ -1,14 +1,12 @@
-\documentclass[fontset=none]{ctexart}
+\documentclass{ctexart}
 \IfFontExistsTF{Source Han Serif SC}{
     \setCJKmainfont{Source Han Serif SC}
-}{
-    \setCJKmainfont{Noto Serif CJK SC}
-}
+}{}
 \usepackage{unicode-math}
 
-\usepackage[mono=false]{libertinus-otf}
-% \setmathfont{NewCMMath-Book.otf}
-% \setmathfont{latinmodern-math.otf}[range=\sqrt]
+% \usepackage[mono=false]{libertinus-otf}
+\setmathfont{NewCMMath-Book.otf}
+\setmathfont{latinmodern-math.otf}[range=\sqrt]
 % \setmathfont{TeX Gyre Pagella Math}[range=bb]
 
 % https://tex.stackexchange.com/questions/307412/redefine-pi-to-pi-with-unicode-math
@@ -18,7 +16,7 @@
 }
 
 \usepackage[margin=1.5cm]{geometry}
-\usepackage{amsmath}
+\usepackage{mathtools}
 \usepackage{physics}
 \let\set\qty
 \let\vb\symbfit
@@ -31,6 +29,7 @@
 \newcommand{\R}{\ensuremath{\symbb{R}}}
 \newcommand{\K}{\ensuremath{\symbb{K}}}
 \newcommand{\N}{\ensuremath{\symbb{N}}}
+\newcommand{\C}{\ensuremath{\symbb{C}}}
 
 \NewDocumentCommand\MM{ O{\R} O{n} }{ \ensuremath{\symup{M}_{#2}(#1)} }
 \DeclareMathOperator{\diag}{diag} 
@@ -129,10 +128,6 @@
     \begin{align*}
         x_{n} = \frac{n}{n^{2} + 1} + \frac{n}{n^{2} + 2^{2}} + \dots + \frac{n}{n^{2} + n^{2}}.
     \end{align*}
-    \begin{align*}
-       -\frac{1}{2}\cdot\frac{1}{n} \sum_{k=1}^{n} M_{k} 
-       \leqslant  n\qty(\frac{\pi}{4} - x_{n}) \leqslant -\frac{1}{2}\cdot\frac{1}{n} \sum_{k=1}^{n} m_{k}
-    \end{align*}
     \item 如果级数 $ \sum_{n = 1}^{\infty} a_{n} $ 收敛, $ \limit{n}{\infty} p_{n} = \infty $, 证明极限
     \begin{align*}
         \limit{n}{\infty}\frac{a_{1} p_{1} + a_{2} p_{2} + \dots + a_{n} p_{n}}{p_{n}} = 0.
@@ -176,7 +171,7 @@
         \int_{0}^{\pi/2} \frac{1}{\sqrt{x}} \dd{x} \int_{\sqrt{x}}^{\sqrt{\pi/2}} \frac{1}{1 + \tan^{a}y^{2}} \dd{y}
     \end{align*}
     \item $ \alpha, \beta $ 是 $ n $ 维列向量, $ A $ 是 $ n $ 阶方阵, 求证: $ \abs{A + \alpha\beta'} = \abs{A} + \beta'A^{*}\alpha $ . 
-    \item 设 $ A \in \R^{3\times 2} $, $ B \in \R^{2\times3} $, 且
+    \item 设 $ A \in \MM[\R][3\times 2] $, $ B \in \MM[\R][2 \times 3] $, 且
     \begin{align*}
         AB = \begin{pmatrix}
             8 & 2 & -2 \\
@@ -207,9 +202,52 @@
     \end{align*}
     证明: $ \limit{x}{+\infty}f(x) $ 存在.
     \item 设 $ f(x) $ 在 $ [0, +\infty) $ 上一致连续, 若对于任意 $ x \in \R $, 都有 $ \limit{n}{+\infty} f(x + n) = 0 $, 证明 $ \limit{x}{+\infty} f(x) = 0 $.  
+    \item 设 $ f(x) $ 在 $ [0, +\infty) $ 上一致连续, 且对任意 $ \delta > 0 $, 都有 $ \limit{n}{\infty} f(n\delta) = 0 $, 证明 $ \limit{x}{+\infty} f(x) = 0 $.  
     \item 设 $ f(x) $ 在 $ \R $ 上一致连续, 则存在正实数 $ a, b $, 使得 $ \abs{f(x)} \leqslant a\abs{x} + b $. 
     \item 设 $ f(x) $ 在 $ [1, +\infty) $ 上一致连续, 证明 $ \abs{f(x)/x} $ 在 $ [1, +\infty) $ 有界. 
     \item 证明欧式空间中两标准正交基的过渡矩阵为正交阵.
+    \item 设 $ \alpha $ 是欧式空间 $ V $ 中的一个非零向量, $ \alpha_{1}, \alpha_{2}, \dots, \alpha_{p} $ 是 $ V $ 中的 $ p $ 个向量, 满足
+    \begin{align*}
+        (a_{i}, a_{j}) \leqslant 0,\ (\alpha_{i}, \alpha) > 0, \quad i, j = 1, 2, \dots, p, i \ne j
+    \end{align*}
+    证明
+    \begin{enumerate}
+        \item $ \alpha_{1}, \alpha_{2}, \dots, \alpha_{p} $ 线性无关;
+        \item $ n $ 维欧式空间中最多有 $ n + 1 $ 个向量, 使其两两互成钝角;
+        \item $ n $ 维欧式空间中一定存在 $ n + 1 $ 个向量, 使其两两互为钝角.
+    \end{enumerate}
+    \item 设 $ A, B \in \MM[\K] $, 且 $ AB = BA $, 利用线性方程组的知识证明
+    \begin{align*}
+        \rank(A + B) \leqslant \rank(A) + \rank(B) - \rank(AB)
+    \end{align*}
+    \item 设 $ B \in \MM[\C][n \times 2] $, 
+    \begin{align*}
+        C = \begin{pmatrix}
+            1 & 1 & \dots & 1\\
+            1 & 2 & \dots & n
+        \end{pmatrix}
+    \end{align*}
+    若 $ A = BC $, 且 $ CB $ 的特征多项式为 $ x^{2} - 2x + 1 $, 求 $ A $ 的特征值, 并求 $ AX = 0 $ 的基础解系. 
+    \item  计算 $ n $ 阶 $ b $ -- 循环行列式:
+    \begin{align*}
+        A = \begin{vmatrix}
+            a_{1}   & a_{2} & a_{3} & \ldots    & a_{n} \\
+            ba_{n}  & a_{1} & a_{2} & \ldots    & a_{n-1} \\
+            ba_{n-1}    & ba_{n}    & a_{1} & \ldots & a_{n-1} \\
+            \vdots  & \vdots & \vdots & \ddots & \vdots \\
+            ba_{2} & ba_{3} & ba_{4} & \ldots & a_{1}
+        \end{vmatrix}
+    \end{align*}
+    \item 设 $ A $ 是 $ n $ 阶实反对称阵, $ D = \diag\qty{d_{1}, d_{2}, \dots, d_{n}} $ 是同阶的对角阵, 且 $ d_{i} > 0\,(i = 1, 2, \dots, n) $. 求证 $ \abs{A + D} > 0 $, 特别地, $ I_{n} + A $ 与 $ I_{n} - A $ 都是非异阵. 
+    \item 如果 $ n $ 阶方阵 $ A = (a_{ij}) $ 适合条件:
+    \begin{align*}
+        \abs{a_{ii}} > \sum_{\mathclap{j = 1,\ j \ne i}}^{n} \abs{a_{ij}}, \quad i = 1, 2, \dots, n,
+    \end{align*}
+    则称 $ A $ 为\textbf{严格对角占优阵}, 求证, 严格对角占优阵必是满秩阵, 若上述条件改为:
+    \begin{align*}
+        a_{ii} > \sum_{\mathclap{j = 1,\ j \ne i}}^{n} \abs{a_{ij}}, \quad i = 1, 2, \dots, n,
+    \end{align*}   
+    求证 $ \abs{A} > 0 $. 
 \end{enumerate}
 \end{document}
 
