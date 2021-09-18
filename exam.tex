@@ -19,7 +19,7 @@
 \usepackage{mathtools}
 \usepackage{physics}
 \let\set\qty
-\let\vb\symbfit
+% \let\vb\symbfit
 \usepackage[shortlabels, inline]{enumitem} % 继承并扩展了enumerate宏包的功能
 \setlist[enumerate, 1]{left=\parindent..0pt, noitemsep, itemindent=1.7\parindent, listparindent=\parindent, label=\arabic*.}
 \setlist[enumerate, 2]{left=1.7\parindent..0pt, noitemsep, itemindent=2.7\parindent, listparindent=2.5\parindent, label=(\arabic*)}
@@ -33,6 +33,9 @@
 
 \NewDocumentCommand\MM{ O{\R} O{n} }{ \ensuremath{\symup{M}_{#2}(#1)} }
 \DeclareMathOperator{\diag}{diag} 
+\DeclareMathOperator{\Image}{Im}
+\DeclareMathOperator{\Ker}{Ker}
+
 
 \begin{document}
 \begin{enumerate}
@@ -81,7 +84,7 @@
         \int_{0}^{+\infty} \me^{-(\alpha + u^{2})t} \sin(t) \dd{u},\quad \alpha > 0
     \end{align*}
     关于 $ t $ 在 $ [0, +\infty) $ 上一致收敛.
-    \item 计算积分 $ \int_{0}^{+\infty} \sin(x^{2}) \dd{x} $.
+    \item 计算 Fresnel 积分 $ \int_{0}^{+\infty} \sin(x^{2}) \dd{x} $.
     \item 计算积分 $ \int_{0}^{+\infty} \exp(-a x^{2})\cos(bx) \dd{x} $, 其中 $ a > 0,\ b\in \R $.
     \item 计算积分 $ \int_{0}^{\pi/2} \tan[\alpha](x) \dd{x} $, 其中 $ \abs{\alpha} < 1 $. 
     \item 设 $ \K $ 是数域, $ A \in \MM[\K][m] $, $ B \in \MM[\K][n] $, 且 $ A, B $ 没有相同的特征值, 证明矩阵方程 $ AX = XB $ 只有零解.
@@ -248,6 +251,33 @@
         a_{ii} > \sum_{\mathclap{j = 1,\ j \ne i}}^{n} \abs{a_{ij}}, \quad i = 1, 2, \dots, n,
     \end{align*}   
     求证 $ \abs{A} > 0 $. 
+    \item 设 $ f(x) $ 在 $ [a, b] $ 上有定义, 对 $ [a, b] $ 上任意一个闭区间 $ [x_{1}, x_{2}] \subset [a, b] $, 对介于 $ f(x_{1}) $ 与 $ f(x_{2}) $ 之间的任一常数 $ l $, 方程 
+    \begin{align*}
+        f(x) = l
+    \end{align*}
+    在 $ [x_{1}, x_{2}] $ 上有且仅有有限个解, 证明 $ f(x) \in C[a, b] $.
+    \item 设 $ f(x) $ 在 $ (0, +\infty) $ 上可导, 且 $ \limit{x}{+\infty} \qty(f(x) + f'(x)) = A $, 证明 $ \limit{x}{+\infty} f(x) = A $, 其中 $ A \in \R\cup{\pm\infty} $. 
+    \item 已知 $ A \in \MM[\K] $, 且 $ \tr(A) = 0 $, 证明
+    \begin{enumerate}
+        \item 存在数域 $ \K $ 上的可逆阵 $ C $, 使得 $ C^{-1}AC $ 为主对角元全为 $ 0 $ 的矩阵.
+        \item 存在 $ X, Y \in \MM[\K] $, 使得 $ XY - YX = A $.
+        \item 令 $ U $ 为 $ \MM[\K] $ 中所有形如 $ XY - YX $ 的矩阵组成的集合, 证明 $ U $ 是 $ \MM[\K] $ 的一个线性子空间. 
+    \end{enumerate}
+    \item 求极限
+    \begin{align*}
+        \limit{n}{\infty} \qty(\frac{1}{\sqrt{n^{2} + 1}} + \frac{1}{\sqrt{n^{2} + 2}} + \dots + \frac{1}{\sqrt{n^{2} + n}})^{n}
+    \end{align*}
+    \item 设 $ \varphi $ 为 $ n $ 维线性空间 $ V $ 上的线性变换, $ W $ 是 $ \varphi $ 的不变子空间, 且 $ V = \Image \varphi \oplus W $, 证明
+    \begin{align*}
+        V = \Image \varphi \oplus \Ker \varphi.
+    \end{align*}
+    \item 设 $ A, B \in \MM[\C] $, 且 $ \rank(A) = \rank(B)  = 1,\ \tr(A) = \tr(B) $, 证明 $ A $ 相似于 $ B $.
+    \item 设 $ \varphi $ 是 $ n $ 维线性空间 $ V $ 上的线性变换, 求证: 必存在正整数 $ m $, 使得
+    \begin{align*}
+        \Image \varphi^{m} = \Image \varphi^{m+1},\quad \Ker \varphi^{m} = \Ker \varphi^{m+1}, \quad V = \Image \varphi^{m} \oplus \Ker \varphi^{m+1}.
+    \end{align*}
+    \item 使用 Jordan 标准型证明迹非 $ 0 $ 的秩 1 矩阵可对角化.
+    \item 设 $ A $ 是 $ n $ 阶实对称阵, 证明: $ A $ 可逆的充分必要条件为存在矩阵 $ B $, 使得 $ AB + B'A $ 正定.
 \end{enumerate}
 \end{document}
 
