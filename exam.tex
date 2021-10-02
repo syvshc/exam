@@ -4,8 +4,8 @@
 }{}
 \usepackage{unicode-math}
 
-% \usepackage[mono=false]{libertinus-otf}
-\setmathfont{NewCMMath-Book.otf}
+\usepackage[mono=false]{libertinus-otf}
+% \setmathfont{NewCMMath-Book.otf}
 % \setmathfont{latinmodern-math.otf}[range=\sqrt]
 % \setmathfont{TeX Gyre Pagella Math}[range=bb]
 
@@ -33,6 +33,7 @@
 \newcommand{\K}{\ensuremath{\symbb{K}}}
 \newcommand{\N}{\ensuremath{\symbb{N}}}
 \newcommand{\C}{\ensuremath{\symbb{C}}}
+\newcommand{\Q}{\ensuremath{\symbb{Q}}}
 
 \NewDocumentCommand{\MM}{ O{\R} O{n} }{ \ensuremath{\symup{M}_{#2}(#1)} }
 \DeclareMathOperator{\diag}{diag} 
@@ -362,5 +363,32 @@
         f(x)u(x) + g(x)v(x) = 1,
     \end{align*}
     且 $ \deg v(x) < \deg f(x) $, $ \deg u(x) < \deg g(x) $.  
+    \item 设 $ f(x) $ 是次数大于 $ 0 $ 的首一整系数多项式, 若 $ f(0), f(1) $ 都是奇数, 求证 $ f(x) $ 没有有理根.
+    \item 设 $ f(x) $ 是次数大于 $ 1 $ 的奇数次有理系数多项式, 且它在有理数域上不可约, 求证: 若 $ x_{1}, x_{2} $ 是 $ f(x) $ 在复数域上的两个不同的根, 则 $ x_{1} + x_{2} $ 必不是有理数.
+    \item 设 $ A $ 是实矩阵, 又 $ I_{n} - A $ 的特征值的模长都小于 $ 1 $, 求证: $ 0<\abs{A}<2^{n} $. 
+    \item 设
+    \begin{align*}
+        \Q(\sqrt[n]{2}) = \set{a_{0} + a_{1}\sqrt[n]{2} + a_{2}\sqrt[n]{4} + \dots + a_{n-1}\sqrt[n]{2^{n-1}} : a_{i} \in \Q, 0\leqslant i\leqslant n-1}
+    \end{align*}
+    证明 $ \Q(\sqrt[n]{2}) $ 是一个数域, 并求 $ \Q(\sqrt[n]{2}) $ 做为 $ \Q $ 上线性空间的一组基.
+    \item 设 $ f(x) = x^{n} + a_{1}x^{n-1} + \dots + a_{n-1}x + a_{n} $ 是数域 $ \K $ 上的不可约多项式, $ \varphi $ 是 $ \K $ 上的 $ n $ 维线性空间 $ V $ 上的线性变换, $ \alpha_{1} \ne 0, \alpha_{2}, \dots, \alpha_{n} $, 是 $ V $ 中的向量, 满足 
+    \begin{align*}
+        \varphi(\alpha_{i}) = \alpha_{i + 1}\,(i = 1, 2, \dots, n-1), \quad \varphi(\alpha_{n}) = -a_{n}\alpha_{1} - a_{n-1}\alpha_{2} - \dots - a_{1}\alpha_{n}.
+    \end{align*}
+    证明 $ \set{\alpha_{1}, \alpha_{2}, \dots, \alpha_{n}} $ 是 $ V $ 的一组基. 
+    \item 设 $ A, B \in \MM $, 存在可逆复矩阵 $ P $, 使得 $ P^{-1}AP = B $, 证明存在可逆实矩阵 $ Q $ 使得 $ Q^{-1}AQ = B $.   
+    \item 设 $ A, B $ 为 $ n $ 阶方阵, 满足 $ \rank(ABA) = r(A) $, 求证: $ AB $ 与 $ BA $ 相似.
+    \item 设 $ A, B $ 为 $ n $ 阶方阵, 则 $ AB $ 与 $ BA $ 相似的充要条件是 $ \rank((AB)^{i}) = \rank((BA)^{i})\,(1 \leqslant i \leqslant n - 1) $.
+    \item  设 $ A, B $ 为 $ n $ 阶方阵, 满足 $ \rank(ABA) = r(B) $, 求证: $ AB $ 与 $ BA $ 相似.
+    \item 设 $ f $ 在 $ \R $ 上连续, 又 $ \varphi(x) = f(x)\int_{0}^{x} f(t) \dd{t} $ 单调递减, 证明 $ f(x) \equiv 0, x\in\R $.
+    \item 计算积分
+    \begin{align*}
+        I = \int_{0}^{\pi/2} \frac{\sin x}{\sin x + \cos x} \dd{x}.
+    \end{align*}
+    \item 讨论广义积分
+    \begin{align*}
+        \int_{1}^{+\infty} \frac{\sin x}{x^{p} + \sin x} \dd{x}
+    \end{align*}
+    在何时绝对收敛或条件收敛.
 \end{enumerate}
 \end{document}
