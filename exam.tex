@@ -2,8 +2,10 @@
 \IfFontExistsTF{Source Han Serif SC}{
     \setCJKmainfont{Source Han Serif SC}
 }{}
-\usepackage{unicode-math}
 
+\xeCJKsetup{CheckSingle=true}
+
+\usepackage{unicode-math}
 \usepackage[mono=false]{libertinus-otf}
 % \setmathfont{NewCMMath-Book.otf}
 % \setmathfont{latinmodern-math.otf}[range=\sqrt]
@@ -390,5 +392,23 @@
         \int_{1}^{+\infty} \frac{\sin x}{x^{p} + \sin x} \dd{x}
     \end{align*}
     在何时绝对收敛或条件收敛.
+    \item 设 $ f(x) $ 在 $ [a, +\infty) $ 上一阶连续可导, 且 $ x \to +\infty $ 时, $ f(x) $ 单调递减趋于 $ 0 $, 证明无穷积分 $ \int_{a}^{+\infty} f(x) \dd{x} $ 收敛当且仅当 $ \int_{a}^{+\infty} xf'(x) \dd{x} $ 收敛. 
+    \item 设 $ \set{a_{n}} $ 是正数列, $ \liminf\limits_{n\to\infty} a_{n} = 1 $, $ \limsup\limits_{n\to\infty} a_{n} = A < +\infty $, 且 $ \limit{n}{\infty} \sqrt[n]{a_{1}a_{2}\dots a_{n}} = 1 $, 求证:
+    \begin{align*}
+        \limit{n}{\infty}\frac{a_{1} + a_{2} + \dots + a_{n}}{n} = 1.
+    \end{align*}
+    \item 设 $ \limit{n}{\infty} a_{n} = A $, 求 $ \limit{n}{\infty} \sum_{k=1}^{n} \frac{a_{n+k}}{n+k} $.  
+    \item 设 $ f(x) \in C[1, +\infty) $, 对任意 $ x\in [1, +\infty) $, 有 $ f(x) > 0 $, 且 $ \limit{x}{+\infty} \ln(f(x))/\ln(x) = -\lambda $, 证明: $ \lambda > 1 $ 时 $ \int_{1}^{+\infty} f(x) \dd{x} $ 收敛.\footnote{数列形式下的该判别法称为\emph{对数判别法}}
+    \item 设函数 $ f(x) $ 在 $ [0, 1] $ 上单调, 并且积分 $ \int_{0}^{1} f(x) \dd{x} $ 收敛, 证明:
+    \begin{align*}
+        \int_{0}^{1} f(x) \dd{x} = \limit{n}{\infty} \frac{1}{n} \sum_{k=1}^{n} f\qty(\frac{k}{n}).
+    \end{align*}
+    并且举反例说明``去掉单调条件, 结论则不成立.''
+    \item 设 $ V $ 是 $ n $ 维线性空间, 对于整数 $ k \geqslant n $, 证明存在一组向量 $ \alpha_{1}, \alpha_{2}, \dots, \alpha_{k} \in V $, 使得其中任意 $ n $ 个线性无关.
+    \item 设 $ \set{a_{n}} $ 是递减正数列, 证明: $ \sum_{n=1}^{\infty}a_{n} $ 与 $ \sum_{n=1}^{\infty}2^{n}a_{2^{n}} $ 同时敛散.
+    \item 设对任意 $ n\in \N $, $ a_{n} > 0 $, 且级数 $ \sum_{n=1}^{\infty}1/a_{n} $ 收敛, 证明下述级数收敛:
+    \begin{align*}
+        \sum_{n=1}^{\infty}\frac{n}{a_{1} + a_{2} + \dots + a_{n}}.
+    \end{align*}
 \end{enumerate}
 \end{document}
