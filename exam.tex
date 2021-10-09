@@ -406,9 +406,13 @@
     并且举反例说明``去掉单调条件, 结论则不成立.''
     \item 设 $ V $ 是 $ n $ 维线性空间, 对于整数 $ k \geqslant n $, 证明存在一组向量 $ \alpha_{1}, \alpha_{2}, \dots, \alpha_{k} \in V $, 使得其中任意 $ n $ 个线性无关.
     \item 设 $ \set{a_{n}} $ 是递减正数列, 证明: $ \sum_{n=1}^{\infty}a_{n} $ 与 $ \sum_{n=1}^{\infty}2^{n}a_{2^{n}} $ 同时敛散.
-    \item 设对任意 $ n\in \N $, $ a_{n} > 0 $, 且级数 $ \sum_{n=1}^{\infty}1/a_{n} $ 收敛, 证明下述级数收敛:
+    \item 设对任意 $ n\in \N $, $ a_{n} > 0 $, 且级数 $ \sum_{n=1}^{\infty}1/a_{n} $ 收敛, 证明下述级数收敛 (利用绝对收敛函数重排不改变敛散性与级数值):
     \begin{align*}
         \sum_{n=1}^{\infty}\frac{n}{a_{1} + a_{2} + \dots + a_{n}}.
     \end{align*}
+    \item 判断级数 $ \sum_{n=1}^{\infty} (-1)^{[\sqrt{n}]}/n^{p} $ 的敛散性.
+    \item 设 $ f(x) $ 在 $ [-1, 1] $ 上二次连续可微, 且有 $ \limit{x}{0} f(x)/x = 0 $, 证明级数 $ \sum_{n=1}^{\infty}f(1/n) $ 绝对收敛.
+    \item 已知 $ \sum_{n=1}^{\infty}(a_{n} - a_{n-1}) $ 绝对收敛, $ \sum_{n=1}^{\infty}b_{n} $ 收敛, 证明 $ \sum_{n=1}^{\infty}a_{n}b_{n} $ 收敛.
+    \item 设 $ A, B \in \MM[\C] $, 若 $ AB = BA $, 则 $ A, B $ 至少有一个公共的特征向量. 
 \end{enumerate}
 \end{document}
