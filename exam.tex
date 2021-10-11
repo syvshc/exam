@@ -15,6 +15,7 @@
 \usepackage[margin=1.5cm]{geometry}
 \usepackage{mathtools}
 \usepackage{physics}
+\usepackage[colorlinks=true]{hyperref}
 
 % https://tex.stackexchange.com/questions/307412/redefine-pi-to-pi-with-unicode-math
 \AtBeginDocument{%
@@ -26,7 +27,7 @@
 \let\emph\textbf
 % \let\vb\symbfit
 \usepackage[shortlabels, inline]{enumitem} % 继承并扩展了enumerate宏包的功能
-\setlist[enumerate, 1]{leftmargin=*, label=\arabic*., widest=111}
+\setlist[enumerate, 1]{leftmargin=*, label=\arabic*., widest=111, ref=\arabic*}
 \setlist[enumerate, 2]{leftmargin=*, label=(\arabic*)}
 
 \newcommand{\limit}[2]{\lim\limits_{#1 \to #2}}
@@ -248,7 +249,7 @@
             ba_{2} & ba_{3} & ba_{4} & \ldots & a_{1}
         \end{vmatrix}
     \end{align*}
-    \item 设 $ A $ 是 $ n $ 阶实反对称阵, $ D = \diag\qty{d_{1}, d_{2}, \dots, d_{n}} $ 是同阶的对角阵, 且 $ d_{i} > 0\,(i = 1, 2, \dots, n) $. 求证 $ \abs{A + D} > 0 $, 特别地, $ I_{n} + A $ 与 $ I_{n} - A $ 都是非异阵. 
+    \item\label{item:反称加对角} 设 $ A $ 是 $ n $ 阶实反对称阵, $ D = \diag\qty{d_{1}, d_{2}, \dots, d_{n}} $ 是同阶的对角阵, 且 $ d_{i} > 0\,(i = 1, 2, \dots, n) $. 求证 $ \abs{A + D} > 0 $, 特别地, $ I_{n} + A $ 与 $ I_{n} - A $ 都是非异阵. 
     \item 如果 $ n $ 阶方阵 $ A = (a_{ij}) $ 适合条件:
     \begin{align*}
         \abs{a_{ii}} > \sum_{\mathclap{j = 1,\ j \ne i}}^{n} \abs{a_{ij}}, \quad i = 1, 2, \dots, n,
@@ -422,5 +423,21 @@
     \end{align*}
     若 $ \limit{x}{+\infty}f'(x) = c $, 证明 $ f'(x) = c $ 在 $ [a, +\infty) $ 上恒成立.
     \item 设 $ a_{n} > 0 $, $ \sum_{n=1}^{\infty}a_{n} < +\infty $, 对于 $ \alpha, \beta > 0 $, 且 $ \alpha + \beta > 1 $, 证明 $ \sum_{n=1}^{\infty} a_{n}^{\alpha}/n^{\beta} < +\infty $. 
+    \item 设 $ A \in \MM $, 对任意 $ 0\ne x \in \R^{n} $, 都有 $ x'Ax > 0 $, 利用 \ref{item:反称加对角} 题证明 $ \abs{A} > 0 $.
+    \item 设有 $ n $ 阶分块对角阵 
+    \begin{align*}
+        A = \begin{pmatrix}
+            A_{1} & & \\
+            & \ddots & \\
+            & & A_{k}
+        \end{pmatrix}\quad 
+        B = \begin{pmatrix}
+            B_{1} & & \\
+            & \ddots & \\
+            & & B_{k}
+        \end{pmatrix}
+    \end{align*}
+    其中 $ A_{i} $ 与 $ B_{i} $ 为同阶方阵, 假定矩阵 $ A_{i} $ 适合非零多项式 $ g_{i}(x) $, 且 $ g_{i}(x)\,(i = 1, \dots, k) $ 两两互素. 求证: 若对于每个 $ i $, 存在多项式 $ f_{i}(x) $, 使 $ B_{i} = f_{i}(A_{i}) $, 则必存在次数不超过 $ n-1 $ 的多项式 $ f(x) $, 使得 $ B = f(A) $.
+    \item 设 $ n $ 阶方阵 $ A $ 的秩为 $ n-1 $, $ B $ 是同阶非零阵, 且有 $ AB = BA = 0 $, 证明: 存在不超过 $ n-1 $ 阶的多项式 $ f(x) $, 使得 $ B = f(A) $.
 \end{enumerate}
 \end{document}
