@@ -30,6 +30,18 @@
 \setlist[enumerate, 1]{leftmargin=*, label=\arabic*., widest=111, ref=\arabic*}
 \setlist[enumerate, 2]{leftmargin=*, label=(\arabic*)}
 
+% https://tex.stackexchange.com/a/52718/180617
+\def\asteriskitem{*}
+\makeatletter
+\def\sitem{%
+  \expandafter\let\expandafter\originallabel\csname labelenum\romannumeral\@enumdepth\endcsname
+  \expandafter\def\csname labelenum\romannumeral\@enumdepth\expandafter\endcsname\expandafter{%
+    \expandafter\bfseries\expandafter\asteriskitem\originallabel}%
+  \item
+  \expandafter\let\csname labelenum\romannumeral\@enumdepth\endcsname\originallabel
+}
+\makeatother
+
 \newcommand{\limit}[2]{\lim\limits_{#1 \to #2}}
 \newcommand{\me}{\symrm{e}}
 \newcommand{\R}{\ensuremath{\symbb{R}}}
@@ -95,7 +107,7 @@
     \item 计算 Fresnel 积分 $ \int_{0}^{+\infty} \sin(x^{2}) \dd{x} $.
     \item 计算积分 $ \int_{0}^{+\infty} \exp(-a x^{2})\cos(bx) \dd{x} $, 其中 $ a > 0,\ b\in \R $.
     \item 计算积分 $ \int_{0}^{\pi/2} \tan[\alpha](x) \dd{x} $, 其中 $ \abs{\alpha} < 1 $. 
-    \item 设 $ \K $ 是数域, $ A \in \MM[\K][m] $, $ B \in \MM[\K][n] $, 且 $ A, B $ 没有相同的特征值, 证明矩阵方程 $ AX = XB $ 只有零解.
+    \item\label{item:AX=XB} 设 $ \K $ 是数域, $ A \in \MM[\K][m] $, $ B \in \MM[\K][n] $, 且 $ A, B $ 没有相同的特征值, 证明矩阵方程 $ AX = XB $ 只有零解.
     \item 设 $ A $ 是 4 阶方阵, 满足 $ \tr(A^{i}) = i\,(i = 1, 2, 3, 4) $, 求 $ \abs{A} $. 
     \item $ n $ 阶方阵可对角化的充分必要条件.
     \item 设 $ f(x) $ 在 $ [0, 1] $ 上可积, 在 $ x = 1 $ 处左连续, 证明:
@@ -111,7 +123,7 @@
         \item $ \rank(A) = \rank(B) $,
         \item $ A $ 可对角化当且仅当 $ B $ 可对角化.
     \end{enumerate}
-    \item 设 $ f(x), g(x) $ 为多项式, 且 $ (f(x), g(x)) = 1 $, $ A $ 是 $ n $ 阶方阵, 求证: $ f(A)g(A) = 0 $ 的充分必要条件为 $ \rank(f(A)) + \rank(g(A)) = n $.
+    \sitem 设 $ f(x), g(x) $ 为多项式, 且 $ (f(x), g(x)) = 1 $, $ A $ 是 $ n $ 阶方阵, 求证: $ f(A)g(A) = 0 $ 的充分必要条件为 $ \rank(f(A)) + \rank(g(A)) = n $.
     \item 设 $ A, B $ 为实对称阵, 求证:
     \begin{enumerate}
         \item 若 $ A $ 正定, 则存在实可逆阵 $ P $ 使得 $ P'AP $ 和 $ P'BP $ 同时为对角阵;
@@ -249,7 +261,7 @@
             ba_{2} & ba_{3} & ba_{4} & \ldots & a_{1}
         \end{vmatrix}
     \end{align*}
-    \item\label{item:反称加对角} 设 $ A $ 是 $ n $ 阶实反对称阵, $ D = \diag\qty{d_{1}, d_{2}, \dots, d_{n}} $ 是同阶的对角阵, 且 $ d_{i} > 0\,(i = 1, 2, \dots, n) $. 求证 $ \abs{A + D} > 0 $, 特别地, $ I_{n} + A $ 与 $ I_{n} - A $ 都是非异阵. 
+    \sitem\label{item:反称加对角} 设 $ A $ 是 $ n $ 阶实反对称阵, $ D = \diag\qty{d_{1}, d_{2}, \dots, d_{n}} $ 是同阶的对角阵, 且 $ d_{i} > 0\,(i = 1, 2, \dots, n) $. 求证 $ \abs{A + D} > 0 $, 特别地, $ I_{n} + A $ 与 $ I_{n} - A $ 都是非异阵. 
     \item 如果 $ n $ 阶方阵 $ A = (a_{ij}) $ 适合条件:
     \begin{align*}
         \abs{a_{ii}} > \sum_{\mathclap{j = 1,\ j \ne i}}^{n} \abs{a_{ij}}, \quad i = 1, 2, \dots, n,
@@ -416,7 +428,7 @@
     \item 已知 $ \sum_{n=1}^{\infty}(a_{n} - a_{n-1}) $ 绝对收敛, $ \sum_{n=1}^{\infty}b_{n} $ 收敛, 证明 $ \sum_{n=1}^{\infty}a_{n}b_{n} $ 收敛.
     \item 设 $ A, B \in \MM[\C] $, 若 $ AB = BA $, 则 $ A, B $ 至少有一个公共的特征向量. 
     \item 设 $ \varphi $ 是 $ n $ 维复线性空间 $ V $ 上的线性变换, 求证 $ \varphi $ 可对角化的充要条件是对 $ \varphi $ 的任一特征值 $ \lambda_{0} $, 总有 $ \Ker(\varphi - \lambda_{0}I) \cap \Image(\varphi - \lambda_{0}I) = 0 $. 
-    \item 设在数域 $ \K $ 上, 一元多项式 $ f(x) = f_{1}f_{2} $, 且 $ (f_{1}, f_{2}) = 1 $, $ V $ 是数域 $ \K $ 上的 $ n $ 维线性空间, $ \varphi $ 是 $ V $ 上的线性变换, 证明 $ \Ker f(\varphi) = \Ker f_{1}(\varphi) \oplus \Ker f_{2}(\varphi) $. 
+    \sitem 设在数域 $ \K $ 上, 一元多项式 $ f(x) = f_{1}f_{2} $, 且 $ (f_{1}, f_{2}) = 1 $, $ V $ 是数域 $ \K $ 上的 $ n $ 维线性空间, $ \varphi $ 是 $ V $ 上的线性变换, 证明 $ \Ker f(\varphi) = \Ker f_{1}(\varphi) \oplus \Ker f_{2}(\varphi) $. 
     \item 设 $ f(x) $ 在 $ [a, +\infty) $ 上可微, 且对任意 $ x \in [a, +\infty) $, 都有
     \begin{align*}
         f(x+1) - f(x) = f'(x)
@@ -439,5 +451,22 @@
     \end{align*}
     其中 $ A_{i} $ 与 $ B_{i} $ 为同阶方阵, 假定矩阵 $ A_{i} $ 适合非零多项式 $ g_{i}(x) $, 且 $ g_{i}(x)\,(i = 1, \dots, k) $ 两两互素. 求证: 若对于每个 $ i $, 存在多项式 $ f_{i}(x) $, 使 $ B_{i} = f_{i}(A_{i}) $, 则必存在次数不超过 $ n-1 $ 的多项式 $ f(x) $, 使得 $ B = f(A) $.
     \item 设 $ n $ 阶方阵 $ A $ 的秩为 $ n-1 $, $ B $ 是同阶非零阵, 且有 $ AB = BA = 0 $, 证明: 存在不超过 $ n-1 $ 阶的多项式 $ f(x) $, 使得 $ B = f(A) $.
+    \item 如 \ref{item:AX=XB} 题, 可以进一步证明逆命题也成立, 即: 如果 $ AX = XB $ 只有零解, 则 $ A, B $ 无公共特征值.
+    \sitem 设 $ V $ 为数域 $ \K $ 上的 $ n $ 维线性空间, $ \varphi $ 是 $ V $ 上的线性变换, 其特征多项式与极小多项式分别设为 $ f(\lambda) $ 与 $ m(\lambda) $, 设
+    \begin{align*}
+        f(\lambda) = P_{1}(\lambda)^{r_{1}}P_{2}(\lambda)^{r_{2}}\dots P_{t}(\lambda)^{r_{t}}, \quad m(\lambda) = P_{1}(\lambda)^{s_{1}}P_{2}(\lambda)^{s_{2}}\dots P_{t}(\lambda)^{s_{t}}
+    \end{align*}
+    分别为 $ f(\lambda) $ 与 $ m(\lambda) $ 的不可约分解, 其中 $ P_{i}(\lambda) $ 为 $ \K $ 上互异的首一不可约多项式, $ r_{i}, s_{i} > 0\, (i = 1, 2, \dots, t) $. 设 $ V_{i} = \Ker P_{i}(\varphi)^{r_{i}} $, $ U_{i} = \Ker P_{i}(\varphi)^{s_{i}}\,(i = 1, 2, \dots, t) $. 求证:
+    \begin{enumerate}
+        \item $ V = V_{1} \oplus V_{2} \oplus \dots \oplus V_{t} $, $ U = U_{1} \oplus U_{2} \oplus \dots \oplus U_{t} $, 且 $ U_{i} = V_{i}\,(i = 1, 2, \dots, t) $;
+        \item $ \varphi|_{V_{i}} $ 的特征多项式为 $ P_{i}(\lambda)^{r_{i}} $, 极小多项式为 $ P_{i}(\lambda)^{s_{i}} $. 特别地, $ \dim V_{i} = r_{i}\deg P_{i}(\lambda) $. 
+    \end{enumerate}
+    \item 证明任一 $ n $ 阶复矩阵 $ A $ 都可以分解为两个 $ n $ 阶对称阵的乘积, 即 $ A = BC $, 并且可以任意指定 $ B $ 或 $ C $ 为可逆阵.
+    \item 证明任一 $ n $ 阶复矩阵 $ A $ 都相似于一个复对称阵.
+    \item 设 $ A $ 为 $ n $ 阶实对称矩阵, 求证: $ A $ 为半正定阵或半负定阵的充要条件是对任意满足 $ \alpha' A\alpha = 0 $ 的 $ n $ 维实向量 $ \alpha $, 都有 $ A\alpha = 0 $.
+    \item 设 $ f(x) $ 在 $ [a, b] $ 上连续, $ (a, b) $ 上可导, 且 $ f(a) = f(b) $, 若 $ \abs{f'(x)} \leqslant 1 $, 证明对任意的 $ x_{1}, x_{2} \in [a, b] $, 都有
+    \begin{align*}
+        \abs{f(x_{1}) - f(x_{2})} \leqslant \frac{(b - a)}{2}.
+    \end{align*}
 \end{enumerate}
 \end{document}
