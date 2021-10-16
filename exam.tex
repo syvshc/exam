@@ -470,5 +470,12 @@
     \end{align*}
     \item 设 $ f(x) $ 在 $ [0, 1] $ 上连续, 且 $ f(1) = 0 $, 证明 $ \set{f(x)x^{n}} $ 在 $ [0, 1] $ 上一致收敛.
     \item 设 $ p(x), q(x), r(x) $ 是数域 $ \K $ 上的正次数多项式, 且 $ p(x) $ 与 $ q(x) $ 互素, $ \deg r(x) < \deg p(x) + \deg q(x) $, 证明存在数域 $ \K $ 上的多项式 $ u(x), v(x) $, 满足 $ \deg u(x) < \deg p(x) $, $ \deg v(x) < \deg q(x) $, 使得 $ r(x) = p(x)v(x) + q(x)u(x) $.
+    \item (\emph{Dini 定理}) 设函数列 $ \set{f_{n}(x)} $ 在有限闭区间 $ [a, b] $ 上连续. 如果对每一个 $ x\in [a, b] $, 数列 $ \set{f_{n}(x)} $ 关于 $ n $ 递减趋于 $ 0 $. 那么 $ f_{n}(x) $ 在 $ [a, b] $ 上一致收敛于 $ 0 $.
+    \item 对任意 $ n\in \N $, $ f_{n}(x) $ 在 $ [a, b] $ 上关于 $ x $ 单调递增, 且 $ \set{f_{n}(x)} $ 收敛于连续函数 $ f(x) $. 证明: $ \set{f_{n}(x)} $ 在 $ [a, b] $ 上一致收敛于 $ f(x) $.
+    \item 设 $ f(x) $ 在 $ [a, b] $ 上可导, 且 $ f'(x) $ 在 $ [a, b] $ 上可积, 记 
+    \begin{align*}
+        A_{n} = \frac{b - a}{n}\sum_{i = 1}^{n} f\qty(a + \frac{i}{n}(b - a)) - \int_{a}^{b} f(x) \dd{x},
+    \end{align*}
+    证明 $ \limit{n}{\infty} nA_{n} = (b - a)(f(b) - f(a))/2 $.
 \end{enumerate}
 \end{document}
