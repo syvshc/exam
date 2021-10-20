@@ -1,3 +1,4 @@
+
 \documentclass{ctexart}
 \IfFontExistsTF{Source Han Serif SC}{
     \setCJKmainfont{Source Han Serif SC}
@@ -15,6 +16,7 @@
 \usepackage[margin=1.5cm]{geometry}
 \usepackage{mathtools}
 \usepackage{physics}
+\usepackage{nicematrix}
 \usepackage[colorlinks=true]{hyperref}
 
 % https://tex.stackexchange.com/questions/307412/redefine-pi-to-pi-with-unicode-math
@@ -42,7 +44,7 @@
 }
 \makeatother
 
-\newcommand{\limit}[2]{\lim\limits_{#1 \to #2}}
+\newcommand{\limit}[2]{\lim_{#1 \to #2}}
 \newcommand{\me}{\symrm{e}}
 \newcommand{\R}{\ensuremath{\symbb{R}}}
 \newcommand{\K}{\ensuremath{\symbb{K}}}
@@ -86,7 +88,7 @@
     \end{align*}
     \item 设 $ p > 0 $, 讨论积分
     \begin{align*}
-        \int_{0}^{\infty} \frac{\sin(1/x)}{x^{p}} \dd{x}
+        \int_{0}^{+\infty} \frac{\sin(1/x)}{x^{p}} \dd{x}
     \end{align*}
     的敛散性. 
     \item 求积分 $ \int_{0}^{+\infty} \sin(x)/x \dd{x} $.
@@ -477,5 +479,32 @@
         A_{n} = \frac{b - a}{n}\sum_{i = 1}^{n} f\qty(a + \frac{i}{n}(b - a)) - \int_{a}^{b} f(x) \dd{x},
     \end{align*}
     证明 $ \limit{n}{\infty} nA_{n} = (b - a)(f(b) - f(a))/2 $.
+    \item 设 $ V $ 是数域 $ \K $ 上的 $ n $ 维线性空间, $ \sigma, \tau $ 是 $ V $ 上的线性变换, 且 $ \sigma^{2} = \tau^{2} = 0 $, 且 $ \sigma\tau + \tau\sigma = I_{V} $, 其中 $ I_{V} $ 是 $ V $ 上的恒等变换, 证明
+    \begin{enumerate}
+        \item $ V = \Ker \sigma \oplus \Ker \tau $;
+        \item $ V $ 必是偶数维线性空间.
+    \end{enumerate}
+    \item 设函数 $ f(x) \in C[a, b] $, $ f(x) $ 不恒为 $ 0 $ 并且满足 $ 0 \leqslant f(x) \leqslant M $. 证明:
+    \begin{align*}
+        \qty(\int_{a}^{b} f(x) \cos x \dd{x})^{2} + \qty(\int_{a}^{b} f(x) \sin x \dd{x})^{2} + \frac{M^{2}(b-a)^{4}}{12} \geqslant \qty(\int_{a}^{b} f(x) \dd{x})^{2}.
+    \end{align*}
+    \item 计算极限 $ \limit{\lambda}{\infty} \int_{0}^{1} \ln x\cos[2](\lambda x) \dd{x} $.
+    \sitem 设 $ A, B \in \MM[\K][m\times n] $, 求证: 方程组 $ Ax = 0 $ 与 $ Bx = 0 $ 同解的充分必要条件是存在可逆阵 $ P $, 使得 $ B = PA $.
+    \item 计算行列式
+    \begin{align*}
+        D = \begin{vNiceMatrix}[cell-space-limits = 1pt]
+            1 & 0 & 0 & \cdots & 0 & 1 \\
+            1 & {1}\choose{1} & 0 & \cdots & 0 & x\\
+            1 & {2}\choose{1} & {2}\choose{2} & \cdots & 0 & x^{2} \\
+            \vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+            1 & {n-1}\choose{1} & {n-1}\choose{2} & \cdots & {n-1}\choose{n-1} & x^{n-1}\\
+            1 & {n}\choose{1} & {n}\choose{2} & \cdots & {n}\choose{n-1} & x^{n}
+        \end{vNiceMatrix}
+    \end{align*}
+    \item 设 $ f(x) $ 是定义在 $ [0, 1] $ 上的单调非增函数, 对于任意 $ a \in (0, 1) $, 证明: $ \int_{0}^{a}f(x) \dd{x} \geqslant a\int_{0}^{1}f(x) \dd{x} $.
+    \item 设 $ f(x) $ 在 $ [0, 1] $ 上 Riemann 可积, 且有 $ 0 < m \leqslant f(x) \leqslant M $. 证明:
+    \begin{align*}
+        1 \leqslant \int_{0}^{1}f(x) \dd{x} \int_{0}^{1} \frac{1}{f(x)} \dd{x} \leqslant \frac{(M+m)^{2}}{4mM}.
+    \end{align*}
 \end{enumerate}
 \end{document}
