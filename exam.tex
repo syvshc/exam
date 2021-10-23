@@ -7,7 +7,9 @@
 \xeCJKsetup{CheckSingle=true}
 
 \usepackage{unicode-math}
-\usepackage[mono=false]{libertinus-otf}
+% \usepackage[mono=false]{libertinus-otf}
+\setmainfont{TeX Gyre Pagella}
+\setmathfont{TeX Gyre Pagella Math}
 % \setmathfont{NewCMMath-Book.otf}
 % \setmathfont{latinmodern-math.otf}[range=\sqrt]
 % \setmathfont{TeX Gyre Pagella Math}[range=bb]
@@ -15,7 +17,7 @@
 
 \usepackage[margin=1.5cm]{geometry}
 \usepackage{mathtools}
-\usepackage{physics}
+\usepackage[notrig]{physics}
 \usepackage{nicematrix}
 \usepackage[colorlinks=true]{hyperref}
 
@@ -27,6 +29,14 @@
 
 \let\set\qty
 \let\emph\textbf
+\AtBeginDocument{
+    \let\ge\geqslant
+    \let\le\leqslant
+}
+
+\def\grad{\symbf{\nabla}}
+\let\boldsymbol\symbfit
+
 % \let\vb\symbfit
 \usepackage[shortlabels, inline]{enumitem} % 继承并扩展了enumerate宏包的功能
 \setlist[enumerate, 1]{leftmargin=*, label=\arabic*., widest=111, ref=\arabic*}
@@ -71,7 +81,7 @@
     \begin{enumerate}
         \item  如果 $ \limit{x}{+\infty}f(x) = f(+\infty) $ 存在, 那么
         \begin{align*}
-            \int_{0}^{+\infty} \frac{f(ax) - f(bx)}{x} \dd{x} = (f(0) - f(+\infty))\ln\frac{b}{a}.
+            \int_{0}^{+\infty} \frac{f(ax) - f(bx)}{x} \dd{x} = \qty(f(0) - f(+\infty))\ln\frac{b}{a}.
         \end{align*}
         \item 如果无穷积分 $ \int_{1}^{+\infty} f(x)/x \dd{x} $ 收敛, 那么
         \begin{align*}
@@ -108,7 +118,7 @@
     关于 $ t $ 在 $ [0, +\infty) $ 上一致收敛.
     \item 计算 Fresnel 积分 $ \int_{0}^{+\infty} \sin(x^{2}) \dd{x} $.
     \item 计算积分 $ \int_{0}^{+\infty} \exp(-a x^{2})\cos(bx) \dd{x} $, 其中 $ a > 0,\ b\in \R $.
-    \item 计算积分 $ \int_{0}^{\pi/2} \tan[\alpha](x) \dd{x} $, 其中 $ \abs{\alpha} < 1 $. 
+    \item 计算积分 $ \int_{0}^{\pi/2} \tan^{\alpha}(x) \dd{x} $, 其中 $ \abs{\alpha} < 1 $. 
     \item\label{item:AX=XB} 设 $ \K $ 是数域, $ A \in \MM[\K][m] $, $ B \in \MM[\K][n] $, 且 $ A, B $ 没有相同的特征值, 证明矩阵方程 $ AX = XB $ 只有零解.
     \item 设 $ A $ 是 4 阶方阵, 满足 $ \tr(A^{i}) = i\,(i = 1, 2, 3, 4) $, 求 $ \abs{A} $. 
     \item $ n $ 阶方阵可对角化的充分必要条件.
@@ -129,10 +139,10 @@
     \item 设 $ A, B $ 为实对称阵, 求证:
     \begin{enumerate}
         \item 若 $ A $ 正定, 则存在实可逆阵 $ P $ 使得 $ P'AP $ 和 $ P'BP $ 同时为对角阵;
-        \item 若 $ A, B $ 半正定, 则 $ \tr(AB) \geqslant 0 $, 并且等号成立当且仅当 $ AB = 0 $.
+        \item 若 $ A, B $ 半正定, 则 $ \tr(AB) \ge 0 $, 并且等号成立当且仅当 $ AB = 0 $.
     \end{enumerate}
     \item $ A, B, C \in \MM $, 并且 $ A = B + C $, 其中 $ B $ 为对称阵, $ C $ 为反对称阵, 证明: 若 $ A^{2} = 0 $, 则 $ A = 0 $.
-    \item 求极限 $ \limit{n}{\infty} \sin[2](\pi \sqrt{n^{2} + n}) $.  
+    \item 求极限 $ \limit{n}{\infty} \sin^{2}\qty(\pi \sqrt{n^{2} + n}) $.  
     \item $ f(x) $ 在 $ [a, b] $ 上二阶可导, 证明存在 $ \xi \in (a, b) $, 使得
     \begin{align*}
         f(b) - 2f\qty(\frac{a + b}{2}) + f(a) = \frac{1}{4} (b - a)^{2} f''(\xi),
@@ -163,19 +173,19 @@
     \end{align*}
     \item \textbf{面积原理}
     \begin{enumerate}
-        \item 设 $ f $ 是一个非负的递增函数, 则当 $ \xi \geqslant m $ 时有
+        \item 设 $ f $ 是一个非负的递增函数, 则当 $ \xi \ge m $ 时有
         \begin{align*}
-            \abs{\sum_{k = m}^{[\xi]} f(k) - \int_{m}^{\xi} f(x) \dd{x}} \leqslant f(\xi).
+            \abs{\sum_{k = m}^{[\xi]} f(k) - \int_{m}^{\xi} f(x) \dd{x}} \le f(\xi).
         \end{align*}
         \item 设 $ f $ 是一个非负的递减函数, 则极限
         \begin{align*}
             \limit{\xi}{\infty} \qty(\sum_{k = m}^{[\xi]} f(k) - \int_{m}^{\xi} f(x) \dd{x}) = \alpha
         \end{align*}
-        存在, 且 $ 0 \leqslant \alpha \leqslant f(m) $. 更进一步, 如果 $ \limit{x}{+\infty} f(x) = 0 $, 那么
+        存在, 且 $ 0 \le \alpha \le f(m) $. 更进一步, 如果 $ \limit{x}{+\infty} f(x) = 0 $, 那么
         \begin{align*}
-            \abs{\sum_{k = m}^{[\xi]} f(k) - \int_{m}^{\xi} f(x) \dd{x} - \alpha} \leqslant f(\xi - 1),
+            \abs{\sum_{k = m}^{[\xi]} f(k) - \int_{m}^{\xi} f(x) \dd{x} - \alpha} \le f(\xi - 1),
         \end{align*} 
-        这里 $ \xi \geqslant m + 1 $. 
+        这里 $ \xi \ge m + 1 $. 
     \end{enumerate}
     \item 设 $ f(x) $ 在 $ [a, b] $ 上二次可微, 且 $ f(a)f(b) < 0 $, 对任意 $ x \in [a, b] $ 都有 $ f'(x) > 0 $, $ f''(x) > 0 $. 证明序列 $ \set{x_{n}} $ 极限存在, 其中 $ x_{1} \in [a, b] $, $ x_{n + 1} = x_{n} - f(x_{n})/f'(x_{n})\,(n = 1, 2, \dots) $, 进而可以证明此极限为方程 $ f(x) = 0 $ 的根. 
     \item 设正项级数 $ \sum_{n = 1}^{\infty} a_{n} $ 收敛, 数列 $ \set{y_{n}} : y_{1} = 1,\ 2y_{n + 1} = y_{n} + \sqrt{y_{n}^{2} + a_{n}} $\, $ (n = 1, 2, \dots) $. 证明 $ \set{y_{n}} $ 是单调递增的收敛数列. 
@@ -205,14 +215,14 @@
         \end{pmatrix},
     \end{align*}
     求证 $ BA = 9 I $. 
-    \item $ A \in \MM $, $ A^{2} = A $, 若对任意列向量 $ x $, 都有 $ x'A'Ax \leqslant x'x $, 证明 $ A' = A $.    
+    \item $ A \in \MM $, $ A^{2} = A $, 若对任意列向量 $ x $, 都有 $ x'A'Ax \le x'x $, 证明 $ A' = A $.    
     \item 证明对任意 $ m \times n $ 矩阵 $ A $, 都有 $ \rank(AA') = \rank(A) $.  
-    \item (极分解) 对可逆阵 $ A \in \MM $, 证明
+    \sitem (\emph{极分解}) 对可逆阵 $ A \in \MM $, 证明
     \begin{enumerate}
         \item 存在正交阵 $ P $, 正定阵 $ B $, 满足 $ A = PB $.
         \item 存在正交阵 $ Q_{1}, Q_{2} $, 使得 $ Q_{1} A Q_{2} = \diag(\lambda_{1}, \lambda_{2}, \dots, \lambda_{n}) $, 并且 $ \lambda_{1}^{2}, \lambda_{2}^{2}, \dots, \lambda_{n}^{2} $ 是 $ A'A $ 的特征值. 
     \end{enumerate}
-    \item $ f(x) \in C[a, b] $, 证明函数 $ m(x) = \min\limits_{a \leqslant \xi \leqslant x}f(\xi) $ 在 $ [a, b] $ 连续.
+    \item $ f(x) \in C[a, b] $, 证明函数 $ m(x) = \min\limits_{a \le \xi \le x}f(\xi) $ 在 $ [a, b] $ 连续.
     \item $ f(x) $ 在 $ (0, +\infty) $ 上二阶可导, 且 $ \limit{x}{+\infty} f(x) $ 存在, $ f''(x) $ 有界, 证明 $ \limit{x}{+\infty} f'(x) = 0 $.
     \item $ f(x) $ 在 $ \R $ 上三阶连续可导, 且对任意的 $ h > 0 $, 有
     \begin{align*}
@@ -220,7 +230,7 @@
     \end{align*}
     求证: $ f(x) $ 为次数至多为 2 的多项式.
     \item 设 $ A' = A $, 证明 $ A $ 可逆当且仅当存在矩阵 $ B $ 使得 $ AB + B'A $ 正定.
-    \item 设 $ f(x) $ 在 $ [a, b] $ 上可微, $ f(a) = 0 $, 并且存在实数 $ A > 0 $, 使得对任意 $ x \in [a, b] $, 都有 $ \abs{f'(x)} \leqslant A \abs{f(x)} $, 证明在 $ [a, b] $ 上, $ f(x) \equiv 0 $. 
+    \item 设 $ f(x) $ 在 $ [a, b] $ 上可微, $ f(a) = 0 $, 并且存在实数 $ A > 0 $, 使得对任意 $ x \in [a, b] $, 都有 $ \abs{f'(x)} \le A \abs{f(x)} $, 证明在 $ [a, b] $ 上, $ f(x) \equiv 0 $. 
     \item 设 $ f(x) $ 在 $ [1, +\infty) $ 上一阶连续可导, 且
     \begin{align*}
         f'(x) = \frac{1}{1 + f^{2}(x)}\qty(\frac{1}{\sqrt{x}} - \sqrt{\ln\qty(1 + \frac{1}{x})})
@@ -228,12 +238,12 @@
     证明: $ \limit{x}{+\infty}f(x) $ 存在.
     \item 设 $ f(x) $ 在 $ [0, +\infty) $ 上一致连续, 若对于任意 $ x \in \R $, 都有 $ \limit{n}{+\infty} f(x + n) = 0 $, 证明 $ \limit{x}{+\infty} f(x) = 0 $.  
     \item 设 $ f(x) $ 在 $ [0, +\infty) $ 上一致连续, 且对任意 $ \delta > 0 $, 都有 $ \limit{n}{\infty} f(n\delta) = 0 $, 证明 $ \limit{x}{+\infty} f(x) = 0 $.  
-    \item 设 $ f(x) $ 在 $ \R $ 上一致连续, 则存在正实数 $ a, b $, 使得 $ \abs{f(x)} \leqslant a\abs{x} + b $. 
+    \item 设 $ f(x) $ 在 $ \R $ 上一致连续, 则存在正实数 $ a, b $, 使得 $ \abs{f(x)} \le a\abs{x} + b $. 
     \item 设 $ f(x) $ 在 $ [1, +\infty) $ 上一致连续, 证明 $ \abs{f(x)/x} $ 在 $ [1, +\infty) $ 有界. 
     \item 证明欧式空间中两标准正交基的过渡矩阵为正交阵.
     \item 设 $ \alpha $ 是欧式空间 $ V $ 中的一个非零向量, $ \alpha_{1}, \alpha_{2}, \dots, \alpha_{p} $ 是 $ V $ 中的 $ p $ 个向量, 满足
     \begin{align*}
-        (a_{i}, a_{j}) \leqslant 0,\ (\alpha_{i}, \alpha) > 0, \quad i, j = 1, 2, \dots, p, i \ne j
+        (a_{i}, a_{j}) \le 0,\ (\alpha_{i}, \alpha) > 0, \quad i, j = 1, 2, \dots, p, i \ne j
     \end{align*}
     证明
     \begin{enumerate}
@@ -243,7 +253,7 @@
     \end{enumerate}
     \item 设 $ A, B \in \MM[\K] $, 且 $ AB = BA $, 利用线性方程组的知识证明
     \begin{align*}
-        \rank(A + B) \leqslant \rank(A) + \rank(B) - \rank(AB)
+        \rank(A + B) \le \rank(A) + \rank(B) - \rank(AB)
     \end{align*}
     \item 设 $ B \in \MM[\C][n \times 2] $, 
     \begin{align*}
@@ -311,16 +321,16 @@
         \item 求证 $ \limit{n}{\infty}(n\pi + \pi/2 - x_{n}) = 0 $,
         \item 求 $ \limit{n}{\infty} n(n\pi + \pi/2 - x_{n}) $.  
     \end{enumerate}
-    \item 设 $ f $ 在 $ [0, +\infty) $ 上可微, 且 $ f(0) = 0 $, 并假设有实数 $ A $ 使得 $ \abs{f'(x)} \leqslant A\abs{f(x)} $ 对 $ x \in (0, +\infty) $ 恒成立, 证明 $ f(x) \equiv 0\,(x \in (0, +\infty)) $.  
+    \item 设 $ f $ 在 $ [0, +\infty) $ 上可微, 且 $ f(0) = 0 $, 并假设有实数 $ A $ 使得 $ \abs{f'(x)} \le A\abs{f(x)} $ 对 $ x \in (0, +\infty) $ 恒成立, 证明 $ f(x) \equiv 0\,(x \in (0, +\infty)) $.  
     \item 设偶函数 $ f(x) $ 在 $ x = 0 $ 处二阶可导, 且 $ f(0) = 1 $, 证明级数 $ \sum_{n = 1}^{\infty} (f(1/n) - 1) $ 绝对收敛.
     \item 设 $ f $ 在 $ [a, b] $ 上可导, 且 $ f' $ 在 $ [a, b] $ 上可积, $ f(a) = 0 $, 证明:
     \begin{align*}
-        2\int_{a}^{b}(f(x))^{2} \dd{x} \leqslant (b-a)^{2} \int_{a}^{b} (f'(x))^{2} \dd{x}.
+        2\int_{a}^{b}(f(x))^{2} \dd{x} \le (b-a)^{2} \int_{a}^{b} (f'(x))^{2} \dd{x}.
     \end{align*}
-    \item 设 $ f(x) $ 在 $ [0, +\infty) $ 上可微, 且存在实数 $ A > 0 $, 使得 $ \abs{f'(x)} \leqslant A\abs{f(x)} $, 证明 $ f(x) \equiv 0 $ 对 $ x \in [0, +\infty) $ 均成立.
+    \item 设 $ f(x) $ 在 $ [0, +\infty) $ 上可微, 且存在实数 $ A > 0 $, 使得 $ \abs{f'(x)} \le A\abs{f(x)} $, 证明 $ f(x) \equiv 0 $ 对 $ x \in [0, +\infty) $ 均成立.
     \item 设 $ f(x) $ 在 $ [0, 1] $ 上有连续的二阶导数, $ f(0) = f(1) = 0 $, 且对任意的 $ x \in (0, 1) $, 都有 $ f(x) \ne 0 $, 证明
     \begin{align*}
-        \int_{0}^{1} \abs{f''(x)\over f(x)} \dd{x} \geqslant 4
+        \int_{0}^{1} \abs{f''(x)\over f(x)} \dd{x} \ge 4
     \end{align*}
     \item 设 $ f(x) \in C^{2}[a, b] $, 证明: 存在 $ \xi \in (a, b) $ 使得
     \begin{align*}
@@ -328,9 +338,9 @@
     \end{align*}
     \item 设 $ x_{1} $, $ x_{2} $, $ x_{3} $ 是多项式 $ f(x) = x^{3} + ax + 1 $ 的三个根, 求一个首一多项式以 $ x_{1}^{2} $, $ x_{2}^{2} $, $ x_{3}^{2} $ 为根.
     \item 设 $ f(x) $ 在有限区间 $ (a, b) $ 内可微, 且 $ f'(x) $ 在 $ (a, b) $ 内有界, 证明 $ f(x) $ 在 $ (a, b) $ 内有界.
-    \item 设 $ f(x) $ 在 $ [a, b] $ 上连续, 且对任意 $ x_{1}, x_{2} \in [a, b] $, $ \lambda \in (0, 1) $, 恒有 $ f(\lambda x_{1} + (1-\lambda) x_{2}) \leqslant \lambda f(x_{1}) + (1 - \lambda) f(x_{2}) $. 证明
+    \item 设 $ f(x) $ 在 $ [a, b] $ 上连续, 且对任意 $ x_{1}, x_{2} \in [a, b] $, $ \lambda \in (0, 1) $, 恒有 $ f(\lambda x_{1} + (1-\lambda) x_{2}) \le \lambda f(x_{1}) + (1 - \lambda) f(x_{2}) $. 证明
     \begin{align*}
-        f\qty(\frac{a+b}{2}) \leqslant \frac{1}{b - a}\int_{a}^{b} f(x) \dd{x} \leqslant \frac{f(a) + f(b)}{2}.
+        f\qty(\frac{a+b}{2}) \le \frac{1}{b - a}\int_{a}^{b} f(x) \dd{x} \le \frac{f(a) + f(b)}{2}.
     \end{align*}
     \item 设 $ \limit{x}{+\infty} f(x) = A $, 且满足下列条件之一, 则有 $ \limit{x}{+\infty} f'(x) = 0 $.
     \begin{enumerate}
@@ -353,7 +363,7 @@
     \item 设数列 $ \set{x_{n}} $ 满足 $ \set{2x_{n+1} + x_{n}} $ 收敛, 证明数列 $ \set{x_{n}} $ 收敛. 
     \item (\emph{Young 不等式})设 $ y=f(x) $ 是区间 $ [0, +\infty) $ 上严格递增的连续函数, 且满足 $ f(0) = 0 $, 证明对任意的 $ a, b > 0 $, 有
     \begin{align*}
-        ab \leqslant \int_{0}^{a}f(x) \dd{x} + \int_{0}^{b} f^{-1}(y) \dd{y}.
+        ab \le \int_{0}^{a}f(x) \dd{x} + \int_{0}^{b} f^{-1}(y) \dd{y}.
     \end{align*}
     \item 设 $ f, g \in C[a, b] $, $ g $ 在 $ [a, b] $ 上不变号, 证明存在 $ \xi\in (a, b) $, 使得
     \begin{align*}
@@ -364,7 +374,7 @@
     \begin{align*}
         \limit{\lambda}{\infty} \int_{a}^{b} f(x)g(\lambda x) \dd{x}
     \end{align*}
-    \item 设 $ f(x) $ 是实多项式, 且对任意实数 $ r $, 都有 $ f(r) \geqslant 0 $. 证明存在实多项式 $ g(x), h(x) $ 使得 $ f(x) = g^{2}(x) + h^{2}(x) $.   
+    \item 设 $ f(x) $ 是实多项式, 且对任意实数 $ r $, 都有 $ f(r) \ge 0 $. 证明存在实多项式 $ g(x), h(x) $ 使得 $ f(x) = g^{2}(x) + h^{2}(x) $.   
     \item 设 $ \varphi_{1}, \varphi_{2}, \dots, \varphi_{m} $ 是 $ n $ 维线性空间 $ V $ 上的线性变换, 且适合条件:
     \begin{align*}
         \varphi_{i}^{2} = \varphi_{i}, \quad \varphi_{i}\varphi_{j} = 0\,(i\ne j), \quad \bigcap_{i=1}^{m}\Ker\varphi_{i} = 0,
@@ -385,7 +395,7 @@
     \item 设 $ A $ 是实矩阵, 又 $ I_{n} - A $ 的特征值的模长都小于 $ 1 $, 求证: $ 0<\abs{A}<2^{n} $. 
     \item 设
     \begin{align*}
-        \Q(\sqrt[n]{2}) = \set{a_{0} + a_{1}\sqrt[n]{2} + a_{2}\sqrt[n]{4} + \dots + a_{n-1}\sqrt[n]{2^{n-1}} : a_{i} \in \Q, 0\leqslant i\leqslant n-1}
+        \Q(\sqrt[n]{2}) = \set{a_{0} + a_{1}\sqrt[n]{2} + a_{2}\sqrt[n]{4} + \dots + a_{n-1}\sqrt[n]{2^{n-1}} : a_{i} \in \Q, 0\le i\le n-1}
     \end{align*}
     证明 $ \Q(\sqrt[n]{2}) $ 是一个数域, 并求 $ \Q(\sqrt[n]{2}) $ 做为 $ \Q $ 上线性空间的一组基.
     \item 设 $ f(x) = x^{n} + a_{1}x^{n-1} + \dots + a_{n-1}x + a_{n} $ 是数域 $ \K $ 上的不可约多项式, $ \varphi $ 是 $ \K $ 上的 $ n $ 维线性空间 $ V $ 上的线性变换, $ \alpha_{1} \ne 0, \alpha_{2}, \dots, \alpha_{n} $, 是 $ V $ 中的向量, 满足 
@@ -395,7 +405,7 @@
     证明 $ \set{\alpha_{1}, \alpha_{2}, \dots, \alpha_{n}} $ 是 $ V $ 的一组基. 
     \item 设 $ A, B \in \MM $, 存在可逆复矩阵 $ P $, 使得 $ P^{-1}AP = B $, 证明存在可逆实矩阵 $ Q $ 使得 $ Q^{-1}AQ = B $.   
     \item 设 $ A, B $ 为 $ n $ 阶方阵, 满足 $ \rank(ABA) = r(A) $, 求证: $ AB $ 与 $ BA $ 相似.
-    \item 设 $ A, B $ 为 $ n $ 阶方阵, 则 $ AB $ 与 $ BA $ 相似的充要条件是 $ \rank((AB)^{i}) = \rank((BA)^{i})\,(1 \leqslant i \leqslant n - 1) $.
+    \item 设 $ A, B $ 为 $ n $ 阶方阵, 则 $ AB $ 与 $ BA $ 相似的充要条件是 $ \rank((AB)^{i}) = \rank((BA)^{i})\,(1 \le i \le n - 1) $.
     \item  设 $ A, B $ 为 $ n $ 阶方阵, 满足 $ \rank(ABA) = r(B) $, 求证: $ AB $ 与 $ BA $ 相似.
     \item 设 $ f $ 在 $ \R $ 上连续, 又 $ \varphi(x) = f(x)\int_{0}^{x} f(t) \dd{t} $ 单调递减, 证明 $ f(x) \equiv 0, x\in\R $.
     \item 计算积分
@@ -419,7 +429,7 @@
         \int_{0}^{1} f(x) \dd{x} = \limit{n}{\infty} \frac{1}{n} \sum_{k=1}^{n} f\qty(\frac{k}{n}).
     \end{align*}
     并且举反例说明``去掉单调条件, 结论则不成立.''
-    \item 设 $ V $ 是 $ n $ 维线性空间, 对于整数 $ k \geqslant n $, 证明存在一组向量 $ \alpha_{1}, \alpha_{2}, \dots, \alpha_{k} \in V $, 使得其中任意 $ n $ 个线性无关.
+    \item 设 $ V $ 是 $ n $ 维线性空间, 对于整数 $ k \ge n $, 证明存在一组向量 $ \alpha_{1}, \alpha_{2}, \dots, \alpha_{k} \in V $, 使得其中任意 $ n $ 个线性无关.
     \item 设 $ \set{a_{n}} $ 是递减正数列, 证明: $ \sum_{n=1}^{\infty}a_{n} $ 与 $ \sum_{n=1}^{\infty}2^{n}a_{2^{n}} $ 同时敛散.
     \item 设对任意 $ n\in \N $, $ a_{n} > 0 $, 且级数 $ \sum_{n=1}^{\infty}1/a_{n} $ 收敛, 证明下述级数收敛 (利用绝对收敛函数重排不改变敛散性与级数值):
     \begin{align*}
@@ -466,9 +476,9 @@
     \item 证明任一 $ n $ 阶复矩阵 $ A $ 都可以分解为两个 $ n $ 阶对称阵的乘积, 即 $ A = BC $, 并且可以任意指定 $ B $ 或 $ C $ 为可逆阵.
     \item 证明任一 $ n $ 阶复矩阵 $ A $ 都相似于一个复对称阵.
     \item 设 $ A $ 为 $ n $ 阶实对称矩阵, 求证: $ A $ 为半正定阵或半负定阵的充要条件是对任意满足 $ \alpha' A\alpha = 0 $ 的 $ n $ 维实向量 $ \alpha $, 都有 $ A\alpha = 0 $.
-    \item 设 $ f(x) $ 在 $ [a, b] $ 上连续, $ (a, b) $ 上可导, 且 $ f(a) = f(b) $, 若 $ \abs{f'(x)} \leqslant 1 $, 证明对任意的 $ x_{1}, x_{2} \in [a, b] $, 都有
+    \item 设 $ f(x) $ 在 $ [a, b] $ 上连续, $ (a, b) $ 上可导, 且 $ f(a) = f(b) $, 若 $ \abs{f'(x)} \le 1 $, 证明对任意的 $ x_{1}, x_{2} \in [a, b] $, 都有
     \begin{align*}
-        \abs{f(x_{1}) - f(x_{2})} \leqslant \frac{(b - a)}{2}.
+        \abs{f(x_{1}) - f(x_{2})} \le \frac{(b - a)}{2}.
     \end{align*}
     \item 设 $ f(x) $ 在 $ [0, 1] $ 上连续, 且 $ f(1) = 0 $, 证明 $ \set{f(x)x^{n}} $ 在 $ [0, 1] $ 上一致收敛.
     \item 设 $ p(x), q(x), r(x) $ 是数域 $ \K $ 上的正次数多项式, 且 $ p(x) $ 与 $ q(x) $ 互素, $ \deg r(x) < \deg p(x) + \deg q(x) $, 证明存在数域 $ \K $ 上的多项式 $ u(x), v(x) $, 满足 $ \deg u(x) < \deg p(x) $, $ \deg v(x) < \deg q(x) $, 使得 $ r(x) = p(x)v(x) + q(x)u(x) $.
@@ -484,9 +494,9 @@
         \item $ V = \Ker \sigma \oplus \Ker \tau $;
         \item $ V $ 必是偶数维线性空间.
     \end{enumerate}
-    \item 设函数 $ f(x) \in C[a, b] $, $ f(x) $ 不恒为 $ 0 $ 并且满足 $ 0 \leqslant f(x) \leqslant M $. 证明:
+    \item 设函数 $ f(x) \in C[a, b] $, $ f(x) $ 不恒为 $ 0 $ 并且满足 $ 0 \le f(x) \le M $. 证明:
     \begin{align*}
-        \qty(\int_{a}^{b} f(x) \cos x \dd{x})^{2} + \qty(\int_{a}^{b} f(x) \sin x \dd{x})^{2} + \frac{M^{2}(b-a)^{4}}{12} \geqslant \qty(\int_{a}^{b} f(x) \dd{x})^{2}.
+        \qty(\int_{a}^{b} f(x) \cos x \dd{x})^{2} + \qty(\int_{a}^{b} f(x) \sin x \dd{x})^{2} + \frac{M^{2}(b-a)^{4}}{12} \ge \qty(\int_{a}^{b} f(x) \dd{x})^{2}.
     \end{align*}
     \item 计算极限 $ \limit{\lambda}{\infty} \int_{0}^{1} \ln x\cos[2](\lambda x) \dd{x} $.
     \sitem 设 $ A, B \in \MM[\K][m\times n] $, 求证: 方程组 $ Ax = 0 $ 与 $ Bx = 0 $ 同解的充分必要条件是存在可逆阵 $ P $, 使得 $ B = PA $.
@@ -501,10 +511,27 @@
             1 & {n}\choose{1} & {n}\choose{2} & \cdots & {n}\choose{n-1} & x^{n}
         \end{vNiceMatrix}
     \end{align*}
-    \item 设 $ f(x) $ 是定义在 $ [0, 1] $ 上的单调非增函数, 对于任意 $ a \in (0, 1) $, 证明: $ \int_{0}^{a}f(x) \dd{x} \geqslant a\int_{0}^{1}f(x) \dd{x} $.
-    \item 设 $ f(x) $ 在 $ [0, 1] $ 上 Riemann 可积, 且有 $ 0 < m \leqslant f(x) \leqslant M $. 证明:
+    \item 设 $ f(x) $ 是定义在 $ [0, 1] $ 上的单调非增函数, 对于任意 $ a \in (0, 1) $, 证明: $ \int_{0}^{a}f(x) \dd{x} \ge a\int_{0}^{1}f(x) \dd{x} $.
+    \item 设 $ f(x) $ 在 $ [0, 1] $ 上 Riemann 可积, 且有 $ 0 < m \le f(x) \le M $. 证明:
     \begin{align*}
-        1 \leqslant \int_{0}^{1}f(x) \dd{x} \int_{0}^{1} \frac{1}{f(x)} \dd{x} \leqslant \frac{(M+m)^{2}}{4mM}.
+        1 \le \int_{0}^{1}f(x) \dd{x} \int_{0}^{1} \frac{1}{f(x)} \dd{x} \le \frac{(M+m)^{2}}{4mM}.
+    \end{align*}
+    \item 设开集 $ D\subset \R^{2} $, $ f: D \to \R $ , 如果 $ \pdv{f}{x}, \pdv{f}{y}, \pdv{f}{x}{y} $ 在 $ (\vb*{x}_{0}, \vb*{y}_{0}) $ 的某个邻域上存在, 且 $ \pdv{f}{x}{y} $ 在 $ (\vb*{x}_{0}, \vb*{y}_{0}) $ 处连续, 那么 $ \pdv{f}{y}{x} $ 在 $ (\vb*{x}_{0}, \vb*{y}_{0}) $ 处存在, 且
+    \begin{align*}
+        \pdv{f}{x}{y}{} (\vb*{x}_{0}, \vb*{y}_{0}) = \pdv{f}{y}{x}{} (\vb*{x}_{0}, \vb*{y}_{0}).
+    \end{align*}
+    \item 设 $ D \subset \R^{2} $ 是一个凸区域, $ f: D \to \R $ 有连续的一阶偏导数, 则 $ f $ 在 $ D $ 内为凸函数的充必条件为对任意 $ \vb*{x}, \vb*{y}\in D $, 有 $ f(\vb*{y}) \ge f(\vb*{x}) + (\vb*{y} - \vb*{x})\cdot\grad f(\vb*{x}) $. 
+    \item 设 $ \symscr{A} $ 为数域 $ \K $ 上的 $ n\,(n \ge 3) $ 维线性空间 $ V $ 上的线性变换, $ \symscr{A} $ 的特征多项式为 
+    \begin{align*}
+        f(\lambda) = \lambda^{n} + a_{n-1}\lambda^{n-1} + a_{n-2}\lambda^{n-2} + \dots + a_{1}\lambda + a_{0},
+    \end{align*}
+    试证明:
+    \begin{align*}
+        a_{n - 2} = \frac{1}{2}\qty(\tr^{2}(\symscr{A}) - \tr(\symscr{A}^{2})).
+    \end{align*}
+    \item 设 $ a\ne 0 $, 计算积分: 
+    \begin{align*}
+        \int_{0}^{+\infty}\frac{\dd{x}}{(1+x^{2})(1+x^{a})}.
     \end{align*}
 \end{enumerate}
 \end{document}
