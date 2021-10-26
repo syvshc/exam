@@ -8,10 +8,10 @@
 
 \usepackage{unicode-math}
 % \usepackage[mono=false]{libertinus-otf}
-\setmainfont{TeX Gyre Pagella}
-\setmathfont{TeX Gyre Pagella Math}
-% \setmathfont{NewCMMath-Book.otf}
-% \setmathfont{latinmodern-math.otf}[range=\sqrt]
+% \setmainfont{TeX Gyre Pagella}
+% \setmathfont{TeX Gyre Pagella Math}
+\setmathfont{NewCMMath-Book.otf}
+\setmathfont{latinmodern-math.otf}[range=\sqrt]
 % \setmathfont{TeX Gyre Pagella Math}[range=bb]
 
 
@@ -48,7 +48,7 @@
 \def\sitem{%
   \expandafter\let\expandafter\originallabel\csname labelenum\romannumeral\@enumdepth\endcsname
   \expandafter\def\csname labelenum\romannumeral\@enumdepth\expandafter\endcsname\expandafter{%
-    \expandafter\bfseries\expandafter\asteriskitem\originallabel}%
+    \expandafter\bfseries\expandafter\color{red}\expandafter{\expandafter\asteriskitem\expandafter\originallabel}}%
   \item
   \expandafter\let\csname labelenum\romannumeral\@enumdepth\endcsname\originallabel
 }
@@ -498,7 +498,7 @@
     \begin{align*}
         \qty(\int_{a}^{b} f(x) \cos x \dd{x})^{2} + \qty(\int_{a}^{b} f(x) \sin x \dd{x})^{2} + \frac{M^{2}(b-a)^{4}}{12} \ge \qty(\int_{a}^{b} f(x) \dd{x})^{2}.
     \end{align*}
-    \item 计算极限 $ \limit{\lambda}{\infty} \int_{0}^{1} \ln x\cos[2](\lambda x) \dd{x} $.
+    \item 计算极限 $ \limit{\lambda}{\infty} \int_{0}^{1} \ln x\cos^{2}(\lambda x) \dd{x} $.
     \sitem 设 $ A, B \in \MM[\K][m\times n] $, 求证: 方程组 $ Ax = 0 $ 与 $ Bx = 0 $ 同解的充分必要条件是存在可逆阵 $ P $, 使得 $ B = PA $.
     \item 计算行列式
     \begin{align*}
@@ -533,5 +533,18 @@
     \begin{align*}
         \int_{0}^{+\infty}\frac{\dd{x}}{(1+x^{2})(1+x^{a})}.
     \end{align*}
-\end{enumerate}
+    \item 设 $ A $ 是 $ n $ 阶实正定阵, $ x \in \R^{n} $ 是非零列向量, 求证:
+    \begin{enumerate}
+        \item $ A + xx' $ 可逆.
+        \item $ 0 < x'(A+xx')^{-1}x < 1 $. 
+    \end{enumerate}
+    \sitem 设 $ A $ 为 $ n $ 阶正定实对称阵, $ B $ 为同阶对称阵, 则存在可逆阵 $ C $ 使得
+    \begin{align*}
+        C'AC = I_{n}, \quad C'BC = \diag\set{\lambda_{1}, \lambda_{2}, \dots, \lambda_{n}}
+    \end{align*}
+    其中 $ \lambda_{1}, \lambda_{2}, \dots, \lambda_{n} $ 为 $ A^{-1}B $ 的全体特征值.
+    \item 设 $ A $ 是 $ n $ 阶半正定的实对称阵, $ S $ 为 $ n $ 阶实反对称阵, 满足 $ AS + SA = 0 $, 证明 $ \abs{A + S} > 0 $ 的充分必要条件为 $ \rank(A) + \rank(S) = n $. 
+    \item 设 $ A, B $ 为 $ n $ 阶正定实对称阵, 若 $ A - B $ 半正定, 证明 $ B^{-1} - A^{-1} $ 为半正定阵.
+    \item 设 $ A $ 是 $ n $ 阶正定实对称阵, $ B $ 是同阶半正定实对称阵, 求证 $ \abs{A + B} \ge \abs{A} + \abs{B} $. 
+\end{enumerate} 
 \end{document}
