@@ -4,19 +4,35 @@
     \setCJKmainfont{Source Han Serif SC}
 }{}
 
-\xeCJKsetup{CheckSingle=true}
+% \usepackage{showframe}
 
+% \ctexset{
+%     section/format  =   {\normalsize\raggedright\bfseries}
+% }
+
+\xeCJKsetup{CheckSingle=true}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\tcbuselibrary{skins}
+\tcbset{
+    width   =   \linewidth,
+    fonttitle=  \bfseries,
+    breakable,
+    enhanced jigsaw
+    % lines before break=0
+}
+\usepackage{mathtools}
 \usepackage{unicode-math}
 % \usepackage[mono=false]{libertinus-otf}
-% \setmainfont{TeX Gyre Pagella}
-% \setmathfont{TeX Gyre Pagella Math}
-\setmathfont{NewCMMath-Book.otf}
-\setmathfont{latinmodern-math.otf}[range=\sqrt]
+\setmainfont{TeX Gyre Pagella}
+\setmathfont{TeX Gyre Pagella Math}
+% \setmathfont{NewCMMath-Book.otf}
+% \setmathfont{latinmodern-math.otf}[range=\sqrt]
 % \setmathfont{TeX Gyre Pagella Math}[range=bb]
 
 
 \usepackage[margin=1.5cm]{geometry}
-\usepackage{mathtools}
+
 \usepackage[notrig]{physics}
 \usepackage{nicematrix}
 \usepackage[colorlinks=true]{hyperref}
@@ -68,9 +84,10 @@
 \DeclareMathOperator{\Image}{Im}
 \DeclareMathOperator{\Ker}{Ker}
 
+\renewcommand{\thempfootnote}{\arabic{mpfootnote}}
 
 \begin{document}
-\begin{enumerate}
+\begin{enumerate}[series=exer]
     \item 设 $ \Gamma $ 是由球面 $ x^{2} + y^{2} + z^{2} = a^{2} $ 和平面 $ x + y + z = 0 $ 交成的圆周, 从第一卦限内看 $ \Gamma $, 它的方向是逆时针. 计算第二型曲线积分
     \begin{align*}
         \int_{\Gamma} z \dd{x} + x \dd{y} + y \dd{z}.
@@ -217,11 +234,6 @@
     求证 $ BA = 9 I $. 
     \item $ A \in \MM $, $ A^{2} = A $, 若对任意列向量 $ x $, 都有 $ x'A'Ax \le x'x $, 证明 $ A' = A $.    
     \item 证明对任意 $ m \times n $ 矩阵 $ A $, 都有 $ \rank(AA') = \rank(A) $.  
-    \sitem (\emph{极分解}) 对可逆阵 $ A \in \MM $, 证明
-    \begin{enumerate}
-        \item 存在正交阵 $ P $, 正定阵 $ B $, 满足 $ A = PB $.
-        \item 存在正交阵 $ Q_{1}, Q_{2} $, 使得 $ Q_{1} A Q_{2} = \diag(\lambda_{1}, \lambda_{2}, \dots, \lambda_{n}) $, 并且 $ \lambda_{1}^{2}, \lambda_{2}^{2}, \dots, \lambda_{n}^{2} $ 是 $ A'A $ 的特征值. 
-    \end{enumerate}
     \item $ f(x) \in C[a, b] $, 证明函数 $ m(x) = \min\limits_{a \le \xi \le x}f(\xi) $ 在 $ [a, b] $ 连续.
     \item $ f(x) $ 在 $ (0, +\infty) $ 上二阶可导, 且 $ \limit{x}{+\infty} f(x) $ 存在, $ f''(x) $ 有界, 证明 $ \limit{x}{+\infty} f'(x) = 0 $.
     \item $ f(x) $ 在 $ \R $ 上三阶连续可导, 且对任意的 $ h > 0 $, 有
@@ -473,7 +485,6 @@
         \item $ V = V_{1} \oplus V_{2} \oplus \dots \oplus V_{t} $, $ U = U_{1} \oplus U_{2} \oplus \dots \oplus U_{t} $, 且 $ U_{i} = V_{i}\,(i = 1, 2, \dots, t) $;
         \item $ \varphi|_{V_{i}} $ 的特征多项式为 $ P_{i}(\lambda)^{r_{i}} $, 极小多项式为 $ P_{i}(\lambda)^{s_{i}} $. 特别地, $ \dim V_{i} = r_{i}\deg P_{i}(\lambda) $. 
     \end{enumerate}
-    \item 证明任一 $ n $ 阶复矩阵 $ A $ 都可以分解为两个 $ n $ 阶对称阵的乘积, 即 $ A = BC $, 并且可以任意指定 $ B $ 或 $ C $ 为可逆阵.
     \item 证明任一 $ n $ 阶复矩阵 $ A $ 都相似于一个复对称阵.
     \item 设 $ A $ 为 $ n $ 阶实对称矩阵, 求证: $ A $ 为半正定阵或半负定阵的充要条件是对任意满足 $ \alpha' A\alpha = 0 $ 的 $ n $ 维实向量 $ \alpha $, 都有 $ A\alpha = 0 $.
     \item 设 $ f(x) $ 在 $ [a, b] $ 上连续, $ (a, b) $ 上可导, 且 $ f(a) = f(b) $, 若 $ \abs{f'(x)} \le 1 $, 证明对任意的 $ x_{1}, x_{2} \in [a, b] $, 都有
@@ -538,13 +549,79 @@
         \item $ A + xx' $ 可逆.
         \item $ 0 < x'(A+xx')^{-1}x < 1 $. 
     \end{enumerate}
-    \sitem 设 $ A $ 为 $ n $ 阶正定实对称阵, $ B $ 为同阶对称阵, 则存在可逆阵 $ C $ 使得
-    \begin{align*}
-        C'AC = I_{n}, \quad C'BC = \diag\set{\lambda_{1}, \lambda_{2}, \dots, \lambda_{n}}
-    \end{align*}
     其中 $ \lambda_{1}, \lambda_{2}, \dots, \lambda_{n} $ 为 $ A^{-1}B $ 的全体特征值.
     \item 设 $ A $ 是 $ n $ 阶半正定的实对称阵, $ S $ 为 $ n $ 阶实反对称阵, 满足 $ AS + SA = 0 $, 证明 $ \abs{A + S} > 0 $ 的充分必要条件为 $ \rank(A) + \rank(S) = n $. 
     \item 设 $ A, B $ 为 $ n $ 阶正定实对称阵, 若 $ A - B $ 半正定, 证明 $ B^{-1} - A^{-1} $ 为半正定阵.
     \item 设 $ A $ 是 $ n $ 阶正定实对称阵, $ B $ 是同阶半正定实对称阵, 求证 $ \abs{A + B} \ge \abs{A} + \abs{B} $. 
+    \item 设 $ V $ 是 $ n $ 维酉空间, $ \varphi $ 是 $ V $ 上的线性变换, 求证: $ \varphi $ 是正规算子的充分必要条件是 $ \norm{\varphi(\alpha)} = \norm{\varphi^{*}(\alpha)} $ 对任意 $ \alpha \in V $ 都成立.
+    \sitem 设 $ V $ 是 $ n $ 维酉空间, $ \varphi $ 是 $ V $ 上的线性变换, 求证: $ \varphi $ 是正规算子的充分必要条件是若 $ v $ 是 $ \varphi $ 属于特征值 $ \lambda $ 的特征向量, 则 $ v $ 也是 $ \varphi^{*} $ 属于特征值 $ \bar\lambda $ 的特征向量.
+    \sitem 设 $ A = (a_{ij}) $ 是 $ n $ 阶复矩阵, $ \lambda_{1}, \lambda_{2}, \dots, \lambda_{n} $ 是其特征值, 求证: $ A $ 是正规矩阵的充分必要条件是
+    \begin{align*}
+        \sum_{i=1}^{n}\abs{\lambda_{i}}^{2} = \tr(A^{\symrm{H}}A) = \sum_{i, j=1}^{n}\abs{a_{ij}}^{2}.
+    \end{align*}
 \end{enumerate} 
+    \begin{tcolorbox}[title={同时上三角化/对角化/标准型化}]
+        \begin{enumerate}[resume=exer]
+            \item 设 $ n $ 阶矩阵 $ \set{A_{i} : i = 1, 2, \dots, m} $ 两两可交换, 即 $ A_{i}A_{j} = A_{j}A_{i} $ 对一切 $ i, j $ 都成立, 假定每一个 $ A_{i} $ 均可对角化, 证明: 它们可同时对角化.
+            \item 若 $ A, B \in \MM[\K] $, 且 $ AB = BA $, 假定 $ A, B $ 的特征值都在 $ \K $ 中, 证明: 存在 $ \K $ 上的可逆阵 $ P $, 使得 $ P^{-1}AP $ 与 $ P^{-1}BP $ 都是上三角矩阵.
+            \item 设 $ A $ 为 $ n $ 阶正定实对称阵, $ B $ 为同阶对称阵, 则存在可逆阵 $ C $ 使得
+            \begin{align*}
+                C'AC = I_{n}, \quad C'BC = \diag\set{\lambda_{1}, \lambda_{2}, \dots, \lambda_{n}}
+            \end{align*}
+            \item 设 $ A, B $ 都是 $ n $ 阶半正定实对称矩阵, 证明: 存在可逆阵 $ C $, 使得
+            \begin{align*}
+                C'AC = \diag\{\underbrace{1, \dots, 1}_{r\text{ 个 }}, 0, \dots, 0\}, \quad C'BC = \diag\set{\lambda_{1}, \dots, \lambda_{r}, \lambda_{r+1}, \dots, \lambda_{n}}
+            \end{align*}
+            \item 设 $ A $ 为 $ n $ 阶正定实对称阵, $ S $ 为同阶实反对称阵, 则存在可逆矩阵 $ C $, 使得
+            \begin{align*}
+                C'AC = I_{n}, \quad C'SC = \diag\set{\mqty(0 & b_{1} \\ -b_{1} & 0), \dots, \mqty(0 & b_{r} \\ -b_{r} & 0), 0, \dots, 0}
+            \end{align*}
+            \item 设 $ A_{i}\,(i = 1, 2, \dots, m) $ 是 $ m $ 个实对称(复正规)矩阵且两两可交换, 证明: 存在正交(酉)矩阵 $ P $, 使得 $ P'A_{i}P $ ($ P^{\symrm{H}}A_{i}P $)都是对角阵.
+            \item 设 $ A, B $ 是两个 $ n $ 阶实正规矩阵, 且 $ AB = BA $, 证明: 存在正交矩阵 $ P $, 使得 $ P'AP $ 和 $ P'BP $ 同时为如下形状的分块对角矩阵: $ \diag\set{A_{1}, \dots, A_{r}, c_{2r+1}, \dots, c_{n}} $, 其中 $ c_{i} $ 是实数, $ A_{i} $ 为形如 $ \smqty(a_{i} & b_{i} \\ -b_{i} & a_{i}) $ 的二阶实矩阵. 
+            \item 设 $ A, B $ 是 $ n $ 阶实对称矩阵, 满足 $ AB + BA = 0 $, 证明: 若 $ A $ 半正定, 则存在正交矩阵 $ P $, 使得:
+            \begin{align*}
+                P'AP = \diag\set{\lambda_{1}, \dots, \lambda_{r}, 0, \dots, 0}, \quad P'BP = \diag\set{0, \dots, 0, \mu_{r + 1}, \dots, \mu_{n}}.
+            \end{align*}
+        \end{enumerate}
+    \end{tcolorbox}
+    \begin{tcolorbox}[title={矩阵/线性算子分解}]
+        \begin{enumerate}[resume=exer]
+            \item 设 $ A \in \MM[\C] $, 则 $ A $ 可以分解为 $ A = B + C $, 其中 $ B $ 为 Hermite 阵, $ C $ 为斜 Hermite 阵.
+            \item 设 $ A\in \MM[\C] $, 则 $ A $ 可以分解成两个对角阵的乘积, 即 $ A = BC $, 且可以任意指定 $ B $ 或 $ C $ 为可逆阵.
+            \item 设 $ A $ 是 $ n $ 阶(半)正定实对称阵, 则
+            \begin{enumerate}
+                \item 存在主对角线上元素全等于 $ 1 $ 的上三角矩阵 $ B $, 使得 $ A = B'DB $, 其中 $ D $ 是(半)正定对角矩阵;
+                \item (\emph{Cholesky 分解})存在主对角线上元素全为正(非负)的上三角阵 $ C $, 使得 $ A = C'C $. 
+            \end{enumerate}
+            \item (\emph{QR 分解}) 设 $ A $ 是 $ n $ 阶实(复)矩阵, 则 $ A $ 可以分解为 $ A = QR $, 其中 $ Q $ 是正交(酉)矩阵, $ R $ 是一个上三角阵, 且主对角线上的元素非负, 若 $ A $ 可逆, 则这样的分解唯一.
+            \item (\emph{极分解}) 设 $ V $ 是 $ n $ 维酉(欧式)空间, $ \varphi $ 是 $ V $ 上的任一线性算子, 则存在 $ V $ 上的酉(正交)算子 $ \omega $ 以及 $ V $ 上的半正定自伴随算子 $ \psi $, 使得 $ \varphi = \omega\psi $, 其中 $ \psi $ 是唯一的, 并且若 $ \varphi $ 是非异线性算子, 则 $ \omega $ 也唯一 \footnote{ $ \varphi $ 也可以做这样的分解: $ \varphi = \psi_{1}\omega_{1} $ 其中 $ \omega_{1} $ 为酉(正交)算子, $ \psi_{1} $ 为半正定自伴随算子, 这样的分解也叫极分解, 下面矩阵版本的同理.}. 
+            \item \label{item:矩阵极分解}(\emph{极分解}) 设 $ A \in \MM $, 则存在 $ n $ 阶正交阵 $ Q $ 以及 $ n $ 阶半正定对称阵 $ S $, 使得 $ A = QS $. 又设 $ B \in \MM[\C] $, 则存在 $ n $ 阶酉矩阵 $ U $, 以及 $ n $ 阶半正定 Hermite 阵 $ H $, 使得 $ B = UH $, 上述分解式当 $ A, B $ 为非异阵的时候被唯一确定.
+            \item (\emph{谱分解}) 设 $ V $ 是 $ n $ 维欧式(酉)空间, $ \varphi $ 为 $ V $ 上的自伴随(正规)算子. $ \lambda_{1}, \lambda_{2}, \dots, \lambda_{k} $ 为 $ \varphi $ 的全体不同特征值, $ W_{i} $ 为属于 $ \lambda_{i} $ 的特征子空间, 则 $ V $ 是 $ W_{i}\,(i = 1, 2, \dots, k) $ 的正交直和. 这时若设 $ E_{i} $ 是 $ V $ 到 $ W_{i} $ 的正交投影, 则 $ \varphi $ 有如下分解式:
+            \begin{align*}
+                \varphi = \lambda_{1}E_{1} + \lambda_{2}E_{2} + \dots + \lambda_{k}E_{k}.
+            \end{align*}
+            \item (\emph{奇异值分解}) 设 $ V, U $ 分别为 $ n, m $ 维欧式(酉)空间, $ \varphi : V \to U $ 是线性映射, 则存在 $ V $ 和 $ U $ 的标准正交基, 使 $ \varphi $ 在这两组基下的表示矩阵为 $ \smqty(S & 0 \\ 0 & 0) $, 其中 $ S = \diag\set{\sigma_{1}, \sigma_{2}, \dots, \sigma_{r}} $, $ \sigma_{1} \ge \sigma_{2} \ge \dots \ge \sigma_{r} > 0 $ 是 $ \varphi $ 的非零奇异值.
+            \item (\emph{奇异值分解}) 设 $ A $ 是 $ m\times n $ 的实(复)矩阵, 则存在 $ m $ 阶正交(酉)矩阵 $ P $, $ n $ 阶正交(酉)矩阵 Q, 使得 $ A = P\smqty(S & 0 \\ 0 & 0)Q $, 其中 $ S = \diag\set{\sigma_{1}, \sigma_{2}, \dots, \sigma_{r}} $, $ \sigma_{1} \ge \sigma_{2} \ge \dots \ge \sigma_{r} > 0 $ 是 $ A $ 的非零奇异值.
+        \end{enumerate}
+    \end{tcolorbox}
+    \begin{enumerate}[resume=exer]
+        \item 利用 \ref{item:矩阵极分解} 题证明: 存在正交阵 $ Q_{1}, Q_{2} $, 使得 $ Q_{1} A Q_{2} = \diag(\lambda_{1}, \lambda_{2}, \dots, \lambda_{n}) $, 并且 $ \lambda_{1}^{2}, \lambda_{2}^{2}, \dots, \lambda_{n}^{2} $ 是 $ A'A $ 的特征值. 
+        \item 利用 $ \cos px $ 在 $ [-\pi, \pi] $ 上的 Fourier 展开证明积分 
+        \begin{align*}
+            \int_{0}^{+\infty} \frac{x^{p-1}}{1+x} \dd{x} = \frac{\pi}{\sin p\pi}\quad (0<p<1).
+        \end{align*}
+        \item 判断含参变量反常积分 $ \int_{0}^{+\infty}\sqrt{u}\me^{-ux^{2}} \dd{x} $ 对于 $ u \in [0, +\infty) $ 的一致收敛性. 
+        \item 计算积分
+        \begin{align*}
+            I(r) = \int_{0}^{\pi} \ln(1 - 2r\cos x + r^{2}) \dd{x}
+        \end{align*}
+        \item 设 $ f(x)\in C^{1}[a, b] $, 记
+        \begin{align*}
+            A = \frac{1}{b - a}\int_{a}^{b} f(x) \dd{x}
+        \end{align*}
+        证明:
+        \begin{align*}
+            \int_{a}^{b}(f(x) - A)^{2} \dd{x} \le (b-a)^{2} \int_{a}^{b} (f'(x))^{2} \dd{x}.
+        \end{align*}
+    \end{enumerate}
 \end{document}
