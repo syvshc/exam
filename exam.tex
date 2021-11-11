@@ -23,9 +23,9 @@
 }
 \usepackage{mathtools}
 \usepackage{unicode-math}
-% \usepackage[mono=false]{libertinus-otf}
-\setmainfont{TeX Gyre Pagella}
-\setmathfont{TeX Gyre Pagella Math}
+\usepackage[mono=false]{libertinus-otf}
+% \setmainfont{TeX Gyre Pagella}
+% \setmathfont{TeX Gyre Pagella Math}
 % \setmathfont{NewCMMath-Book.otf}
 % \setmathfont{latinmodern-math.otf}[range=\sqrt]
 % \setmathfont{TeX Gyre Pagella Math}[range=bb]
@@ -416,7 +416,7 @@
     \end{align*}
     证明 $ \set{\alpha_{1}, \alpha_{2}, \dots, \alpha_{n}} $ 是 $ V $ 的一组基. 
     \item 设 $ A, B \in \MM $, 存在可逆复矩阵 $ P $, 使得 $ P^{-1}AP = B $, 证明存在可逆实矩阵 $ Q $ 使得 $ Q^{-1}AQ = B $.   
-    \item 设 $ A, B $ 为 $ n $ 阶方阵, 满足 $ \rank(ABA) = r(A) $, 求证: $ AB $ 与 $ BA $ 相似.
+    \item 设 $ A, B $ 为 $ n $ 阶方阵, 满足 $ \rank(ABA) = \rank(A) $, 求证: $ AB $ 与 $ BA $ 相似.
     \item 设 $ A, B $ 为 $ n $ 阶方阵, 则 $ AB $ 与 $ BA $ 相似的充要条件是 $ \rank((AB)^{i}) = \rank((BA)^{i})\,(1 \le i \le n - 1) $.
     \item  设 $ A, B $ 为 $ n $ 阶方阵, 满足 $ \rank(ABA) = r(B) $, 求证: $ AB $ 与 $ BA $ 相似.
     \item 设 $ f $ 在 $ \R $ 上连续, 又 $ \varphi(x) = f(x)\int_{0}^{x} f(t) \dd{t} $ 单调递减, 证明 $ f(x) \equiv 0, x\in\R $.
@@ -568,6 +568,7 @@
             \begin{align*}
                 C'AC = I_{n}, \quad C'BC = \diag\set{\lambda_{1}, \lambda_{2}, \dots, \lambda_{n}}
             \end{align*}
+            其中 $ \lambda_{1}, \lambda_{2}, \dots, \lambda_{n} $ 是 $ A^{-1}B $ 的特征值.
             \item 设 $ A, B $ 都是 $ n $ 阶半正定实对称矩阵, 证明: 存在可逆阵 $ C $, 使得
             \begin{align*}
                 C'AC = \diag\{\underbrace{1, \dots, 1}_{r\text{ 个 }}, 0, \dots, 0\}, \quad C'BC = \diag\set{\lambda_{1}, \dots, \lambda_{r}, \lambda_{r+1}, \dots, \lambda_{n}}
@@ -623,5 +624,68 @@
         \begin{align*}
             \int_{a}^{b}(f(x) - A)^{2} \dd{x} \le (b-a)^{2} \int_{a}^{b} (f'(x))^{2} \dd{x}.
         \end{align*}
+        \item 计算积分 $ \int_{0}^{\pi/2} \ln(a^{2}\sin^{2}x + b^{2}\cos^{2} x)\dd{x}\,(a^{2} + b^{2} \ne 0) $.
+        \item 已知 $ f(x) \in C[-1, 1] $, 证明:
+        \begin{align*}
+            \limit{y}{0+} \int_{-1}^{1}\frac{yf(x)}{x^{2} + y^{2}} \dd{x} = \pi f(0).
+        \end{align*}
+        \item 设 $ A $ 是 $ n $ 阶实对称阵:
+        \begin{align*}
+            A = \begin{pmatrix}
+                a_{1} & b_{1} & & & \\
+                b_{1} & a_{2} & b_{2} & & \\
+                & b_{2} & a_{3} & \ddots & \\
+                & & \ddots & \ddots & b_{n-1} \\
+                & & & b_{n-1} & a_{n}
+            \end{pmatrix},\quad b_{j} \ne 0
+        \end{align*}
+        证明: 
+        \begin{enumerate}
+            \item $ \rank(A) \ge n-1 $;
+            \item $ A $ 的特征值各不相同. 
+        \end{enumerate}
+        \item 设 $ \lambda_{1}, \lambda_{2}, \dots, \lambda_{k} $ 是 $ A\in \MM[\C] $ 的全体特征值, 若有 $ \rank(\lambda_{i}I - A) = \rank(\lambda_{i}I - A)^{2}\,(i = 1, 2, \dots, k) $, 证明 $ A $ 可以相似对角化.
+        \item 证明
+        \begin{align*}
+            \int_{1}^{+\infty}\exp\qty(-\frac{1}{\alpha^{2}}\qty(x-\frac{1}{\alpha})^{2}) \dd{x}
+        \end{align*}
+        在 $ (0, 1) $ 上一致收敛.
+        \item 设 $ f(x) $ 为单调递减的正值函数, 证明 $ \int_{a}^{+\infty} f(x) \dd{x} $ 与 $ \int_{a}^{+\infty} f(x)\sin^{2}{x} \dd{x} $ 同时敛散.
+        \item 设 $ \symscr{A}, \symscr{B} $ 均是 $ n $ 维线性空间 $ V $ 上的线性变换, 且 $ \Ker \symscr{A} \subset \Ker \symscr{B} $, 证明, 存在线性变换 $ \symscr{T} $, 使得 $ \symscr{B} = \symscr{TA} $.
+        \item 计算极限
+        \begin{align*}
+            \limit{r}{+\infty} r\int_{0}^{+\infty} \me^{-x^{2}}\sin(rx) \dd{x}.
+        \end{align*}
+        \item 设数域 $ \K $ 上的全体矩阵 $ \MM[\K] $ 上有线性变换 $ \sigma(X) = AX - XA $, 其中 $ A \in \MM[\K] $:
+        \begin{enumerate}
+            \item 若 $ A $ 为幂零阵, 证明 $ \sigma $ 为幂零变换;
+            \item 若 $ A $ 有特征值 $ \lambda_{1}, \lambda_{2}, \dots, \lambda_{n} $, 证明 $ \lambda_{i} - \lambda_{j}\,(1\le i, j\le n) $ 为 $ \sigma $ 的特征值.
+        \end{enumerate}
+        \item 设 $ f(x) $ 是实系数多项式, 若有 $ f(x) \mid f(x^2 + x + 1) $, 证明 $ 2 \mid \deg f(x) $.
+        \item 设函数 $ f(x) $ 在 $ [0, 1] $ 上连续, 证明:
+        \begin{align*}
+            \int_{0}^{1} \dd{x}\int_{x}^{1} \dd{y}\int_{x}^{y}f(x)f(y)f(z)\dd{z} = \frac{1}{6}\qty(\int_{0}^{1}f(t) \dd{t})^{3}.
+        \end{align*}
+        \item 设 $ A, B $ 都是 $ n $ 阶正交阵, 证明 $ \abs{\det(A+B)} \le 2^{n} $.
+        \item 设 $ A, B \in \MM[\C] $, 若 $ AB = BA = 0 $, $ \rank(A^{2}) = \rank(A) $, 证明
+        \begin{align*}
+            \rank(A+B) = \rank(A) + \rank(B).
+        \end{align*}
+        \item 设 $ V $ 是 $ n $ 维内积空间,  $ V_{1}, V_{2}, \dots, V_{r} $ 是 $ V $ 的 $ r $ 个真子空间, 证明: 存在 $ V $ 的一组标准正交基 $ \alpha_{1}, \alpha_{2}, \dots, \alpha_{n} $, 使得对任意的 $ 1 \le i \le n, 1\le j \le r $ 都有 $ \alpha_{i} \notin V_{j} $. 
+        \item 设 $ f(x) $ 在 $ \R $ 上连续且有界, 证明对任意 $ T > 0 $, 都存在一个数列 $ \set{x_{n}} $, 满足
+        \begin{align*}
+            \limit{n}{\infty} x_{n} = +\infty, \quad \limit{n}{\infty}(f(x_{n}+T) - f(x_{n})) = 0.
+        \end{align*}
+        \item (华师 2020) 计算级数 $ \sum_{n=0}^{\infty}\frac{(-1)^{n}}{3^{n}(2n+1)} $.
+        \item (华师 2020) 计算
+        \begin{align*}
+            \oiint_{\Sigma} (z^{2}+x) \dd{y}\dd{z} + \sqrt{z} \dd{x}\dd{y}
+        \end{align*}
+        其中 $ \Sigma $ 为抛物面 $ z = (x^{2}+y^{2})/2 $ 在平面 $ x=0 $ 与 $ x=2 $ 之间的部分, 方向取下侧.
+        \item 计算第二型曲线积分
+        \begin{align*}
+            \oint_{L} \frac{4x-y}{4x^{2}+y^{2}}\dd{x} + \frac{x-y}{4x^{2}+y^{2}}\dd{y}
+        \end{align*}
+        其中 $ L $ 为 $ x^{2} + y^{2} = 2 $ 的圆周, 方向为逆时针.
     \end{enumerate}
 \end{document}
