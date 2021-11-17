@@ -136,7 +136,7 @@
     \item 计算 Fresnel 积分 $ \int_{0}^{+\infty} \sin(x^{2}) \dd{x} $.
     \item 计算积分 $ \int_{0}^{+\infty} \exp(-a x^{2})\cos(bx) \dd{x} $, 其中 $ a > 0,\ b\in \R $.
     \item 计算积分 $ \int_{0}^{\pi/2} \tan^{\alpha}(x) \dd{x} $, 其中 $ \abs{\alpha} < 1 $. 
-    \item\label{item:AX=XB} 设 $ \K $ 是数域, $ A \in \MM[\K][m] $, $ B \in \MM[\K][n] $, 且 $ A, B $ 没有相同的特征值, 证明矩阵方程 $ AX = XB $ 只有零解.
+    \sitem\label{item:AX=XB} 设 $ \K $ 是数域, $ A \in \MM[\K][m] $, $ B \in \MM[\K][n] $, 且 $ A, B $ 没有相同的特征值, 证明矩阵方程 $ AX = XB $ 只有零解.
     \item 设 $ A $ 是 4 阶方阵, 满足 $ \tr(A^{i}) = i\,(i = 1, 2, 3, 4) $, 求 $ \abs{A} $. 
     \item $ n $ 阶方阵可对角化的充分必要条件.
     \item 设 $ f(x) $ 在 $ [0, 1] $ 上可积, 在 $ x = 1 $ 处左连续, 证明:
@@ -687,5 +687,20 @@
             \oint_{L} \frac{4x-y}{4x^{2}+y^{2}}\dd{x} + \frac{x-y}{4x^{2}+y^{2}}\dd{y}
         \end{align*}
         其中 $ L $ 为 $ x^{2} + y^{2} = 2 $ 的圆周, 方向为逆时针.
+        \item (浙大 2018) 设 $ A $ 为 $ n $ 阶非零实方阵, 且 $ A^{2} = A $, 设 $ \rank(A) = r $, 求证 $ A $ 正交相似于分块矩阵: $ \smqty(I_{r} & 0 \\ B & 0) $, 其中 $ I_{r} $ 为 $ r $ 阶单位阵, $ B $ 为某一实矩阵.
+        \item 求抛物面 $ x^{2} + y^{2} + az = 4a^{2} $ 将球体 $ x^{2} + y^{2} + z^{2} \le 4az $ 分成两部分的体积之比.
+        \item 计算第一型曲面积分
+        \begin{align*}
+            I = \iint_{S} \frac{x^{3} + y^{3} + z^{3}}{1-z} \dd{S}
+        \end{align*}
+        其中 $ S $ 为 $ x^{2} + y^{2} = (1-z)^{2}\,(0 \le z \le 1) $. 
+        \item 计算 $ I = \iiint_{\Omega} x^{2}\sqrt{x^{2} + y^{2}}\,\dd x\dd y\dd z $, 其中 $ \Omega $ 是曲面 $ z = \sqrt{x^{2} + y^{2}} $ 与 $ z = x^{2} + y^{2} $ 围成的有界区域.
+        \item 计算第二型曲面积分
+        \begin{align*}
+            \iint_{\Sigma} x\,\dd y\dd z + (2 + y^{3})\,\dd z\dd x + z^{3}\,\dd x\dd y
+        \end{align*}
+        其中 $ \Sigma $ 为 $ x = \sqrt{1 - 2y^{2} - 3z^{2}} $, 方向取 $ x $ 轴正向.
+        \item 计算积分 $ I = \iint_{S} (x + z) \dd{\sigma} $, 其中 $ S $ 是曲面 $ x^{2} + z^{2} = 2az\,(a > 0) $ 被曲面 $ z = \sqrt{x^{2} + y^{2}} $ 所截取的有限部分.
+        \item 设 $ A, B \in \MM $ 为对称阵, 若 $ A $ 正定, 证明 $ AB $ 的特征值全为实数.
     \end{enumerate}
 \end{document}
