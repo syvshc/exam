@@ -68,6 +68,13 @@
   \item
   \expandafter\let\csname labelenum\romannumeral\@enumdepth\endcsname\originallabel
 }
+\def\hitem{%
+  \expandafter\let\expandafter\originallabel\csname labelenum\romannumeral\@enumdepth\endcsname
+  \expandafter\def\csname labelenum\romannumeral\@enumdepth\expandafter\endcsname\expandafter{%
+    \expandafter\bfseries\expandafter\expandafter{\expandafter\asteriskitem\expandafter\originallabel}}%
+  \item
+  \expandafter\let\csname labelenum\romannumeral\@enumdepth\endcsname\originallabel
+}
 \makeatother
 
 \newcommand{\limit}[2]{\lim_{#1 \to #2}}
@@ -133,7 +140,7 @@
         \int_{0}^{+\infty} \me^{-(\alpha + u^{2})t} \sin(t) \dd{u},\quad \alpha > 0
     \end{align*}
     关于 $ t $ 在 $ [0, +\infty) $ 上一致收敛.
-    \item 计算 Fresnel 积分 $ \int_{0}^{+\infty} \sin(x^{2}) \dd{x} $.
+    \hitem 计算 Fresnel 积分 $ \int_{0}^{+\infty} \sin(x^{2}) \dd{x} $.
     \item 计算积分 $ \int_{0}^{+\infty} \exp(-a x^{2})\cos(bx) \dd{x} $, 其中 $ a > 0,\ b\in \R $.
     \item 计算积分 $ \int_{0}^{\pi/2} \tan^{\alpha}(x) \dd{x} $, 其中 $ \abs{\alpha} < 1 $. 
     \sitem\label{item:AX=XB} 设 $ \K $ 是数域, $ A \in \MM[\K][m] $, $ B \in \MM[\K][n] $, 且 $ A, B $ 没有相同的特征值, 证明矩阵方程 $ AX = XB $ 只有零解.
