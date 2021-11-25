@@ -90,6 +90,7 @@
 % \DeclareMathOperator{\deg}{deg} 
 \DeclareMathOperator{\Image}{Im}
 \DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\sgn}{sgn}
 
 \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
 
@@ -423,7 +424,7 @@
         \varphi(\alpha_{i}) = \alpha_{i + 1}\,(i = 1, 2, \dots, n-1), \quad \varphi(\alpha_{n}) = -a_{n}\alpha_{1} - a_{n-1}\alpha_{2} - \dots - a_{1}\alpha_{n}.
     \end{align*}
     证明 $ \set{\alpha_{1}, \alpha_{2}, \dots, \alpha_{n}} $ 是 $ V $ 的一组基. 
-    \item 设 $ A, B \in \MM $, 存在可逆复矩阵 $ P $, 使得 $ P^{-1}AP = B $, 证明存在可逆实矩阵 $ Q $ 使得 $ Q^{-1}AQ = B $.   
+    \item\label{item:CtoR} 设 $ A, B \in \MM $, 存在可逆复矩阵 $ P $, 使得 $ P^{-1}AP = B $, 证明存在可逆实矩阵 $ Q $ 使得 $ Q^{-1}AQ = B $.   
     \item 设 $ A, B $ 为 $ n $ 阶方阵, 满足 $ \rank(ABA) = \rank(A) $, 求证: $ AB $ 与 $ BA $ 相似.
     \item 设 $ A, B $ 为 $ n $ 阶方阵, 则 $ AB $ 与 $ BA $ 相似的充要条件是 $ \rank((AB)^{i}) = \rank((BA)^{i})\,(1 \le i \le n - 1) $.
     \item  设 $ A, B $ 为 $ n $ 阶方阵, 满足 $ \rank(ABA) = r(B) $, 求证: $ AB $ 与 $ BA $ 相似.
@@ -722,5 +723,28 @@
         \item 计算曲线积分 $ I = \int_{L} z^{2} \dd{s} $, 其中 $ L $ 为 $ x^{2} + y^{2} + z^{2} = 1 $ 与 $ x + y = 1 $ 的交线.
         \item 设矩阵 $ A \in \MM[\Q] $, 其中 $ n\ge 2 $, 设 $ f(\lambda) = \lambda^{n} + 2\lambda^{n-1} + 2 $, 若有 $ f(A) = 0 $, 证明 $ f(\lambda) $ 是 $ A $ 的特征多项式.
         \item 设函数 $ f(x) $ 在 $ (0, 1] $ 上可导, $ \limit{x}{0+} \sqrt{x}f'(x) = A\in \R $, 证明 $ f(x) $ 在 $ (0, 1] $ 上一致连续.
+        \item (中科院 2019) 设有 $ n + 1 $ 个列向量 $ \alpha_{1}, \alpha_{2}, \dots, \alpha_{n}, \beta \in \R^{n} $, $ A $ 是一个 $ n $ 阶实对称正定阵, $ \alpha_{i}' $ 为 $ \alpha_{i} $ 的转置, 如果满足下列条件: 
+        \begin{enumerate}
+            \item $ \alpha_{j} \ne 0\, (j = 1, 2, \dots, n) $;
+            \item 对于任意 $ i \ne j \,(i, j = 1, 2, \dots, n) $, 都有 $ \alpha_{i}' A \alpha_{j} = 0 $;
+            \item $ \beta $ 与每个 $ \alpha_{j}\,(j = 1, 2, \dots, n) $ 都正交; 
+        \end{enumerate}
+        证明 $ \beta = 0 $.
+        \item (浙大 2020, 与 \ref{item:CtoR} 题类似) 若 $ A, B \in \MM $, 存在 $ n $ 阶可逆复方阵 $ X $ 使得 $ XA + 2BX = 0 $, 证明存在可逆实方阵 $ Y $, 使得 $ YA + 2BY = 0 $. 
+        \item (浙大 2020) 求行列式 $ \abs{A} $, 其中 $ A $ 的第 $ (i, j) $ 元为 $ \sgn(i - j) $.
+        \item (中南大学 2020) 设 $ \symscr{A} $ 是实数域 $ \R $ 上 $ n\,(n\ge 1) $ 维线性空间 $ V $ 上的线性变换, 证明 $ \symscr{A} $ 至少有一个维数是 $ 1 $ 或 $ 2 $ 的不变子空间.
+        \item (华师 2021) 设 $ c_{1}, c_{2}, c_{3} $ 是多项式 $ f(x) = 2x^{3} - 4x^{2} + 6x - 1 $ 的三个复根, 求 $ (c_{1}c_{2} + c_{3}^{2})(c_{2}c_{3} + c_{1}^{2})(c_{1}c_{3} + c_{2}^{2}) $.
+        \item (华师 2021) 设实矩阵
+        \begin{align*}
+            A = \begin{pmatrix}
+                a & b \\ c & d
+            \end{pmatrix},\quad a, b, c, d > 0
+        \end{align*}
+        证明: 一定存在 $ A $ 的特征向量 $ (x, y)'\in \R^{2} $, 满足 $ x, y > 0 $.
+        \item (华师 2021) 设 $ A \in \MM $, $ B $ 是 $ n $ 阶实对称正定阵. 
+        \begin{enumerate}
+            \item 证明: 存在唯一 $ n $ 阶实矩阵 $ C $ 满足 $ BC + CB = A $;
+            \item 证明: 对 $ (1) $ 中的实矩阵 $ C $, $ BC = CB $ 当且仅当 $ AB = BA $. 
+        \end{enumerate}
     \end{enumerate}
 \end{document}
