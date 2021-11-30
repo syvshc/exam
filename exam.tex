@@ -84,7 +84,7 @@
 \newcommand{\N}{\ensuremath{\symbb{N}}}
 \newcommand{\C}{\ensuremath{\symbb{C}}}
 \newcommand{\Q}{\ensuremath{\symbb{Q}}}
-
+% 可以用 D(){} 来做定界符
 \NewDocumentCommand{\MM}{ O{\R} O{n} }{ \ensuremath{\symup{M}_{#2}(#1)} }
 \DeclareMathOperator{\diag}{diag} 
 % \DeclareMathOperator{\deg}{deg} 
@@ -746,5 +746,12 @@
             \item 证明: 存在唯一 $ n $ 阶实矩阵 $ C $ 满足 $ BC + CB = A $;
             \item 证明: 对 $ (1) $ 中的实矩阵 $ C $, $ BC = CB $ 当且仅当 $ AB = BA $. 
         \end{enumerate}
+        \item 设数列 $ \set{na_{n}} $ 收敛, 级数 $ \sum_{n=1}^{\infty}n(a_{n} - a_{n-1}) $ 收敛, 证明 $ \sum_{n=1}^{\infty}a_{n} $ 也收敛. 
+        \item 求 $ \limit{n}{+\infty} (I_{n}/\ln n) $, 其中
+        \begin{align*}
+            I_{n} = \int_{0}^{\pi/2} \frac{\sin^{2}(nt)}{\sin t}\dd{t}.
+        \end{align*}
+        \sitem 设 $ I(x) = \int_{0}^{+\infty} x^{3/2}\exp(-x^{2}y^{2})\dd{y} $, 证明 $ I(x) $ 关于 $ x\geq 0 $ 一致收敛.
+        \item 计算曲线积分: $ I = \int_{L} (x^{2} - y^{2}) \dd{x} + (x^{2} - z^{2}) \dd{y} + (y^{2} - z^{2})\dd{z} $ , 其中 $ L $ 是曲面 $ x = \sqrt{2z - y^{2} - z^{2}} $ 与 $ x + z = 1 $ 的交线上, 从点 $ (0, -1, 1) $ 到点 $ (0, 1, 1) $ 的一段有向弧.
     \end{enumerate}
 \end{document}
