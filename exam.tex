@@ -27,7 +27,7 @@
 % \setmainfont{TeX Gyre Pagella}
 % \setmathfont{TeX Gyre Pagella Math}
 % \setmathfont{NewCMMath-Book.otf}
-% \setmathfont{latinmodern-math.otf}[range=\sqrt]
+\setmathfont{latinmodern-math.otf}[range={\lbrace, \rbrace}]
 % \setmathfont{TeX Gyre Pagella Math}[range=bb]
 
 
@@ -146,6 +146,7 @@
     \item 计算积分 $ \int_{0}^{+\infty} \exp(-a x^{2})\cos(bx) \dd{x} $, 其中 $ a > 0,\ b\in \R $.
     \item 计算积分 $ \int_{0}^{\pi/2} \tan^{\alpha}(x) \dd{x} $, 其中 $ \abs{\alpha} < 1 $. 
     \sitem\label{item:AX=XB} 设 $ \K $ 是数域, $ A \in \MM[\K][m] $, $ B \in \MM[\K][n] $, 且 $ A, B $ 没有相同的特征值, 证明矩阵方程 $ AX = XB $ 只有零解.
+    \item 如 \ref{item:AX=XB} 题, 可以进一步证明逆命题也成立, 即: 如果 $ AX = XB $ 只有零解, 则 $ A, B $ 无公共特征值.
     \item 设 $ A $ 是 4 阶方阵, 满足 $ \tr(A^{i}) = i\,(i = 1, 2, 3, 4) $, 求 $ \abs{A} $. 
     \item $ n $ 阶方阵可对角化的充分必要条件.
     \item 设 $ f(x) $ 在 $ [0, 1] $ 上可积, 在 $ x = 1 $ 处左连续, 证明:
@@ -395,7 +396,7 @@
     \begin{align*}
         \limit{\lambda}{\infty} \int_{a}^{b} f(x)g(\lambda x) \dd{x}
     \end{align*}
-    \item 设 $ f(x) $ 是实多项式, 且对任意实数 $ r $, 都有 $ f(r) \ge 0 $. 证明存在实多项式 $ g(x), h(x) $ 使得 $ f(x) = g^{2}(x) + h^{2}(x) $.   
+    \sitem 设 $ f(x) $ 是实多项式, 且对任意实数 $ r $, 都有 $ f(r) \ge 0 $. 证明存在实多项式 $ g(x), h(x) $ 使得 $ f(x) = g^{2}(x) + h^{2}(x) $.   
     \item 设 $ \varphi_{1}, \varphi_{2}, \dots, \varphi_{m} $ 是 $ n $ 维线性空间 $ V $ 上的线性变换, 且适合条件:
     \begin{align*}
         \varphi_{i}^{2} = \varphi_{i}, \quad \varphi_{i}\varphi_{j} = 0\,(i\ne j), \quad \bigcap_{i=1}^{m}\Ker\varphi_{i} = 0,
@@ -484,7 +485,6 @@
     \end{align*}
     其中 $ A_{i} $ 与 $ B_{i} $ 为同阶方阵, 假定矩阵 $ A_{i} $ 适合非零多项式 $ g_{i}(x) $, 且 $ g_{i}(x)\,(i = 1, \dots, k) $ 两两互素. 求证: 若对于每个 $ i $, 存在多项式 $ f_{i}(x) $, 使 $ B_{i} = f_{i}(A_{i}) $, 则必存在次数不超过 $ n-1 $ 的多项式 $ f(x) $, 使得 $ B = f(A) $.
     \item 设 $ n $ 阶方阵 $ A $ 的秩为 $ n-1 $, $ B $ 是同阶非零阵, 且有 $ AB = BA = 0 $, 证明: 存在不超过 $ n-1 $ 阶的多项式 $ f(x) $, 使得 $ B = f(A) $.
-    \item 如 \ref{item:AX=XB} 题, 可以进一步证明逆命题也成立, 即: 如果 $ AX = XB $ 只有零解, 则 $ A, B $ 无公共特征值.
     \sitem 设 $ V $ 为数域 $ \K $ 上的 $ n $ 维线性空间, $ \varphi $ 是 $ V $ 上的线性变换, 其特征多项式与极小多项式分别设为 $ f(\lambda) $ 与 $ m(\lambda) $, 设
     \begin{align*}
         f(\lambda) = P_{1}(\lambda)^{r_{1}}P_{2}(\lambda)^{r_{2}}\dots P_{t}(\lambda)^{r_{t}}, \quad m(\lambda) = P_{1}(\lambda)^{s_{1}}P_{2}(\lambda)^{s_{2}}\dots P_{t}(\lambda)^{s_{t}}
@@ -732,7 +732,7 @@
         证明 $ \beta = 0 $.
         \item (浙大 2020, 与 \ref{item:CtoR} 题类似) 若 $ A, B \in \MM $, 存在 $ n $ 阶可逆复方阵 $ X $ 使得 $ XA + 2BX = 0 $, 证明存在可逆实方阵 $ Y $, 使得 $ YA + 2BY = 0 $. 
         \item (浙大 2020) 求行列式 $ \abs{A} $, 其中 $ A $ 的第 $ (i, j) $ 元为 $ \sgn(i - j) $.
-        \item (中南大学 2020) 设 $ \symscr{A} $ 是实数域 $ \R $ 上 $ n\,(n\ge 1) $ 维线性空间 $ V $ 上的线性变换, 证明 $ \symscr{A} $ 至少有一个维数是 $ 1 $ 或 $ 2 $ 的不变子空间.
+        \item  设 $ \symscr{A} $ 是实数域 $ \R $ 上 $ n\,(n\ge 1) $ 维线性空间 $ V $ 上的线性变换, 证明 $ \symscr{A} $ 至少有一个维数是 $ 1 $ 或 $ 2 $ 的不变子空间.
         \item (华师 2021) 设 $ c_{1}, c_{2}, c_{3} $ 是多项式 $ f(x) = 2x^{3} - 4x^{2} + 6x - 1 $ 的三个复根, 求 $ (c_{1}c_{2} + c_{3}^{2})(c_{2}c_{3} + c_{1}^{2})(c_{1}c_{3} + c_{2}^{2}) $.
         \item (华师 2021) 设实矩阵
         \begin{align*}
@@ -753,5 +753,44 @@
         \end{align*}
         \sitem 设 $ I(x) = \int_{0}^{+\infty} x^{3/2}\exp(-x^{2}y^{2})\dd{y} $, 证明 $ I(x) $ 关于 $ x\geq 0 $ 一致收敛.
         \item 计算曲线积分: $ I = \int_{L} (x^{2} - y^{2}) \dd{x} + (x^{2} - z^{2}) \dd{y} + (y^{2} - z^{2})\dd{z} $ , 其中 $ L $ 是曲面 $ x = \sqrt{2z - y^{2} - z^{2}} $ 与 $ x + z = 1 $ 的交线上, 从点 $ (0, -1, 1) $ 到点 $ (0, 1, 1) $ 的一段有向弧.
+        \sitem 记 $ \abs{M} $ 为矩阵 $ M $ 的行列式, 设 $ A, B\in \MM $, 
+        \begin{enumerate}
+            \item 证明
+            \begin{align*}
+                \begin{vmatrix}
+                    A & B \\ -B & A
+                \end{vmatrix} = \abs{A + \sqrt{-1}B}\cdot\abs{A - \sqrt{-1}B}.
+            \end{align*}
+            \item 证明 
+            \begin{align*}
+                \begin{vmatrix}
+                    A & B \\ B & A
+                \end{vmatrix} = \abs{A + B}\cdot\abs{A - B}.
+            \end{align*}
+        \end{enumerate}
+        \item 设函数 
+        \begin{align*}
+            f(x) = \begin{cases}
+                \int_{0}^{x}\sin(1/x) \dd{x} & ,x \ne 0\\
+                0 & ,x = 0
+            \end{cases}
+        \end{align*}
+        则 $ f(x) $ 在 $ x = 0 $ 处是否可导?
+        \item 求积分
+        \begin{align*}
+            I = \int_{0}^{1} \frac{\ln(1 + x)}{1 + x^{2}} \dd{x}.
+        \end{align*}
+        \item 设 $ D $ 是 $ xOy $ 平面上由曲线 $ y = \sqrt{x} $ 和直线 $ y = x $ 围成的图形, 求 $ D $ 绕直线 $ y = x $ 旋转产生的旋转体的体积.
+        \item 设 $ A $ 为 $ n $ 阶实对称矩阵, 证明: $ \rank(A) = n $ 的充分必要条件为存在 $ n $ 阶实矩阵 $ B $, 使得 $ AB + B'A $ 为正定阵.
+        \sitem\label{item:f有限区间一致收敛} 设 $ f(x) $ 是 $ \R $ 上的连续函数, 设
+        \begin{align*}
+            f_{n}(x) = \sum_{k=0}^{n-1}\frac{1}{n}f\qty(x+\frac{k}{n}),
+        \end{align*} 
+        证明: 函数列 $ \set{f_{n}(x)} $ 在任意有限区间上一致收敛. 
+        \item 与 \ref{item:f有限区间一致收敛} 很类似, 如果令 $ f(x) = \sin(x) $, 证明 $ \set{f_{n}(x)} $ 在 $ \R $ 上一致收敛. 
+        \item 判断下列级数的敛散性
+        \begin{align*}
+            \sum_{n = 1}^{\infty} (-1)^{n - 1} \frac{\sqrt{n}}{\sqrt{n} + (-1)^{n-1}}\sin\frac{1}{\sqrt{n}}.
+        \end{align*}
     \end{enumerate}
 \end{document}
