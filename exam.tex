@@ -55,7 +55,7 @@
 
 % \let\vb\symbfit
 \usepackage[shortlabels, inline]{enumitem} % 继承并扩展了enumerate宏包的功能
-\setlist[enumerate, 1]{leftmargin=*, label=\arabic*., widest=111, ref=\arabic*}
+\setlist[enumerate, 1]{leftmargin=*, label=\arabic*., widest=000, ref=\arabic*}
 \setlist[enumerate, 2]{leftmargin=*, label=(\arabic*)}
 
 % https://tex.stackexchange.com/a/52718/180617
@@ -564,10 +564,6 @@
     \item 设 $ A $ 是 $ n $ 阶正定实对称阵, $ B $ 是同阶半正定实对称阵, 求证 $ \abs{A + B} \ge \abs{A} + \abs{B} $. 
     \item 设 $ V $ 是 $ n $ 维酉空间, $ \varphi $ 是 $ V $ 上的线性变换, 求证: $ \varphi $ 是正规算子的充分必要条件是 $ \norm{\varphi(\alpha)} = \norm{\varphi^{*}(\alpha)} $ 对任意 $ \alpha \in V $ 都成立.
     \sitem 设 $ V $ 是 $ n $ 维酉空间, $ \varphi $ 是 $ V $ 上的线性变换, 求证: $ \varphi $ 是正规算子的充分必要条件是若 $ v $ 是 $ \varphi $ 属于特征值 $ \lambda $ 的特征向量, 则 $ v $ 也是 $ \varphi^{*} $ 属于特征值 $ \bar\lambda $ 的特征向量.
-    \sitem 设 $ A = (a_{ij}) $ 是 $ n $ 阶复矩阵, $ \lambda_{1}, \lambda_{2}, \dots, \lambda_{n} $ 是其特征值, 求证: $ A $ 是正规矩阵的充分必要条件是
-    \begin{align*}
-        \sum_{i=1}^{n}\abs{\lambda_{i}}^{2} = \tr(A^{\symrm{H}}A) = \sum_{i, j=1}^{n}\abs{a_{ij}}^{2}.
-    \end{align*}
 \end{enumerate} 
     \begin{tcolorbox}[title={同时上三角化/对角化/标准型化}]
         \begin{enumerate}[resume=exer]
@@ -612,9 +608,21 @@
             \end{align*}
             \item (\emph{奇异值分解}) 设 $ V, U $ 分别为 $ n, m $ 维欧式(酉)空间, $ \varphi : V \to U $ 是线性映射, 则存在 $ V $ 和 $ U $ 的标准正交基, 使 $ \varphi $ 在这两组基下的表示矩阵为 $ \smqty(S & 0 \\ 0 & 0) $, 其中 $ S = \diag\set{\sigma_{1}, \sigma_{2}, \dots, \sigma_{r}} $, $ \sigma_{1} \ge \sigma_{2} \ge \dots \ge \sigma_{r} > 0 $ 是 $ \varphi $ 的非零奇异值.
             \item (\emph{奇异值分解}) 设 $ A $ 是 $ m\times n $ 的实(复)矩阵, 则存在 $ m $ 阶正交(酉)矩阵 $ P $, $ n $ 阶正交(酉)矩阵 Q, 使得 $ A = P\smqty(S & 0 \\ 0 & 0)Q $, 其中 $ S = \diag\set{\sigma_{1}, \sigma_{2}, \dots, \sigma_{r}} $, $ \sigma_{1} \ge \sigma_{2} \ge \dots \ge \sigma_{r} > 0 $ 是 $ A $ 的非零奇异值.
+            \hitem (\emph{Jordan -- Chevalley 分解}) 设 $ A \in \MM[\C] $, 则 $ A $ 可以分解为 $ A = B + C $, 其中 $ B, C $ 符合以下条件:
+            \begin{enumerate}
+                \item $ B $ 是一个相似可对角化矩阵;
+                \item $ C $ 是一个幂零阵;
+                \item $ BC = CB $;
+                \item $ B, C $ 均可以表示为 $ A $ 的多项式.
+            \end{enumerate}
+            不仅如此, 上述满足 (1) -- (3) 的分解是唯一的.
         \end{enumerate}
     \end{tcolorbox}
     \begin{enumerate}[resume=exer]
+        \sitem 设 $ A = (a_{ij}) $ 是 $ n $ 阶复矩阵, $ \lambda_{1}, \lambda_{2}, \dots, \lambda_{n} $ 是其特征值, 求证: $ A $ 是正规矩阵的充分必要条件是
+        \begin{align*}
+            \sum_{i=1}^{n}\abs{\lambda_{i}}^{2} = \tr(A^{\symrm{H}}A) = \sum_{i, j=1}^{n}\abs{a_{ij}}^{2}.
+        \end{align*}
         \item 利用 \ref{item:矩阵极分解} 题证明: 存在正交阵 $ Q_{1}, Q_{2} $, 使得 $ Q_{1} A Q_{2} = \diag(\lambda_{1}, \lambda_{2}, \dots, \lambda_{n}) $, 并且 $ \lambda_{1}^{2}, \lambda_{2}^{2}, \dots, \lambda_{n}^{2} $ 是 $ A'A $ 的特征值. 
         \item 利用 $ \cos px $ 在 $ [-\pi, \pi] $ 上的 Fourier 展开证明积分 
         \begin{align*}
@@ -659,7 +667,7 @@
             \int_{1}^{+\infty}\exp\qty(-\frac{1}{\alpha^{2}}\qty(x-\frac{1}{\alpha})^{2}) \dd{x}
         \end{align*}
         在 $ (0, 1) $ 上一致收敛.
-        \item 设 $ f(x) $ 为单调递减的正值函数, 证明 $ \int_{a}^{+\infty} f(x) \dd{x} $ 与 $ \int_{a}^{+\infty} f(x)\sin^{2}{x} \dd{x} $ 同时敛散.
+        \item 设 $ f(x) $ 为单调递减的正值函数, 证明 $ \int_{a}^{+\infty} f(x) \dd{x} $ 与 $ \int_{a}^{+\infty} f(x)\sin^{2}{x} \dd{x} $ 同时敛散. 
         \item 设 $ \symscr{A}, \symscr{B} $ 均是 $ n $ 维线性空间 $ V $ 上的线性变换, 且 $ \Ker \symscr{A} \subset \Ker \symscr{B} $, 证明, 存在线性变换 $ \symscr{T} $, 使得 $ \symscr{B} = \symscr{TA} $.
         \item 计算极限
         \begin{align*}
@@ -792,5 +800,18 @@
         \begin{align*}
             \sum_{n = 1}^{\infty} (-1)^{n - 1} \frac{\sqrt{n}}{\sqrt{n} + (-1)^{n-1}}\sin\frac{1}{\sqrt{n}}.
         \end{align*}
+        \sitem 设 $ f(x) \in C^{2}(0, 1) $, 满足 $ f(0) = f(1) = 0 $, 且对任意 $ x\in (0, 1) $, $ f(x) \ne 0 $, 证明积分不等式
+        \begin{align*}
+            \int_{0}^{1} \abs{\frac{f''(x)}{f(x)}} \dd{x} > 4.
+        \end{align*}
+        \item 设 $ V $ 是 $ n $ 维欧式空间, 证明
+        \begin{enumerate}
+            \item 对于任意两个不同的单位向量 $ \alpha, \beta \in V $, 总存在 $ V $ 上的镜面变换 $ \symscr{A} $, 使得 $ \symscr{A}(\alpha) = \beta $;
+            \item 证明 $ V $ 上的任意正交变换 $ \symscr{B} $ 都可以表示成有限个镜面变换的乘积, 即存在 $ m $ 个镜面变换 $ \symscr{A}_{1}, \symscr{A}_{2}, \dots, \symscr{A}_{m} $, 使得
+            \begin{align*}
+                \symscr{B} = \symscr{A}_{1}\symscr{A}_{2}\dots\symscr{A}_{m}.
+            \end{align*}
+        \end{enumerate}
+        \item 计算积分 $ I = \int_{0}^{\pi/2} \ln (a^{2}\sin^{2}x + b^{2}\cos^{2}x) \dd{x} $, 其中 $ a, b $ 不全为 $ 0 $.
     \end{enumerate}
 \end{document}
