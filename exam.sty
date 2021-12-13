@@ -1,15 +1,26 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{exam}[2021/12/13 v0.1 test]
+
+\newif\ifhint
+\hintfalse
+\DeclareOption{hint}{%
+  \hinttrue
+}
+
+\ProcessOptions
+
 \IfFontExistsTF{Source Han Serif SC}{
     \setCJKmainfont{Source Han Serif SC}
 }{}
 
-% \usepackage{showframe}
+% \RequirePackage{showframe}
 
 % \ctexset{
 %     section/format  =   {\normalsize\raggedright\bfseries}
 % }
 
 \xeCJKsetup{CheckSingle=true}
-\usepackage{tcolorbox}
+\RequirePackage{tcolorbox}
 \tcbuselibrary{breakable}
 \tcbuselibrary{skins}
 \tcbset{
@@ -19,9 +30,9 @@
     enhanced jigsaw
     % lines before break=0
 }
-\usepackage{mathtools}
-\usepackage{unicode-math}
-\usepackage[mono=false]{libertinus-otf}
+\RequirePackage{mathtools}
+\RequirePackage{unicode-math}
+\RequirePackage[mono=false]{libertinus-otf}
 % \setmainfont{TeX Gyre Pagella}
 % \setmathfont{TeX Gyre Pagella Math}
 % \setmathfont{NewCMMath-Book.otf}
@@ -29,11 +40,11 @@
 % \setmathfont{TeX Gyre Pagella Math}[range=bb]
 
 
-\usepackage[margin=1.5cm]{geometry}
+\RequirePackage[margin=1.5cm]{geometry}
 
-\usepackage[notrig]{physics}
-\usepackage{nicematrix}
-\usepackage[colorlinks=true]{hyperref}
+\RequirePackage[notrig]{physics}
+\RequirePackage{nicematrix}
+\RequirePackage[colorlinks=true]{hyperref}
 
 % https://tex.stackexchange.com/questions/307412/redefine-pi-to-pi-with-unicode-math
 \AtBeginDocument{%
@@ -47,13 +58,14 @@
     \let\ge\geqslant
     \let\le\leqslant
     \let\hom\symscr
+    \ifhint \else 如果想启用提示, 请添加宏包 \textsf{exam} 的选项 \texttt{hint}\par \fi
 }
 
 \def\grad{\symbf{\nabla}}
 \let\boldsymbol\symbfit
 
 % \let\vb\symbfit
-\usepackage[shortlabels, inline]{enumitem} % 继承并扩展了enumerate宏包的功能
+\RequirePackage[shortlabels, inline]{enumitem} % 继承并扩展了enumerate宏包的功能
 \setlist[enumerate, 1]{leftmargin=*, label=\arabic*., widest=000, ref=\arabic*}
 \setlist[enumerate, 2]{leftmargin=*, label=(\arabic*)}
 
@@ -90,3 +102,25 @@
 \DeclareMathOperator{\sgn}{sgn}
 
 \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
+
+\RequirePackage{amsthm}
+
+\newtheoremstyle{hint}%⟨name⟩
+{3pt}%⟨Space above⟩1
+{3pt}%⟨Space below⟩1
+{\mdseries}%⟨Body font⟩
+{0pt}%⟨Indent amount⟩2
+{\bfseries}% ⟨Theorem head font⟩
+{:}%⟨Punctuation after theorem head⟩
+{.5em}%⟨Space after theorem head⟩3
+{}%⟨Theorem head spec (can be left empty, meaning ‘normal’)⟩
+
+\theoremstyle{hint}
+\newtheorem*{orihint}{提示}
+
+\NewDocumentEnvironment{hint}{ +b }{%
+  \ifhint \begin{orihint}
+    #1
+  \end{orihint} \fi
+}{}
+
