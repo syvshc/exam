@@ -1,5 +1,5 @@
 \documentclass{ctexart}
-\usepackage{exam}
+\usepackage[answer]{exam}
 \begin{document}
 {\bfseries 其中标红加星的题, 如\  ``{\bfseries\color{red}*3.}'',  为较重要的题, 可以简化一些其他的证明. 不标红只加星的题, 如\ ``{\bfseries*3.}'', 为折磨题, 记一下结论就好了.}
 \begin{enumerate}[series=exer]
@@ -7,9 +7,31 @@
     \begin{align*}
         \int_{\Gamma} z \dd{x} + x \dd{y} + y \dd{z}.
     \end{align*}
+    \begin{hint}[Stokes 公式]
+        可利用 Stokes 公式转换为面积.
+    \end{hint}
+    \begin{hint}[参数方程]
+        利用该圆的参数方程进行计算:
+        \begin{align*}
+            \begin{cases}
+                x = a\qty(\frac{1}{\sqrt{6}}\cos \theta + \frac{1}{\sqrt{2}}\sin \theta)\\
+                y = a\qty(-\frac{2}{\sqrt{6}}\cos \theta)\\
+                z = a\qty(\frac{1}{\sqrt{6}}\cos \theta - \frac{1}{\sqrt{2}}\sin \theta)
+            \end{cases}, \quad \theta\in [0, 2\pi],
+        \end{align*}
+    \end{hint}
+    \begin{answer}
+        $ \pi a^{2}/\sqrt{3}. $ 
+    \end{answer}
     \item 设 $ f(x) $ 在 $ [1, +\infty) $ 上可导, 且 $ \limit{x}{+\infty}f'(x) = +\infty $, 证明 $ f(x) $ 在 $ [1, +\infty) $ 上不一致连续.
+    \begin{hint}
+        用反证法, 假设一致连续, 再用 $ \limit{x}{+\infty}f'(x) = +\infty $ 与 Lagrange 中值定理导出矛盾.
+    \end{hint}
     \item 设 $ \set{a_{n}} $ 为非负递减的数列, 如果级数 $ \sum_{n=0}^{\infty}a_{n} $ 收敛, 那么 $ \limit{n}{\infty} na_{n} = 0 $. 
-    \item 设 $ a, b > 0 $, $ f \in C[0, +\infty) $, 证明:
+    \begin{hint}
+        用 Cauchy 收敛准则与 $ \set{a_{n}} $ 的单调性考虑 $ \sum_{k = n}{2n} a_{n} $. 
+    \end{hint}
+    \item (\textbf{Frullani 积分}) 设 $ a, b > 0 $, $ f \in C[0, +\infty) $, 证明:
     \begin{enumerate}
         \item  如果 $ \limit{x}{+\infty}f(x) = f(+\infty) $ 存在, 那么
         \begin{align*}
@@ -24,32 +46,122 @@
             \int_{0}^{+\infty} \frac{f(ax) - f(bx)}{x} \dd{x} = - f(+\infty)\ln\frac{b}{a}.
         \end{align*}
     \end{enumerate}
+    \begin{hint}
+        (1) 可以考虑
+        \begin{align*}
+            \int_{A}^{B} \frac{f(ax)}{x} \dd{x} - \int_{A}^{B} \frac{f(bx)}{x} \dd{x} = \int_{aA}^{aB} \frac{f(x)}{x} \dd{x} - \int_{bA}^{bB} \frac{f(x)}{x} \dd{x} = \int_{aA}^{bA} \frac{f(x)}{x} \dd{x} - \int_{aB}^{bB} \frac{f(x)}{x} \dd{x}
+        \end{align*}
+        再利用积分中值定理与 $ A \to 0,\ B \to +\infty $ 得到结论. (2), (3) 同理.
+    \end{hint}
     \item 计算积分
     \begin{align*}
-        I(r) = \int_{0}^{\pi} \ln(1 - 2 r \cos x + r^{2}) \dd{x}, \quad \abs{r} <1.
+        I(r) = \int_{0}^{\pi} \ln(1 - 2 r \cos x + r^{2}) \dd{x}.
     \end{align*}
+    \begin{hint}
+        分别考虑 $ r = 0 $, $ \abs{r} < 1 $, $ \abs{r} = 1 $ 与 $ \abs{r} > 1 $, 其中 $ \abs{r} > 1 $ 的情况可以令 $ \rho = 1/r $, 再利用 $ \abs{r} < 1 $ 的情况即可. 
+        利用不定积分
+        \begin{align*}
+            \int \frac{1}{a + b\cos x} \dd{x} = \frac{2}{\sqrt{a^{2} - b^{2}}}\arctan\sqrt{\frac{a - b}{a + b}}t + C,
+        \end{align*}
+        计算 $ I'(r) $, 与利用
+        \begin{align*}
+            \int_{0}^{\pi/2} \ln \sin x \dd{x} = \int_{0}^{\pi/2} \ln \cos x\dd{x} = -\frac{\pi}{2}\ln 2.
+        \end{align*}
+        计算 $ I(\pm 1) $ 即可求得答案.
+    \end{hint}
+    \begin{answer}
+        \begin{align*}
+            I(r) = \begin{cases}
+                0 & , \abs{r} \le 1;\\
+                2\pi \ln \abs{r} & , \abs{r} > 1.
+            \end{cases}
+        \end{align*}
+    \end{answer}
     \item 设 $ p > 0 $, 讨论积分
     \begin{align*}
         \int_{0}^{+\infty} \frac{\sin(1/x)}{x^{p}} \dd{x}
     \end{align*}
     的敛散性. 
+    \begin{hint}
+        做换元 $ t = 1/x $, 则有
+        \begin{align*}
+            \int_{0}^{+\infty} \frac{\sin(1/x)}{x^{p}} \dd{x} = \int_{0}^{+\infty} \frac{\sin t}{t^{2 - p}} \dd{t}
+        \end{align*}
+        再分成 $ [0, 1]\cup[1, +\infty) $ 进行讨论.
+    \end{hint}
+    \begin{answer}
+        当 $ 0 < p < 2 $ 时收敛, $ p \ge 2 $ 时发散.
+    \end{answer}
     \item 求积分 $ \int_{0}^{+\infty} \sin(x)/x \dd{x} $.
+    \begin{hint}
+        用积分因子构造含参变量反常积分:
+        \begin{align*}
+            H(t) = \int_{0}^{+\infty} \me^{-tx}\frac{\sin x}{x} \dd{x}, \quad t\in [0, 1],
+        \end{align*}
+        首先可以用 Abel 判别法说明 $ H(t) $ 关于 $ t \in [0, 1] $ 一致收敛, 则有 $ H(t) \in C[0, 1] $. 又可以说明
+        \begin{align*}
+            \int_{0}^{+\infty} \pdv{x}\qty(\me^{-tx}\frac{\sin x}{x}) \dd{x}
+        \end{align*}
+        在 $ t \in (0, 1) $ 内闭一致收敛, 则可以得到 $ H'(t) $ 在 $ (0, 1) $ 上的表达式:
+        \begin{align*}
+            H'(t) = \int_{0}^{+\infty} \sin x\me^{-tx} \dd{x},
+        \end{align*}
+        而对于这个反常积分的计算, 可以使用分部积分, 或者用\footnote{这种写法我不确定是否标准, 或者是否有足够的理论依据} $ \sin x = (\me^{\mi x} - \me^{-\mi x})/(2\mi) $, 可以得到 $ H'(t) = (1 + t^{2})^{-1} $, 即可求得 $ H(0) $. 
+    \end{hint}
+    \begin{answer}
+        $ \pi/2 $ 
+    \end{answer}
     \item 设 $ f(x) \in C[0, 1] $, 证明
     \begin{align*}
         \limit{n}{\infty} \frac{1}{n} \sum_{k=1}^{n} (-1)^{k+1} f\qty(\frac{k}{n}) = 0.
     \end{align*}
+    \begin{hint}
+        由 $ f \in C[0, 1] $ 可知 $ f $ 在 $ [0, 1] $ 上一致连续, 则当 $ \abs{x - y} $ 足够小的时候 $ \abs{f(x) - f(y)} $ 也足够小, 再考虑 $ n $ 为偶数时
+        \begin{align*}
+            \frac{1}{n} \abs{\sum_{k=1}^{n} (-1)^{k+1} f\qty(\frac{k}{n})} & = \frac{1}{n}\abs{\sum_{k = 1}^{n/2}f\qty(\frac{2k-1}{n}) - f\qty(\frac{2k}{n})} \le \frac{1}{n}\cdot\frac{n}{2}\varepsilon.
+        \end{align*}
+        $ n $ 为奇数时只需要增加一项 $ f(1)/n $.
+    \end{hint}
     \item 证明: 积分 
     \begin{align*}
         \int_{0}^{+\infty} \me^{-(\alpha + u^{2})t} \sin(t) \dd{t},\quad \alpha > 0
     \end{align*}
     关于 $ u $ 在 $ [0, +\infty) $ 上一致收敛.    
+    \begin{hint}
+        $ \abs{\me^{-(\alpha + u^{2})t} \sin(t)} \le \me^{-\alpha t} $ 
+    \end{hint}
     \item 证明: 积分 
     \begin{align*}
         \int_{0}^{+\infty} \me^{-(\alpha + u^{2})t} \sin(t) \dd{u},\quad \alpha > 0
     \end{align*}
     关于 $ t $ 在 $ [0, +\infty) $ 上一致收敛.
+    \begin{hint}
+        \begin{align*}
+            \abs{\me^{-(\alpha + u^{2})t} \sin(t)} \le \abs{\frac{t}{\me^{(\alpha + u^{2})t}}} \le \frac{t}{1 + u^{2}t} \le \frac{1}{u^{2}}
+        \end{align*}
+    \end{hint}
     \hitem 计算 Fresnel 积分 $ \int_{0}^{+\infty} \sin(x^{2}) \dd{x} $.
     \item 计算积分 $ \int_{0}^{+\infty} \exp(-a x^{2})\cos(bx) \dd{x} $, 其中 $ a > 0,\ b\in \R $.
+    \begin{hint}
+        记
+        \begin{align*}
+            I(b) = \int_{0}^{+\infty} \exp(-a x^{2})\cos(bx) \dd{x}
+        \end{align*}
+        则又 Weierstrass 判别法可知
+        \begin{align*}
+            \int_{0}^{+\infty} \pdv{b}\qty(\exp(-a x^{2})\cos(bx)) \dd{x}
+        \end{align*}
+        在 $ \R $ 上一致收敛, 于是可求得 $ I'(b) $, 再对 $ I(b) $ 利用分部积分, 可得
+        \begin{align*}
+            I'(b) = -\frac{b}{2a}I(b)
+        \end{align*}
+        即 $ \qty(\ln I(b))' = -b/(2a) $, 再利用 $ I(0) $ 的值可以计算得 $ I(b) $. 
+    \end{hint}
+    \begin{answer}
+        \begin{align*}
+            I(b) = \frac{1}{2}\sqrt{\frac{\pi}{a}}\exp\qty(-\frac{b^{2}}{4a}).
+        \end{align*}
+    \end{answer}
     \item 计算积分 $ \int_{0}^{\pi/2} \tan^{\alpha}(x) \dd{x} $, 其中 $ \abs{\alpha} < 1 $. 
     \sitem\label{item:AX=XB} 设 $ \K $ 是数域, $ A \in \MM[\K][m] $, $ B \in \MM[\K][n] $, 且 $ A, B $ 没有相同的特征值, 证明矩阵方程 $ AX = XB $ 只有零解.
     \item 如 \ref{item:AX=XB} 题, 可以进一步证明逆命题也成立, 即: 如果 $ AX = XB $ 只有零解, 则 $ A, B $ 无公共特征值.
@@ -87,10 +199,6 @@
     \item 设 $ f(x) $ 在 $ [a, b] $ 上三阶可导, 证明存在 $ \xi \in (a, b) $, 使得
     \begin{align*}
         f(b) = f(a) + \frac{1}{2} (b - a) [f'(a) + f'(b)] - \frac{1}{12} (b - a)^{3} f'''(\xi).
-    \end{align*}
-    \item $ f(x) $ 在 $ [0, +\infty) $ 非负连续, 单调递减, 求证 $ \set{a_{n}} $ 极限存在, 其中
-    \begin{align*}
-        a_{n} = \sum_{k = 1}^{n} f(k) - \int_{0}^{n} f(x) \dd{x}.
     \end{align*}
     \item 求 $ \limit{n}{\infty} n \qty(\pi/4 - x_{n}) $, 其中:
     \begin{align*}
@@ -745,5 +853,23 @@
             \iint_{S} (x + z) \dd{S},
         \end{align*}
         其中 $ S $ 是曲面 $ x^{2} + y^{2} = 2az\,(a > 0) $ 被曲面 $ z = \sqrt{x^{2} + y^{2}} $ 所截取的有限部分.
+        \item 设 $ W = \set{A : \tr(A) = 0, A \in \MM} $, 证明 $ W $ 是 $ \MM $ 的子空间, 并且求它的一组基.
+        \begin{hint}
+            $ W $ 是子空间是显然的. 下面求维数: 可知 $ W_{1} = \set{\sum_{i \ne j} x_{ij}E_{ij} : x_{ij} \in \R} $ 是 $ W $ 的 $ (n - 1)n $ 维的子空间, 而 $ W_{2} = \set{\sum_{i = 1}^{n} x_{i}E_{ii} : x_{1} + x_{2} + \dots + x_{n} = 0} $ 是 $ W  $ 的 $ n - 1 $ 维的子空间, 且 $ W_{2} \cap W_{1} = 0 $. 则
+            \begin{align*}
+                \dim W \ge \dim(W_{1} + W_{2}) = \dim W_{1} + \dim W_{2} = n^{2} - 1
+            \end{align*}
+            又因为 $ W $ 是 $ \MM $ 的真子空间, 则 $ \dim W = n^{2} - 1 $, $ W = W_{1} \oplus W_{2} $. 
+        \end{hint}
+        \begin{answer}
+            $ W $ 是 $ \MM $ 的 $ n^{2} - 1 $ 维的子空间, 且 $ \set{E_{ij} : i \ne j} \cup \set{E_{11} - E_{kk} : k > 1} $ 是 $ W $ 的一组基.
+        \end{answer}
+        \item 设 $ f $ 在 $ [0, +\infty) $ 上二阶可导, 且 $ f''(x) $ 有界, $ \limit{x}{+\infty} f(x) = 0 $, 证明: $ \limit{x}{+\infty} f'(x) = 0 $.
+        \begin{hint}[法一]
+            由 $ f(x) \to 0 $ 可得 $ x $ 足够大时 $ \abs{f(x)} $ 足够小, 由 Lagrange 中值定理可以得到 $ x $ 附近的某个 $ \xi $, 使得 $ f'(\xi) $ 足够小, 再利用 $ f'(x) $ 在 $ \xi $ 点的 Taylor 展开, 搭配二阶导有界的条件, 即可说明对每个足够大的 $ x $, 都有 $ \abs{f'(x)} $ 足够小, 命题得证.
+        \end{hint}
+        \begin{hint}[法二]
+            取足够大的 $ N\in \N $, 对任意足够大的 $ x $ 将 $ f(x+1/N) $ 在 $ x $ 处 Taylor 展开, 就可以得到 $ f'(x) $ 的表达式, 再利用 $ f''(x) $ 有界, 以及 $ f(x) \to 0 $, 即可说明.
+        \end{hint}
     \end{enumerate}
 \end{document}

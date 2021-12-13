@@ -3,10 +3,14 @@
 
 \newif\ifhint
 \hintfalse
+\newif\ifanswer
+\answerfalse
 \DeclareOption{hint}{%
   \hinttrue
 }
-
+\DeclareOption{answer}{%
+  \answertrue
+}
 \ProcessOptions
 
 \IfFontExistsTF{Source Han Serif SC}{
@@ -59,6 +63,7 @@
     \let\le\leqslant
     \let\hom\symscr
     \ifhint \else 如果想启用提示, 请添加宏包 \textsf{exam} 的选项 \texttt{hint}\par \fi
+    \ifanswer \else 如果想启用答案, 请添加宏包 \textsf{exam} 的选项 \texttt{answer}\par \fi
 }
 
 \def\grad{\symbf{\nabla}}
@@ -88,6 +93,7 @@
 
 \newcommand{\limit}[2]{\lim_{#1 \to #2}}
 \newcommand{\me}{\symrm{e}}
+\newcommand{\mi}{\symrm{i}}
 \newcommand{\R}{\ensuremath{\symbb{R}}}
 \newcommand{\K}{\ensuremath{\symbb{K}}}
 \newcommand{\N}{\ensuremath{\symbb{N}}}
@@ -117,10 +123,29 @@
 
 \theoremstyle{hint}
 \newtheorem*{orihint}{提示}
+\newtheorem*{orianswer}{答案}
 
-\NewDocumentEnvironment{hint}{ +b }{%
-  \ifhint \begin{orihint}
-    #1
-  \end{orihint} \fi
+\NewDocumentEnvironment{hint}{ o +b }{%
+  \ifhint \IfNoValueTF{#1}%
+  {
+    \begin{orihint}
+      #2
+    \end{orihint}
+  }%
+  {
+    \begin{orihint}[#1]
+      #2
+    \end{orihint}
+  } %
+  \fi
 }{}
 
+\NewDocumentEnvironment{answer}{ +b }{%
+  \ifanswer%
+  {
+    \begin{orianswer}
+      #1
+    \end{orianswer}
+  }%
+  \fi
+}{}
