@@ -1,0 +1,92 @@
+\IfFontExistsTF{Source Han Serif SC}{
+    \setCJKmainfont{Source Han Serif SC}
+}{}
+
+% \usepackage{showframe}
+
+% \ctexset{
+%     section/format  =   {\normalsize\raggedright\bfseries}
+% }
+
+\xeCJKsetup{CheckSingle=true}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\tcbuselibrary{skins}
+\tcbset{
+    width   =   \linewidth,
+    fonttitle=  \bfseries,
+    breakable,
+    enhanced jigsaw
+    % lines before break=0
+}
+\usepackage{mathtools}
+\usepackage{unicode-math}
+\usepackage[mono=false]{libertinus-otf}
+% \setmainfont{TeX Gyre Pagella}
+% \setmathfont{TeX Gyre Pagella Math}
+% \setmathfont{NewCMMath-Book.otf}
+\setmathfont{latinmodern-math.otf}[range={\lbrace, \rbrace}]
+% \setmathfont{TeX Gyre Pagella Math}[range=bb]
+
+
+\usepackage[margin=1.5cm]{geometry}
+
+\usepackage[notrig]{physics}
+\usepackage{nicematrix}
+\usepackage[colorlinks=true]{hyperref}
+
+% https://tex.stackexchange.com/questions/307412/redefine-pi-to-pi-with-unicode-math
+\AtBeginDocument{%
+  \let\umathpi\pi
+  \renewcommand\pi{\symup\umathpi}%
+}
+
+\let\set\qty
+\let\emph\textbf
+\AtBeginDocument{
+    \let\ge\geqslant
+    \let\le\leqslant
+    \let\hom\symscr
+}
+
+\def\grad{\symbf{\nabla}}
+\let\boldsymbol\symbfit
+
+% \let\vb\symbfit
+\usepackage[shortlabels, inline]{enumitem} % 继承并扩展了enumerate宏包的功能
+\setlist[enumerate, 1]{leftmargin=*, label=\arabic*., widest=000, ref=\arabic*}
+\setlist[enumerate, 2]{leftmargin=*, label=(\arabic*)}
+
+% https://tex.stackexchange.com/a/52718/180617
+\def\asteriskitem{*}
+\def\sitem{%
+  \expandafter\let\expandafter\originallabel\csname labelenum\romannumeral\@enumdepth\endcsname
+  \expandafter\def\csname labelenum\romannumeral\@enumdepth\expandafter\endcsname\expandafter{%
+    \expandafter\bfseries\expandafter\color{red}\expandafter{\expandafter\asteriskitem\expandafter\originallabel}}%
+  \item
+  \expandafter\let\csname labelenum\romannumeral\@enumdepth\endcsname\originallabel
+}
+\def\hitem{%
+  \expandafter\let\expandafter\originallabel\csname labelenum\romannumeral\@enumdepth\endcsname
+  \expandafter\def\csname labelenum\romannumeral\@enumdepth\expandafter\endcsname\expandafter{%
+    \expandafter\bfseries\expandafter\expandafter{\expandafter\asteriskitem\expandafter\originallabel}}%
+  \item
+  \expandafter\let\csname labelenum\romannumeral\@enumdepth\endcsname\originallabel
+}
+
+\newcommand{\limit}[2]{\lim_{#1 \to #2}}
+\newcommand{\me}{\symrm{e}}
+\newcommand{\R}{\ensuremath{\symbb{R}}}
+\newcommand{\K}{\ensuremath{\symbb{K}}}
+\newcommand{\N}{\ensuremath{\symbb{N}}}
+\newcommand{\C}{\ensuremath{\symbb{C}}}
+\newcommand{\Q}{\ensuremath{\symbb{Q}}}
+% 可以用 D(){} 来做定界符
+\NewDocumentCommand{\MM}{ O{\R} O{n} }{ \ensuremath{\symup{M}_{#2}(#1)} }
+\DeclareMathOperator{\diag}{diag} 
+% \DeclareMathOperator{\deg}{deg} 
+\DeclareMathOperator{\Image}{Im}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\sgn}{sgn}
+
+\renewcommand{\thempfootnote}{\arabic{mpfootnote}}

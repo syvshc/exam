@@ -1,99 +1,5 @@
-
 \documentclass{ctexart}
-\IfFontExistsTF{Source Han Serif SC}{
-    \setCJKmainfont{Source Han Serif SC}
-}{}
-
-% \usepackage{showframe}
-
-% \ctexset{
-%     section/format  =   {\normalsize\raggedright\bfseries}
-% }
-
-\xeCJKsetup{CheckSingle=true}
-\usepackage{tcolorbox}
-\tcbuselibrary{breakable}
-\tcbuselibrary{skins}
-\tcbset{
-    width   =   \linewidth,
-    fonttitle=  \bfseries,
-    breakable,
-    enhanced jigsaw
-    % lines before break=0
-}
-\usepackage{mathtools}
-\usepackage{unicode-math}
-\usepackage[mono=false]{libertinus-otf}
-% \setmainfont{TeX Gyre Pagella}
-% \setmathfont{TeX Gyre Pagella Math}
-% \setmathfont{NewCMMath-Book.otf}
-\setmathfont{latinmodern-math.otf}[range={\lbrace, \rbrace}]
-% \setmathfont{TeX Gyre Pagella Math}[range=bb]
-
-
-\usepackage[margin=1.5cm]{geometry}
-
-\usepackage[notrig]{physics}
-\usepackage{nicematrix}
-\usepackage[colorlinks=true]{hyperref}
-
-% https://tex.stackexchange.com/questions/307412/redefine-pi-to-pi-with-unicode-math
-\AtBeginDocument{%
-  \let\umathpi\pi
-  \renewcommand\pi{\symup\umathpi}%
-}
-
-\let\set\qty
-\let\emph\textbf
-\AtBeginDocument{
-    \let\ge\geqslant
-    \let\le\leqslant
-}
-
-\def\grad{\symbf{\nabla}}
-\let\boldsymbol\symbfit
-
-% \let\vb\symbfit
-\usepackage[shortlabels, inline]{enumitem} % 继承并扩展了enumerate宏包的功能
-\setlist[enumerate, 1]{leftmargin=*, label=\arabic*., widest=000, ref=\arabic*}
-\setlist[enumerate, 2]{leftmargin=*, label=(\arabic*)}
-
-% https://tex.stackexchange.com/a/52718/180617
-\def\asteriskitem{*}
-\makeatletter
-\def\sitem{%
-  \expandafter\let\expandafter\originallabel\csname labelenum\romannumeral\@enumdepth\endcsname
-  \expandafter\def\csname labelenum\romannumeral\@enumdepth\expandafter\endcsname\expandafter{%
-    \expandafter\bfseries\expandafter\color{red}\expandafter{\expandafter\asteriskitem\expandafter\originallabel}}%
-  \item
-  \expandafter\let\csname labelenum\romannumeral\@enumdepth\endcsname\originallabel
-}
-\def\hitem{%
-  \expandafter\let\expandafter\originallabel\csname labelenum\romannumeral\@enumdepth\endcsname
-  \expandafter\def\csname labelenum\romannumeral\@enumdepth\expandafter\endcsname\expandafter{%
-    \expandafter\bfseries\expandafter\expandafter{\expandafter\asteriskitem\expandafter\originallabel}}%
-  \item
-  \expandafter\let\csname labelenum\romannumeral\@enumdepth\endcsname\originallabel
-}
-\makeatother
-
-\newcommand{\limit}[2]{\lim_{#1 \to #2}}
-\newcommand{\me}{\symrm{e}}
-\newcommand{\R}{\ensuremath{\symbb{R}}}
-\newcommand{\K}{\ensuremath{\symbb{K}}}
-\newcommand{\N}{\ensuremath{\symbb{N}}}
-\newcommand{\C}{\ensuremath{\symbb{C}}}
-\newcommand{\Q}{\ensuremath{\symbb{Q}}}
-% 可以用 D(){} 来做定界符
-\NewDocumentCommand{\MM}{ O{\R} O{n} }{ \ensuremath{\symup{M}_{#2}(#1)} }
-\DeclareMathOperator{\diag}{diag} 
-% \DeclareMathOperator{\deg}{deg} 
-\DeclareMathOperator{\Image}{Im}
-\DeclareMathOperator{\Ker}{Ker}
-\DeclareMathOperator{\sgn}{sgn}
-
-\renewcommand{\thempfootnote}{\arabic{mpfootnote}}
-
+\usepackage{exam}
 \begin{document}
 {\bfseries 其中标红加星的题, 如\  ``{\bfseries\color{red}*3.}'',  为较重要的题, 可以简化一些其他的证明. 不标红只加星的题, 如\ ``{\bfseries*3.}'', 为折磨题, 记一下结论就好了.}
 \begin{enumerate}[series=exer]
@@ -541,13 +447,13 @@
         \pdv{f}{x}{y}{} (\vb*{x}_{0}, \vb*{y}_{0}) = \pdv{f}{y}{x}{} (\vb*{x}_{0}, \vb*{y}_{0}).
     \end{align*}
     \item 设 $ D \subset \R^{2} $ 是一个凸区域, $ f: D \to \R $ 有连续的一阶偏导数, 则 $ f $ 在 $ D $ 内为凸函数的充必条件为对任意 $ \vb*{x}, \vb*{y}\in D $, 有 $ f(\vb*{y}) \ge f(\vb*{x}) + (\vb*{y} - \vb*{x})\cdot\grad f(\vb*{x}) $. 
-    \item 设 $ \symscr{A} $ 为数域 $ \K $ 上的 $ n\,(n \ge 3) $ 维线性空间 $ V $ 上的线性变换, $ \symscr{A} $ 的特征多项式为 
+    \item 设 $ \hom{A} $ 为数域 $ \K $ 上的 $ n\,(n \ge 3) $ 维线性空间 $ V $ 上的线性变换, $ \hom{A} $ 的特征多项式为 
     \begin{align*}
         f(\lambda) = \lambda^{n} + a_{n-1}\lambda^{n-1} + a_{n-2}\lambda^{n-2} + \dots + a_{1}\lambda + a_{0},
     \end{align*}
     试证明:
     \begin{align*}
-        a_{n - 2} = \frac{1}{2}\qty(\tr^{2}(\symscr{A}) - \tr(\symscr{A}^{2})).
+        a_{n - 2} = \frac{1}{2}\qty(\tr^{2}(\hom{A}) - \tr(\hom{A}^{2})).
     \end{align*}
     \item 设 $ a\ne 0 $, 计算积分: 
     \begin{align*}
@@ -668,7 +574,7 @@
         \end{align*}
         在 $ (0, 1) $ 上一致收敛.
         \item 设 $ f(x) $ 为单调递减的正值函数, 证明 $ \int_{a}^{+\infty} f(x) \dd{x} $ 与 $ \int_{a}^{+\infty} f(x)\sin^{2}{x} \dd{x} $ 同时敛散. 
-        \item 设 $ \symscr{A}, \symscr{B} $ 均是 $ n $ 维线性空间 $ V $ 上的线性变换, 且 $ \Ker \symscr{A} \subset \Ker \symscr{B} $, 证明, 存在线性变换 $ \symscr{T} $, 使得 $ \symscr{B} = \symscr{TA} $.
+        \item 设 $ \hom{A}, \hom{B} $ 均是 $ n $ 维线性空间 $ V $ 上的线性变换, 且 $ \Ker \hom{A} \subset \Ker \hom{B} $, 证明, 存在线性变换 $ \hom{T} $, 使得 $ \hom{B} = \hom{TA} $.
         \item 计算极限
         \begin{align*}
             \limit{r}{+\infty} r\int_{0}^{+\infty} \me^{-x^{2}}\sin(rx) \dd{x}.
@@ -740,7 +646,7 @@
         证明 $ \beta = 0 $.
         \item (浙大 2020, 与 \ref{item:CtoR} 题类似) 若 $ A, B \in \MM $, 存在 $ n $ 阶可逆复方阵 $ X $ 使得 $ XA + 2BX = 0 $, 证明存在可逆实方阵 $ Y $, 使得 $ YA + 2BY = 0 $. 
         \item (浙大 2020) 求行列式 $ \abs{A} $, 其中 $ A $ 的第 $ (i, j) $ 元为 $ \sgn(i - j) $.
-        \item  设 $ \symscr{A} $ 是实数域 $ \R $ 上 $ n\,(n\ge 1) $ 维线性空间 $ V $ 上的线性变换, 证明 $ \symscr{A} $ 至少有一个维数是 $ 1 $ 或 $ 2 $ 的不变子空间.
+        \item  设 $ \hom{A} $ 是实数域 $ \R $ 上 $ n\,(n\ge 1) $ 维线性空间 $ V $ 上的线性变换, 证明 $ \hom{A} $ 至少有一个维数是 $ 1 $ 或 $ 2 $ 的不变子空间.
         \item (华师 2021) 设 $ c_{1}, c_{2}, c_{3} $ 是多项式 $ f(x) = 2x^{3} - 4x^{2} + 6x - 1 $ 的三个复根, 求 $ (c_{1}c_{2} + c_{3}^{2})(c_{2}c_{3} + c_{1}^{2})(c_{1}c_{3} + c_{2}^{2}) $.
         \item (华师 2021) 设实矩阵
         \begin{align*}
@@ -806,12 +712,28 @@
         \end{align*}
         \item 设 $ V $ 是 $ n $ 维欧式空间, 证明
         \begin{enumerate}
-            \item 对于任意两个不同的单位向量 $ \alpha, \beta \in V $, 总存在 $ V $ 上的镜面变换 $ \symscr{A} $, 使得 $ \symscr{A}(\alpha) = \beta $;
-            \item 证明 $ V $ 上的任意正交变换 $ \symscr{B} $ 都可以表示成有限个镜面变换的乘积, 即存在 $ m $ 个镜面变换 $ \symscr{A}_{1}, \symscr{A}_{2}, \dots, \symscr{A}_{m} $, 使得
+            \item 对于任意两个不同的单位向量 $ \alpha, \beta \in V $, 总存在 $ V $ 上的镜面变换 $ \hom{A} $, 使得 $ \hom{A}(\alpha) = \beta $;
+            \item 证明 $ V $ 上的任意正交变换 $ \hom{B} $ 都可以表示成有限个镜面变换的乘积, 即存在 $ m $ 个镜面变换 $ \hom{A}_{1}, \hom{A}_{2}, \dots, \hom{A}_{m} $, 使得
             \begin{align*}
-                \symscr{B} = \symscr{A}_{1}\symscr{A}_{2}\dots\symscr{A}_{m}.
+                \hom{B} = \hom{A}_{1}\hom{A}_{2}\dots\hom{A}_{m}.
             \end{align*}
         \end{enumerate}
         \item 计算积分 $ I = \int_{0}^{\pi/2} \ln (a^{2}\sin^{2}x + b^{2}\cos^{2}x) \dd{x} $, 其中 $ a, b $ 不全为 $ 0 $.
+        \item 设 $ A $ 为 $ n $ 阶正定阵, $ X \in \R^{n} $ 为非零列向量, 证明
+        \begin{enumerate}
+            \item 矩阵 $ A + XX' $ 可逆,
+            \item $ 0 < X'(A + XX')^{-1}X < 1 $. 
+        \end{enumerate}
+        \item $ A\in \MM $, 假设 $ A^{2} = A $, 且对任意的 $ X \in \R^{n} $, 有
+        \begin{align*}
+            X'A'AX \le X'X,
+        \end{align*}
+        证明 $ A $ 为对称阵.
+        \item 设 $ \hom{A} $ 是线性空间 $ V $ 上的可逆线性变换, $ v_{1}, v_{2}, \dots, v_{m} $ 张成 $ V $, 且
+        \begin{align*}
+            \hom{A}(v_{i}) \in \set{v_{1}, v_{2}, \dots, v_{m}}, \quad i = 1, 2, \dots, m,
+        \end{align*}
+        求证 $ \hom{A} $ 可对角化, 且特征值都为单位根. 
+        \item 证明 $ \abs{\int_{a}^{a + 1} \sin t^{2} \dd{t}} \le a^{-1}\,(a > 0) $, 也可以证明更强的结论: $ \abs{\int_{a}^{a + 1} \sin t^{2} \dd{t}} < a^{-1}\,(a > 0) $. 
     \end{enumerate}
 \end{document}
