@@ -1,38 +1,40 @@
 \documentclass{ctexart}
-\usepackage{exam}
+\usepackage[]{exam}
 \begin{document}
+\section{题目}
 {\bfseries 其中标红加星的题, 如\  ``{\bfseries\color{red}*3.}'',  为较重要的题, 可以简化一些其他的证明. 不标红只加星的题, 如\ ``{\bfseries*3.}'', 为折磨题, 记一下结论就好了.}
-\begin{enumerate}[series=exer]
-    \item 设 $ \Gamma $ 是由球面 $ x^{2} + y^{2} + z^{2} = a^{2} $ 和平面 $ x + y + z = 0 $ 交成的圆周, 从第一卦限内看 $ \Gamma $, 它的方向是逆时针. 计算第二型曲线积分
+\startexercise
+\begin{exercise}[series=exer]
+    \item 设 $ \Gamma $ 是由球面 $ x^{2} + y^{2} + z^{2} = a^{2} $ 和平面 $ x + y + z = 0 $ 交成的圆周, 从第一卦限内看 $ \Gamma $, 它的方向是逆时针. 计算第二型曲线积分 
     \begin{align*}
         \int_{\Gamma} z \dd{x} + x \dd{y} + y \dd{z}.
     \end{align*}
-    \begin{hint}[Stokes 公式]
-        可利用 Stokes 公式转换为面积.
-    \end{hint}
-    \begin{hint}[参数方程]
-        利用该圆的参数方程进行计算:
-        \begin{align*}
-            \begin{cases}
-                x = a\qty(\frac{1}{\sqrt{6}}\cos \theta + \frac{1}{\sqrt{2}}\sin \theta)\\
-                y = a\qty(-\frac{2}{\sqrt{6}}\cos \theta)\\
-                z = a\qty(\frac{1}{\sqrt{6}}\cos \theta - \frac{1}{\sqrt{2}}\sin \theta)
-            \end{cases}, \quad \theta\in [0, 2\pi],
-        \end{align*}
+    \begin{hint}
+        \begin{hintsheet}
+            \item \textbf{Stokes 公式}. 可利用 Stokes 公式转换为面积.
+            \item \textbf{参数方程}. 利用该圆的参数方程进行计算:
+            \begin{align*}
+                \begin{cases}
+                    x = a\qty(\frac{1}{\sqrt{6}}\cos \theta + \frac{1}{\sqrt{2}}\sin \theta)\\
+                    y = a\qty(-\frac{2}{\sqrt{6}}\cos \theta)\\
+                    z = a\qty(\frac{1}{\sqrt{6}}\cos \theta - \frac{1}{\sqrt{2}}\sin \theta)
+                \end{cases}, \quad \theta\in [0, 2\pi],
+            \end{align*}
+        \end{hintsheet}
     \end{hint}
     \begin{answer}
         $ \pi a^{2}/\sqrt{3}. $ 
     \end{answer}
     \item 设 $ f(x) $ 在 $ [1, +\infty) $ 上可导, 且 $ \limit{x}{+\infty}f'(x) = +\infty $, 证明 $ f(x) $ 在 $ [1, +\infty) $ 上不一致连续.
     \begin{hint}
-        用反证法, 假设一致连续, 再用 $ \limit{x}{+\infty}f'(x) = +\infty $ 与 Lagrange 中值定理导出矛盾.
+        利用 $ \limit{x}{+\infty}f'(x) = +\infty $ 与 Lagrange 中值定理得到不一致连续的定义.
     \end{hint}
     \item 设 $ \set{a_{n}} $ 为非负递减的数列, 如果级数 $ \sum_{n=0}^{\infty}a_{n} $ 收敛, 那么 $ \limit{n}{\infty} na_{n} = 0 $. 
     \begin{hint}
-        用 Cauchy 收敛准则与 $ \set{a_{n}} $ 的单调性考虑 $ \sum_{k = n}{2n} a_{n} $. 
+        用 Cauchy 收敛准则与 $ \set{a_{n}} $ 的单调性考虑 $ \sum_{k = n}^{2n} a_{n} $. 
     \end{hint}
     \item (\textbf{Frullani 积分}) 设 $ a, b > 0 $, $ f \in C[0, +\infty) $, 证明:
-    \begin{enumerate}
+    \begin{exercise}
         \item  如果 $ \limit{x}{+\infty}f(x) = f(+\infty) $ 存在, 那么
         \begin{align*}
             \int_{0}^{+\infty} \frac{f(ax) - f(bx)}{x} \dd{x} = \qty(f(0) - f(+\infty))\ln\frac{b}{a}.
@@ -45,7 +47,7 @@
         \begin{align*}
             \int_{0}^{+\infty} \frac{f(ax) - f(bx)}{x} \dd{x} = - f(+\infty)\ln\frac{b}{a}.
         \end{align*}
-    \end{enumerate}
+    \end{exercise}
     \begin{hint}
         (1) 可以考虑
         \begin{align*}
@@ -141,6 +143,12 @@
         \end{align*}
     \end{hint}
     \hitem 计算 Fresnel 积分 $ \int_{0}^{+\infty} \sin(x^{2}) \dd{x} $.
+    \begin{hint}
+        hint
+    \end{hint}
+    \begin{answer}
+        answer
+    \end{answer}
     \item 计算积分 $ \int_{0}^{+\infty} \exp(-a x^{2})\cos(bx) \dd{x} $, 其中 $ a > 0,\ b\in \R $.
     \begin{hint}
         记
@@ -164,6 +172,12 @@
     \end{answer}
     \item 计算积分 $ \int_{0}^{\pi/2} \tan^{\alpha}(x) \dd{x} $, 其中 $ \abs{\alpha} < 1 $. 
     \sitem\label{item:AX=XB} 设 $ \K $ 是数域, $ A \in \MM[\K][m] $, $ B \in \MM[\K][n] $, 且 $ A, B $ 没有相同的特征值, 证明矩阵方程 $ AX = XB $ 只有零解.
+    \begin{hint}
+        hint
+    \end{hint}
+    \begin{answer}
+        answer
+    \end{answer}
     \item 如 \ref{item:AX=XB} 题, 可以进一步证明逆命题也成立, 即: 如果 $ AX = XB $ 只有零解, 则 $ A, B $ 无公共特征值.
     \item 设 $ A $ 是 4 阶方阵, 满足 $ \tr(A^{i}) = i\,(i = 1, 2, 3, 4) $, 求 $ \abs{A} $. 
     \item $ n $ 阶方阵可对角化的充分必要条件.
@@ -175,17 +189,17 @@
     \item 设 $ A, B \in \MM $, 若 $ A^{2} = A $, $ B^{2} = B $ 以及 $ (A + B)^{2} = A + B $, 证明 $ AB = BA = 0 $.  
     \item 设 $ A, B $ 都是 $ n $ 阶矩阵, 若 $ A^{k} = 0 $, 且 $ AB + BA = B $, 证明 $ B = 0 $. 
     \item $ A, B $ 是 $ n $ 阶方阵, $ A + B = AB $, 求证
-    \begin{enumerate}
+    \begin{exercise}
         \item $ AB = BA $,
         \item $ \rank(A) = \rank(B) $,
         \item $ A $ 可对角化当且仅当 $ B $ 可对角化.
-    \end{enumerate}
-    \sitem 设 $ f(x), g(x) $ 为多项式, 且 $ (f(x), g(x)) = 1 $, $ A $ 是 $ n $ 阶方阵, 求证: $ f(A)g(A) = 0 $ 的充分必要条件为 $ \rank(f(A)) + \rank(g(A)) = n $.
+    \end{exercise}
+    \item 设 $ f(x), g(x) $ 为多项式, 且 $ (f(x), g(x)) = 1 $, $ A $ 是 $ n $ 阶方阵, 求证: $ f(A)g(A) = 0 $ 的充分必要条件为 $ \rank(f(A)) + \rank(g(A)) = n $.
     \item 设 $ A, B $ 为实对称阵, 求证:
-    \begin{enumerate}
+    \begin{exercise}
         \item 若 $ A $ 正定, 则存在实可逆阵 $ P $ 使得 $ P'AP $ 和 $ P'BP $ 同时为对角阵;
         \item 若 $ A, B $ 半正定, 则 $ \tr(AB) \ge 0 $, 并且等号成立当且仅当 $ AB = 0 $.
-    \end{enumerate}
+    \end{exercise}
     \item $ A, B, C \in \MM $, 并且 $ A = B + C $, 其中 $ B $ 为对称阵, $ C $ 为反对称阵, 证明: 若 $ A^{2} = 0 $, 则 $ A = 0 $.
     \item 求极限 $ \limit{n}{\infty} \sin^{2}\qty(\pi \sqrt{n^{2} + n}) $.  
     \item $ f(x) $ 在 $ [a, b] $ 上二阶可导, 证明存在 $ \xi \in (a, b) $, 使得
@@ -213,7 +227,7 @@
         \limit{n}{\infty}\qty(n! a_{1} a_{2} \dots a_{n})^{1/n} = 0.
     \end{align*}
     \item \textbf{面积原理}
-    \begin{enumerate}
+    \begin{exercise}
         \item 设 $ f $ 是一个非负的递增函数, 则当 $ \xi \ge m $ 时有
         \begin{align*}
             \abs{\sum_{k = m}^{[\xi]} f(k) - \int_{m}^{\xi} f(x) \dd{x}} \le f(\xi).
@@ -227,7 +241,7 @@
             \abs{\sum_{k = m}^{[\xi]} f(k) - \int_{m}^{\xi} f(x) \dd{x} - \alpha} \le f(\xi - 1),
         \end{align*} 
         这里 $ \xi \ge m + 1 $. 
-    \end{enumerate}
+    \end{exercise}
     \item 设 $ f(x) $ 在 $ [a, b] $ 上二次可微, 且 $ f(a)f(b) < 0 $, 对任意 $ x \in [a, b] $ 都有 $ f'(x) > 0 $, $ f''(x) > 0 $. 证明序列 $ \set{x_{n}} $ 极限存在, 其中 $ x_{1} \in [a, b] $, $ x_{n + 1} = x_{n} - f(x_{n})/f'(x_{n})\,(n = 1, 2, \dots) $, 进而可以证明此极限为方程 $ f(x) = 0 $ 的根. 
     \item 设正项级数 $ \sum_{n = 1}^{\infty} a_{n} $ 收敛, 数列 $ \set{y_{n}} : y_{1} = 1,\ 2y_{n + 1} = y_{n} + \sqrt{y_{n}^{2} + a_{n}} $\, $ (n = 1, 2, \dots) $. 证明 $ \set{y_{n}} $ 是单调递增的收敛数列. 
     \item 设数列 $ \set{x_{n}} $ 满足: 当 $ n < m $ 时, $ \abs{x_{n} - x_{m}} > 1/n $. 证明数列 $ \set{x_{n}} $ 无界.
@@ -238,15 +252,15 @@
         \limit{x}{+\infty} \qty(f(x + 1) - f(x)) = A.
     \end{align*}
     证明 $ \limit{x}{+\infty} (f(x) / x) = A $. 
-    \item 证明: \begin{enumerate*}[(1)]
+    \item 证明: \begin{exercise}
         \item 关于 $ x $ 的方程 $ \sum_{k=1}^{n} \me^{kx} = n + 1 $ 在 $ (0, 1) $ 上存在唯一的实根 $ a_{n} $;
         \item 数列 $ \set{a_{n}} $ 收敛, 并求其极限.
-    \end{enumerate*}
+    \end{exercise}
     \item 设 $ a > 0 $, 求积分
     \begin{align*}
         \int_{0}^{\pi/2} \frac{1}{\sqrt{x}} \dd{x} \int_{\sqrt{x}}^{\sqrt{\pi/2}} \frac{1}{1 + \tan^{a}y^{2}} \dd{y}
     \end{align*}
-    \item $ \alpha, \beta $ 是 $ n $ 维列向量, $ A $ 是 $ n $ 阶方阵, 求证: $ \abs{A + \alpha\beta'} = \abs{A} + \beta'A^{*}\alpha $ . 
+    \item 设 $ \alpha, \beta $ 是 $ n $ 维列向量, $ A $ 是 $ n $ 阶方阵, 求证: $ \abs{A + \alpha\beta'} = \abs{A} + \beta'A^{*}\alpha $ . 
     \item 设 $ A \in \MM[\R][3\times 2] $, $ B \in \MM[\R][2 \times 3] $, 且
     \begin{align*}
         AB = \begin{pmatrix}
@@ -282,11 +296,11 @@
         (a_{i}, a_{j}) \le 0,\ (\alpha_{i}, \alpha) > 0, \quad i, j = 1, 2, \dots, p, i \ne j
     \end{align*}
     证明
-    \begin{enumerate}
+    \begin{exercise}
         \item $ \alpha_{1}, \alpha_{2}, \dots, \alpha_{p} $ 线性无关;
         \item $ n $ 维欧式空间中最多有 $ n + 1 $ 个向量, 使其两两互成钝角;
         \item $ n $ 维欧式空间中一定存在 $ n + 1 $ 个向量, 使其两两互为钝角.
-    \end{enumerate}
+    \end{exercise}
     \item 设 $ A, B \in \MM[\K] $, 且 $ AB = BA $, 利用线性方程组的知识证明
     \begin{align*}
         \rank(A + B) \le \rank(A) + \rank(B) - \rank(AB)
@@ -326,11 +340,11 @@
     在 $ [x_{1}, x_{2}] $ 上有且仅有有限个解, 证明 $ f(x) \in C[a, b] $.
     \item 设 $ f(x) $ 在 $ (0, +\infty) $ 上可导, 且 $ \limit{x}{+\infty} \qty(f(x) + f'(x)) = A $, 证明 $ \limit{x}{+\infty} f(x) = A $, 其中 $ A \in \R\cup{\pm\infty} $. 
     \item 已知 $ A \in \MM[\K] $, 且 $ \tr(A) = 0 $, 证明
-    \begin{enumerate}
+    \begin{exercise}
         \item 存在数域 $ \K $ 上的可逆阵 $ C $, 使得 $ C^{-1}AC $ 为主对角元全为 $ 0 $ 的矩阵.
         \item 存在 $ X, Y \in \MM[\K] $, 使得 $ XY - YX = A $.
         \item 令 $ U $ 为 $ \MM[\K] $ 中所有形如 $ XY - YX $ 的矩阵组成的集合, 证明 $ U $ 是 $ \MM[\K] $ 的一个线性子空间. 
-    \end{enumerate}
+    \end{exercise}
     \item 求极限
     \begin{align*}
         \limit{n}{\infty} \qty(\frac{1}{\sqrt{n^{2} + 1}} + \frac{1}{\sqrt{n^{2} + 2}} + \dots + \frac{1}{\sqrt{n^{2} + n}})^{n}
@@ -353,10 +367,10 @@
     \end{align*}
     求证: $ f'(0) $ 存在, 且 $ f'(0) = A $. 
     \item 设 $ x_{n} $ 是 $ \tan x = x $ 在 $ (n\pi, n\pi + \pi/2) $ 上的解,
-    \begin{enumerate}
+    \begin{exercise}
         \item 求证 $ \limit{n}{\infty}(n\pi + \pi/2 - x_{n}) = 0 $,
         \item 求 $ \limit{n}{\infty} n(n\pi + \pi/2 - x_{n}) $.  
-    \end{enumerate}
+    \end{exercise}
     \item 设 $ f $ 在 $ [0, +\infty) $ 上可微, 且 $ f(0) = 0 $, 并假设有实数 $ A $ 使得 $ \abs{f'(x)} \le A\abs{f(x)} $ 对 $ x \in (0, +\infty) $ 恒成立, 证明 $ f(x) \equiv 0\,(x \in (0, +\infty)) $.  
     \item 设偶函数 $ f(x) $ 在 $ x = 0 $ 处二阶可导, 且 $ f(0) = 1 $, 证明级数 $ \sum_{n = 1}^{\infty} (f(1/n) - 1) $ 绝对收敛.
     \item 设 $ f $ 在 $ [a, b] $ 上可导, 且 $ f' $ 在 $ [a, b] $ 上可积, $ f(a) = 0 $, 证明:
@@ -379,18 +393,24 @@
         f\qty(\frac{a+b}{2}) \le \frac{1}{b - a}\int_{a}^{b} f(x) \dd{x} \le \frac{f(a) + f(b)}{2}.
     \end{align*}
     \item 设 $ \limit{x}{+\infty} f(x) = A $, 且满足下列条件之一, 则有 $ \limit{x}{+\infty} f'(x) = 0 $.
-    \begin{enumerate}
+    \begin{exercise}
         \item $ f''(x) $ 在 $ (0, +\infty) $ 有界;
         \item $ \limit{x}{+\infty} f'(x) $ 存在.
-    \end{enumerate}
+    \end{exercise}
+    \begin{hint}
+        \begin{hintsheet}
+            \item 由 $ f(x) \to 0 $ 可得 $ x $ 足够大时 $ \abs{f(x)} $ 足够小, 由 Lagrange 中值定理可以得到 $ x $ 附近的某个 $ \xi $, 使得 $ f'(\xi) $ 足够小, 再利用 $ f'(x) $ 在 $ \xi $ 点的 Taylor 展开, 搭配二阶导有界的条件, 即可说明对每个足够大的 $ x $, 都有 $ \abs{f'(x)} $ 足够小, 命题得证.
+            \item 取足够大的 $ N\in \N $, 对任意足够大的 $ x $ 将 $ f(x+1/N) $ 在 $ x $ 处 Taylor 展开, 就可以得到 $ f'(x) $ 的表达式, 再利用 $ f''(x) $ 有界, 以及 $ f(x) \to 0 $, 即可说明.
+        \end{hintsheet}  
+    \end{hint}
     \item 广义积分 $ \int_{a}^{+\infty} f(x) \dd{x} $ 收敛, 加上下面任一条件即可推出 $ \limit{x}{+\infty} f(x) = 0 $:
-    \begin{enumerate}
+    \begin{exercise}
         \item $ \limit{x}{+\infty} f(x) $ 存在,
         \item $ \int_{a}^{+\infty} f'(x) \dd{x} $ 收敛,
         \item $ f(x) $ 单调, 这时有更强的结果: $ \limit{x}{+\infty} xf(x) = 0 $,
         \item $ f(x) $ 在 $ [a, +\infty) $ 上一致连续,
         \item $ f'(x) $ 在 $ [a, +\infty) $ 上有界. 
-    \end{enumerate}
+    \end{exercise}
     \item 设 $ A $ 是三阶正交矩阵, 且 $ \abs{A} = 1 $, 证明存在正交阵 $ B $, 使得 $ A = B^{2} $.  
     \item 设函数 $ f(x) $ 在 $ \R $ 上有定义, 且在任何有限闭区间上可积, 证明: 对任何闭区间 $ [a, b] $, 有
     \begin{align*}
@@ -410,7 +430,33 @@
     \begin{align*}
         \limit{\lambda}{\infty} \int_{a}^{b} f(x)g(\lambda x) \dd{x}
     \end{align*}
-    \sitem 设 $ f(x) $ 是实多项式, 且对任意实数 $ r $, 都有 $ f(r) \ge 0 $. 证明存在实多项式 $ g(x), h(x) $ 使得 $ f(x) = g^{2}(x) + h^{2}(x) $.   
+    \sitem 设 $ f(x) $ 是实多项式, 且对任意实数 $ r $, 都有 $ f(r) \ge 0 $. 证明存在实多项式 $ g(x), h(x) $ 使得 $ f(x) = g^{2}(x) + h^{2}(x) $, 更进一步可以要求 $ \deg g(x) > \deg h(x) $.   
+    \begin{answer}
+        \begin{answersheet}
+            \item 首先可以说明 $ f(x) $ 的实根的重数都是偶数, 且首项系数 $ k > 0 $ 即
+            \begin{align}
+                f(x) = k\prod_{i = 1}^{s}(x - a_{i})^{2k_{i}}\prod_{j = 1}^{t}(x^{2} + b_{j}x + c_{j})^{l_{j}} := kp^{2}(x)q(x), \label{eq:f=kp2q}
+            \end{align}
+            其中 $ k, a_{i}, b_{j}, c_{j} \in \R,\ k_{i}, l_{j} \in \N \,(1 \le i \le s, 1 \le j \le t) $,  $ b_{j}^{2} - 4c_{j} < 0 $, 又可知对于每个 $ j $,  $ x^{2} + b_{j}x + c_{j} $ 都有一对共轭的复根, 记为 $ \omega_{j}, \bar{\omega}_{j} $, 并注意到 $ x \in \R $ 于是又有
+            \begin{align*}
+                q(x) = \prod_{j = 1}^{t} ( x - \omega_{j})^{l_{j}}\prod_{j = 1}^{t} ( x - \bar{\omega}_{j})^{l_{j}} = \prod_{j = 1}^{t} ( x - \omega_{j})^{l_{j}}\overline{\prod_{j = 1}^{t} ( x - \omega_{j})^{l_{j}}}
+            \end{align*} 
+            若记 $ \prod_{j = 1}^{t} ( x - \omega_{j})^{l_{j}} = g_{i}(x) + \mi h_{1}(x) $, 其中 $ g_{1}(x), h_{1}(x) \in \R[x] $, 那么就有
+            \begin{align*}
+                q(x) = (g_{1}(x) + \mi h_{1}(x))\overline{(g_{1}(x) + \mi h_{1}(x))} = (g_{1}(x) + \mi h_{1}(x))(g_{1}(x) - \mi h_{1}(x)) = g_{1}^{2}(x) + h_{1}^{2}(x)
+            \end{align*}
+            于是令 $ g(x) = \sqrt{k}p(x)g_{1}(x) $, $ h(x) = \sqrt{k}p(x)h_{1}(x) $, 就有 $ f(x) = g^{2}(x) + h^{2}(x) $. 
+            \item 注意到在刚才的过程中得到的 $ g(x) $ 与 $ h(x) $ 的次数是相等的, 如果要得到次数不等的 $ g, h $, 可以用数学归纳法. 首先依旧可以得到 \eqref{eq:f=kp2q} 的分解式, 当 $ b^{2} - 4c < 0 $ 时利用
+            \begin{align*}
+                x^{2} + b_{1}x + c_{1} = \qty(x + \frac{b_{1}}{2})^{2} + \frac{4c_{1} - b_{1}^{2}}{4} = \varphi_{1}^{2}(x) + \psi_{1}^{2}(x)
+            \end{align*}
+            以及
+            \begin{align*}
+                (a^{2} + b^{2})(c^{2} + d^{2}) = \frac{1}{2}(ac + bd)^{2} + \frac{1}{2}(ad - bc)^{2}
+            \end{align*}
+            可以得到 $ q(x) $ 新的分解式 $ g_{2}(x), h_{2}(x) $, 此时 $ \deg g_{2}(x) > \deg h_{2}(x) $, 且令 $ g(x) = \sqrt{k}p(x)g_{2}(x) $, $ h(x) = \sqrt{k}p(x)h_{2}(x) $, 就有 $ f(x) = g^{2}(x) + h^{2}(x) $, 这时就有 $ \deg g(x) > \deg h(x) $. 
+        \end{answersheet}
+    \end{answer}
     \item 设 $ \varphi_{1}, \varphi_{2}, \dots, \varphi_{m} $ 是 $ n $ 维线性空间 $ V $ 上的线性变换, 且适合条件:
     \begin{align*}
         \varphi_{i}^{2} = \varphi_{i}, \quad \varphi_{i}\varphi_{j} = 0\,(i\ne j), \quad \bigcap_{i=1}^{m}\Ker\varphi_{i} = 0,
@@ -442,7 +488,6 @@
     \item\label{item:CtoR} 设 $ A, B \in \MM $, 存在可逆复矩阵 $ P $, 使得 $ P^{-1}AP = B $, 证明存在可逆实矩阵 $ Q $ 使得 $ Q^{-1}AQ = B $.   
     \item 设 $ A, B $ 为 $ n $ 阶方阵, 满足 $ \rank(ABA) = \rank(A) $, 求证: $ AB $ 与 $ BA $ 相似.
     \item 设 $ A, B $ 为 $ n $ 阶方阵, 则 $ AB $ 与 $ BA $ 相似的充要条件是 $ \rank((AB)^{i}) = \rank((BA)^{i})\,(1 \le i \le n - 1) $.
-    \item  设 $ A, B $ 为 $ n $ 阶方阵, 满足 $ \rank(ABA) = r(B) $, 求证: $ AB $ 与 $ BA $ 相似.
     \item 设 $ f $ 在 $ \R $ 上连续, 又 $ \varphi(x) = f(x)\int_{0}^{x} f(t) \dd{t} $ 单调递减, 证明 $ f(x) \equiv 0, x\in\R $.
     \item 计算积分
     \begin{align*}
@@ -504,10 +549,10 @@
         f(\lambda) = P_{1}(\lambda)^{r_{1}}P_{2}(\lambda)^{r_{2}}\dots P_{t}(\lambda)^{r_{t}}, \quad m(\lambda) = P_{1}(\lambda)^{s_{1}}P_{2}(\lambda)^{s_{2}}\dots P_{t}(\lambda)^{s_{t}}
     \end{align*}
     分别为 $ f(\lambda) $ 与 $ m(\lambda) $ 的不可约分解, 其中 $ P_{i}(\lambda) $ 为 $ \K $ 上互异的首一不可约多项式, $ r_{i}, s_{i} > 0\, (i = 1, 2, \dots, t) $. 设 $ V_{i} = \Ker P_{i}(\varphi)^{r_{i}} $, $ U_{i} = \Ker P_{i}(\varphi)^{s_{i}}\,(i = 1, 2, \dots, t) $. 求证:
-    \begin{enumerate}
+    \begin{exercise}
         \item $ V = V_{1} \oplus V_{2} \oplus \dots \oplus V_{t} $, $ U = U_{1} \oplus U_{2} \oplus \dots \oplus U_{t} $, 且 $ U_{i} = V_{i}\,(i = 1, 2, \dots, t) $;
         \item $ \varphi|_{V_{i}} $ 的特征多项式为 $ P_{i}(\lambda)^{r_{i}} $, 极小多项式为 $ P_{i}(\lambda)^{s_{i}} $. 特别地, $ \dim V_{i} = r_{i}\deg P_{i}(\lambda) $. 
-    \end{enumerate}
+    \end{exercise}
     \item 证明任一 $ n $ 阶复矩阵 $ A $ 都相似于一个复对称阵.
     \item 设 $ A $ 为 $ n $ 阶实对称矩阵, 求证: $ A $ 为半正定阵或半负定阵的充要条件是对任意满足 $ \alpha' A\alpha = 0 $ 的 $ n $ 维实向量 $ \alpha $, 都有 $ A\alpha = 0 $.
     \item 设 $ f(x) $ 在 $ [a, b] $ 上连续, $ (a, b) $ 上可导, 且 $ f(a) = f(b) $, 若 $ \abs{f'(x)} \le 1 $, 证明对任意的 $ x_{1}, x_{2} \in [a, b] $, 都有
@@ -524,10 +569,10 @@
     \end{align*}
     证明 $ \limit{n}{\infty} nA_{n} = (b - a)(f(b) - f(a))/2 $.
     \item 设 $ V $ 是数域 $ \K $ 上的 $ n $ 维线性空间, $ \sigma, \tau $ 是 $ V $ 上的线性变换, 且 $ \sigma^{2} = \tau^{2} = 0 $, 且 $ \sigma\tau + \tau\sigma = I_{V} $, 其中 $ I_{V} $ 是 $ V $ 上的恒等变换, 证明
-    \begin{enumerate}
+    \begin{exercise}
         \item $ V = \Ker \sigma \oplus \Ker \tau $;
         \item $ V $ 必是偶数维线性空间.
-    \end{enumerate}
+    \end{exercise}
     \item 设函数 $ f(x) \in C[a, b] $, $ f(x) $ 不恒为 $ 0 $ 并且满足 $ 0 \le f(x) \le M $. 证明:
     \begin{align*}
         \qty(\int_{a}^{b} f(x) \cos x \dd{x})^{2} + \qty(\int_{a}^{b} f(x) \sin x \dd{x})^{2} + \frac{M^{2}(b-a)^{4}}{12} \ge \qty(\int_{a}^{b} f(x) \dd{x})^{2}.
@@ -568,19 +613,19 @@
         \int_{0}^{+\infty}\frac{\dd{x}}{(1+x^{2})(1+x^{a})}.
     \end{align*}
     \item 设 $ A $ 是 $ n $ 阶实正定阵, $ x \in \R^{n} $ 是非零列向量, 求证:
-    \begin{enumerate}
+    \begin{exercise}
         \item $ A + xx' $ 可逆.
         \item $ 0 < x'(A+xx')^{-1}x < 1 $. 
-    \end{enumerate}
+    \end{exercise}
     其中 $ \lambda_{1}, \lambda_{2}, \dots, \lambda_{n} $ 为 $ A^{-1}B $ 的全体特征值.
     \item 设 $ A $ 是 $ n $ 阶半正定的实对称阵, $ S $ 为 $ n $ 阶实反对称阵, 满足 $ AS + SA = 0 $, 证明 $ \abs{A + S} > 0 $ 的充分必要条件为 $ \rank(A) + \rank(S) = n $. 
     \item 设 $ A, B $ 为 $ n $ 阶正定实对称阵, 若 $ A - B $ 半正定, 证明 $ B^{-1} - A^{-1} $ 为半正定阵.
     \item 设 $ A $ 是 $ n $ 阶正定实对称阵, $ B $ 是同阶半正定实对称阵, 求证 $ \abs{A + B} \ge \abs{A} + \abs{B} $. 
     \item 设 $ V $ 是 $ n $ 维酉空间, $ \varphi $ 是 $ V $ 上的线性变换, 求证: $ \varphi $ 是正规算子的充分必要条件是 $ \norm{\varphi(\alpha)} = \norm{\varphi^{*}(\alpha)} $ 对任意 $ \alpha \in V $ 都成立.
     \sitem 设 $ V $ 是 $ n $ 维酉空间, $ \varphi $ 是 $ V $ 上的线性变换, 求证: $ \varphi $ 是正规算子的充分必要条件是若 $ v $ 是 $ \varphi $ 属于特征值 $ \lambda $ 的特征向量, 则 $ v $ 也是 $ \varphi^{*} $ 属于特征值 $ \bar\lambda $ 的特征向量.
-\end{enumerate} 
+\end{exercise} 
     \begin{tcolorbox}[title={同时上三角化/对角化/标准型化}]
-        \begin{enumerate}[resume=exer]
+        \begin{exercise}[resume=exer]
             \item 设 $ n $ 阶矩阵 $ \set{A_{i} : i = 1, 2, \dots, m} $ 两两可交换, 即 $ A_{i}A_{j} = A_{j}A_{i} $ 对一切 $ i, j $ 都成立, 假定每一个 $ A_{i} $ 均可对角化, 证明: 它们可同时对角化.
             \item 若 $ A, B \in \MM[\K] $, 且 $ AB = BA $, 假定 $ A, B $ 的特征值都在 $ \K $ 中, 证明: 存在 $ \K $ 上的可逆阵 $ P $, 使得 $ P^{-1}AP $ 与 $ P^{-1}BP $ 都是上三角矩阵.
             \item 设 $ A $ 为 $ n $ 阶正定实对称阵, $ B $ 为同阶对称阵, 则存在可逆阵 $ C $ 使得
@@ -602,17 +647,17 @@
             \begin{align*}
                 P'AP = \diag\set{\lambda_{1}, \dots, \lambda_{r}, 0, \dots, 0}, \quad P'BP = \diag\set{0, \dots, 0, \mu_{r + 1}, \dots, \mu_{n}}.
             \end{align*}
-        \end{enumerate}
+        \end{exercise}
     \end{tcolorbox}
     \begin{tcolorbox}[title={矩阵/线性算子分解}]
-        \begin{enumerate}[resume=exer]
+        \begin{exercise}[resume=exer]
             \item 设 $ A \in \MM[\C] $, 则 $ A $ 可以分解为 $ A = B + C $, 其中 $ B $ 为 Hermite 阵, $ C $ 为斜 Hermite 阵.
             \item 设 $ A\in \MM[\C] $, 则 $ A $ 可以分解成两个对角阵的乘积, 即 $ A = BC $, 且可以任意指定 $ B $ 或 $ C $ 为可逆阵.
             \item 设 $ A $ 是 $ n $ 阶(半)正定实对称阵, 则
-            \begin{enumerate}
+            \begin{exercise}
                 \item 存在主对角线上元素全等于 $ 1 $ 的上三角矩阵 $ B $, 使得 $ A = B'DB $, 其中 $ D $ 是(半)正定对角矩阵;
                 \item (\emph{Cholesky 分解})存在主对角线上元素全为正(非负)的上三角阵 $ C $, 使得 $ A = C'C $. 
-            \end{enumerate}
+            \end{exercise}
             \item (\emph{QR 分解}) 设 $ A $ 是 $ n $ 阶实(复)矩阵, 则 $ A $ 可以分解为 $ A = QR $, 其中 $ Q $ 是正交(酉)矩阵, $ R $ 是一个上三角阵, 且主对角线上的元素非负, 若 $ A $ 可逆, 则这样的分解唯一.
             \item (\emph{极分解}) 设 $ V $ 是 $ n $ 维酉(欧式)空间, $ \varphi $ 是 $ V $ 上的任一线性算子, 则存在 $ V $ 上的酉(正交)算子 $ \omega $ 以及 $ V $ 上的半正定自伴随算子 $ \psi $, 使得 $ \varphi = \omega\psi $, 其中 $ \psi $ 是唯一的, 并且若 $ \varphi $ 是非异线性算子, 则 $ \omega $ 也唯一 \footnote{ $ \varphi $ 也可以做这样的分解: $ \varphi = \psi_{1}\omega_{1} $ 其中 $ \omega_{1} $ 为酉(正交)算子, $ \psi_{1} $ 为半正定自伴随算子, 这样的分解也叫极分解, 下面矩阵版本的同理.}. 
             \item \label{item:矩阵极分解}(\emph{极分解}) 设 $ A \in \MM $, 则存在 $ n $ 阶正交阵 $ Q $ 以及 $ n $ 阶半正定对称阵 $ S $, 使得 $ A = QS $. 又设 $ B \in \MM[\C] $, 则存在 $ n $ 阶酉矩阵 $ U $, 以及 $ n $ 阶半正定 Hermite 阵 $ H $, 使得 $ B = UH $, 上述分解式当 $ A, B $ 为非异阵的时候被唯一确定.
@@ -623,16 +668,16 @@
             \item (\emph{奇异值分解}) 设 $ V, U $ 分别为 $ n, m $ 维欧式(酉)空间, $ \varphi : V \to U $ 是线性映射, 则存在 $ V $ 和 $ U $ 的标准正交基, 使 $ \varphi $ 在这两组基下的表示矩阵为 $ \smqty(S & 0 \\ 0 & 0) $, 其中 $ S = \diag\set{\sigma_{1}, \sigma_{2}, \dots, \sigma_{r}} $, $ \sigma_{1} \ge \sigma_{2} \ge \dots \ge \sigma_{r} > 0 $ 是 $ \varphi $ 的非零奇异值.
             \item (\emph{奇异值分解}) 设 $ A $ 是 $ m\times n $ 的实(复)矩阵, 则存在 $ m $ 阶正交(酉)矩阵 $ P $, $ n $ 阶正交(酉)矩阵 Q, 使得 $ A = P\smqty(S & 0 \\ 0 & 0)Q $, 其中 $ S = \diag\set{\sigma_{1}, \sigma_{2}, \dots, \sigma_{r}} $, $ \sigma_{1} \ge \sigma_{2} \ge \dots \ge \sigma_{r} > 0 $ 是 $ A $ 的非零奇异值.
             \hitem (\emph{Jordan -- Chevalley 分解}) 设 $ A \in \MM[\C] $, 则 $ A $ 可以分解为 $ A = B + C $, 其中 $ B, C $ 符合以下条件:
-            \begin{enumerate}
+            \begin{exercise}
                 \item $ B $ 是一个相似可对角化矩阵;
                 \item $ C $ 是一个幂零阵;
                 \item $ BC = CB $;
                 \item $ B, C $ 均可以表示为 $ A $ 的多项式.
-            \end{enumerate}
+            \end{exercise}
             不仅如此, 上述满足 (1) -- (3) 的分解是唯一的.
-        \end{enumerate}
+        \end{exercise}
     \end{tcolorbox}
-    \begin{enumerate}[resume=exer]
+    \begin{exercise}[resume=exer]
         \sitem 设 $ A = (a_{ij}) $ 是 $ n $ 阶复矩阵, $ \lambda_{1}, \lambda_{2}, \dots, \lambda_{n} $ 是其特征值, 求证: $ A $ 是正规矩阵的充分必要条件是
         \begin{align*}
             \sum_{i=1}^{n}\abs{\lambda_{i}}^{2} = \tr(A^{\symrm{H}}A) = \sum_{i, j=1}^{n}\abs{a_{ij}}^{2}.
@@ -671,10 +716,10 @@
             \end{pmatrix},\quad b_{j} \ne 0
         \end{align*}
         证明: 
-        \begin{enumerate}
+        \begin{exercise}
             \item $ \rank(A) \ge n-1 $;
             \item $ A $ 的特征值各不相同. 
-        \end{enumerate}
+        \end{exercise}
         \item 设 $ \lambda_{1}, \lambda_{2}, \dots, \lambda_{k} $ 是 $ A\in \MM[\C] $ 的全体特征值, 若有 $ \rank(\lambda_{i}I - A) = \rank(\lambda_{i}I - A)^{2}\,(i = 1, 2, \dots, k) $, 证明 $ A $ 可以相似对角化.
         \item 证明
         \begin{align*}
@@ -688,10 +733,10 @@
             \limit{r}{+\infty} r\int_{0}^{+\infty} \me^{-x^{2}}\sin(rx) \dd{x}.
         \end{align*}
         \item 设数域 $ \K $ 上的全体矩阵 $ \MM[\K] $ 上有线性变换 $ \sigma(X) = AX - XA $, 其中 $ A \in \MM[\K] $:
-        \begin{enumerate}
+        \begin{exercise}
             \item 若 $ A $ 为幂零阵, 证明 $ \sigma $ 为幂零变换;
             \item 若 $ A $ 有特征值 $ \lambda_{1}, \lambda_{2}, \dots, \lambda_{n} $, 证明 $ \lambda_{i} - \lambda_{j}\,(1\le i, j\le n) $ 为 $ \sigma $ 的特征值.
-        \end{enumerate}
+        \end{exercise}
         \item 设 $ f(x) $ 是实系数多项式, 若有 $ f(x) \mid f(x^2 + x + 1) $, 证明 $ 2 \mid \deg f(x) $.
         \item 设函数 $ f(x) $ 在 $ [0, 1] $ 上连续, 证明:
         \begin{align*}
@@ -746,11 +791,11 @@
         \item 设矩阵 $ A \in \MM[\Q] $, 其中 $ n\ge 2 $, 设 $ f(\lambda) = \lambda^{n} + 2\lambda^{n-1} + 2 $, 若有 $ f(A) = 0 $, 证明 $ f(\lambda) $ 是 $ A $ 的特征多项式.
         \item 设函数 $ f(x) $ 在 $ (0, 1] $ 上可导, $ \limit{x}{0+} \sqrt{x}f'(x) = A\in \R $, 证明 $ f(x) $ 在 $ (0, 1] $ 上一致连续.
         \item (中科院 2019) 设有 $ n + 1 $ 个列向量 $ \alpha_{1}, \alpha_{2}, \dots, \alpha_{n}, \beta \in \R^{n} $, $ A $ 是一个 $ n $ 阶实对称正定阵, $ \alpha_{i}' $ 为 $ \alpha_{i} $ 的转置, 如果满足下列条件: 
-        \begin{enumerate}
+        \begin{exercise}
             \item $ \alpha_{j} \ne 0\, (j = 1, 2, \dots, n) $;
             \item 对于任意 $ i \ne j \,(i, j = 1, 2, \dots, n) $, 都有 $ \alpha_{i}' A \alpha_{j} = 0 $;
             \item $ \beta $ 与每个 $ \alpha_{j}\,(j = 1, 2, \dots, n) $ 都正交; 
-        \end{enumerate}
+        \end{exercise}
         证明 $ \beta = 0 $.
         \item (浙大 2020, 与 \ref{item:CtoR} 题类似) 若 $ A, B \in \MM $, 存在 $ n $ 阶可逆复方阵 $ X $ 使得 $ XA + 2BX = 0 $, 证明存在可逆实方阵 $ Y $, 使得 $ YA + 2BY = 0 $. 
         \item (浙大 2020) 求行列式 $ \abs{A} $, 其中 $ A $ 的第 $ (i, j) $ 元为 $ \sgn(i - j) $.
@@ -764,10 +809,10 @@
         \end{align*}
         证明: 一定存在 $ A $ 的特征向量 $ (x, y)'\in \R^{2} $, 满足 $ x, y > 0 $.
         \item (华师 2021) 设 $ A \in \MM $, $ B $ 是 $ n $ 阶实对称正定阵. 
-        \begin{enumerate}
+        \begin{exercise}
             \item 证明: 存在唯一 $ n $ 阶实矩阵 $ C $ 满足 $ BC + CB = A $;
             \item 证明: 对 $ (1) $ 中的实矩阵 $ C $, $ BC = CB $ 当且仅当 $ AB = BA $. 
-        \end{enumerate}
+        \end{exercise}
         \item 设数列 $ \set{na_{n}} $ 收敛, 级数 $ \sum_{n=1}^{\infty}n(a_{n} - a_{n-1}) $ 收敛, 证明 $ \sum_{n=1}^{\infty}a_{n} $ 也收敛. 
         \item 求 $ \limit{n}{+\infty} (I_{n}/\ln n) $, 其中
         \begin{align*}
@@ -776,7 +821,7 @@
         \sitem 设 $ I(x) = \int_{0}^{+\infty} x^{3/2}\exp(-x^{2}y^{2})\dd{y} $, 证明 $ I(x) $ 关于 $ x\geq 0 $ 一致收敛.
         \item 计算曲线积分: $ I = \int_{L} (x^{2} - y^{2}) \dd{x} + (x^{2} - z^{2}) \dd{y} + (y^{2} - z^{2})\dd{z} $ , 其中 $ L $ 是曲面 $ x = \sqrt{2z - y^{2} - z^{2}} $ 与 $ x + z = 1 $ 的交线上, 从点 $ (0, -1, 1) $ 到点 $ (0, 1, 1) $ 的一段有向弧.
         \sitem 记 $ \abs{M} $ 为矩阵 $ M $ 的行列式, 设 $ A, B\in \MM $, 
-        \begin{enumerate}
+        \begin{exercise}
             \item 证明
             \begin{align*}
                 \begin{vmatrix}
@@ -789,7 +834,7 @@
                     A & B \\ B & A
                 \end{vmatrix} = \abs{A + B}\cdot\abs{A - B}.
             \end{align*}
-        \end{enumerate}
+        \end{exercise}
         \item 设函数 
         \begin{align*}
             f(x) = \begin{cases}
@@ -819,19 +864,19 @@
             \int_{0}^{1} \abs{\frac{f''(x)}{f(x)}} \dd{x} > 4.
         \end{align*}
         \item 设 $ V $ 是 $ n $ 维欧式空间, 证明
-        \begin{enumerate}
+        \begin{exercise}
             \item 对于任意两个不同的单位向量 $ \alpha, \beta \in V $, 总存在 $ V $ 上的镜面变换 $ \hom{A} $, 使得 $ \hom{A}(\alpha) = \beta $;
             \item 证明 $ V $ 上的任意正交变换 $ \hom{B} $ 都可以表示成有限个镜面变换的乘积, 即存在 $ m $ 个镜面变换 $ \hom{A}_{1}, \hom{A}_{2}, \dots, \hom{A}_{m} $, 使得
             \begin{align*}
                 \hom{B} = \hom{A}_{1}\hom{A}_{2}\dots\hom{A}_{m}.
             \end{align*}
-        \end{enumerate}
+        \end{exercise}
         \item 计算积分 $ I = \int_{0}^{\pi/2} \ln (a^{2}\sin^{2}x + b^{2}\cos^{2}x) \dd{x} $, 其中 $ a, b $ 不全为 $ 0 $.
         \item 设 $ A $ 为 $ n $ 阶正定阵, $ X \in \R^{n} $ 为非零列向量, 证明
-        \begin{enumerate}
+        \begin{exercise}
             \item 矩阵 $ A + XX' $ 可逆,
             \item $ 0 < X'(A + XX')^{-1}X < 1 $. 
-        \end{enumerate}
+        \end{exercise}
         \item $ A\in \MM $, 假设 $ A^{2} = A $, 且对任意的 $ X \in \R^{n} $, 有
         \begin{align*}
             X'A'AX \le X'X,
@@ -864,12 +909,10 @@
         \begin{answer}
             $ W $ 是 $ \MM $ 的 $ n^{2} - 1 $ 维的子空间, 且 $ \set{E_{ij} : i \ne j} \cup \set{E_{11} - E_{kk} : k > 1} $ 是 $ W $ 的一组基.
         \end{answer}
-        \item 设 $ f $ 在 $ [0, +\infty) $ 上二阶可导, 且 $ f''(x) $ 有界, $ \limit{x}{+\infty} f(x) = 0 $, 证明: $ \limit{x}{+\infty} f'(x) = 0 $.
-        \begin{hint}[法一]
-            由 $ f(x) \to 0 $ 可得 $ x $ 足够大时 $ \abs{f(x)} $ 足够小, 由 Lagrange 中值定理可以得到 $ x $ 附近的某个 $ \xi $, 使得 $ f'(\xi) $ 足够小, 再利用 $ f'(x) $ 在 $ \xi $ 点的 Taylor 展开, 搭配二阶导有界的条件, 即可说明对每个足够大的 $ x $, 都有 $ \abs{f'(x)} $ 足够小, 命题得证.
-        \end{hint}
-        \begin{hint}[法二]
-            取足够大的 $ N\in \N $, 对任意足够大的 $ x $ 将 $ f(x+1/N) $ 在 $ x $ 处 Taylor 展开, 就可以得到 $ f'(x) $ 的表达式, 再利用 $ f''(x) $ 有界, 以及 $ f(x) \to 0 $, 即可说明.
-        \end{hint}
-    \end{enumerate}
+    \end{exercise}
+    \stopexercise
+    \section{提示}
+    \printhint
+    \section{答案}
+    \printanswer
 \end{document}

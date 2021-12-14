@@ -278,3 +278,7 @@ TSWLatexianTemp*
 
 # vscode config
 .vscode
+
+# user defined
+*.ans
+*.hint

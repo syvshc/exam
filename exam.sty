@@ -1,16 +1,13 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{exam}[2021/12/13 v0.1 test]
 
-\newif\ifhint
-\hintfalse
-\newif\ifanswer
-\answerfalse
-\DeclareOption{hint}{%
-  \hinttrue
+\newif\ifprint
+\printfalse
+
+\DeclareOption{print}{%
+  \printtrue
 }
-\DeclareOption{answer}{%
-  \answertrue
-}
+
 \ProcessOptions
 
 \IfFontExistsTF{Source Han Serif SC}{
@@ -48,7 +45,7 @@
 
 \RequirePackage[notrig]{physics}
 \RequirePackage{nicematrix}
-\RequirePackage[colorlinks=true]{hyperref}
+\RequirePackage[colorlinks=true, linkcolor=blue]{hyperref}
 
 % https://tex.stackexchange.com/questions/307412/redefine-pi-to-pi-with-unicode-math
 \AtBeginDocument{%
@@ -62,34 +59,10 @@
     \let\ge\geqslant
     \let\le\leqslant
     \let\hom\symscr
-    \ifhint \else 如果想启用提示, 请添加宏包 \textsf{exam} 的选项 \texttt{hint}\par \fi
-    \ifanswer \else 如果想启用答案, 请添加宏包 \textsf{exam} 的选项 \texttt{answer}\par \fi
 }
 
 \def\grad{\symbf{\nabla}}
 \let\boldsymbol\symbfit
-
-% \let\vb\symbfit
-\RequirePackage[shortlabels, inline]{enumitem} % 继承并扩展了enumerate宏包的功能
-\setlist[enumerate, 1]{leftmargin=*, label=\arabic*., widest=000, ref=\arabic*}
-\setlist[enumerate, 2]{leftmargin=*, label=(\arabic*)}
-
-% https://tex.stackexchange.com/a/52718/180617
-\def\asteriskitem{*}
-\def\sitem{%
-  \expandafter\let\expandafter\originallabel\csname labelenum\romannumeral\@enumdepth\endcsname
-  \expandafter\def\csname labelenum\romannumeral\@enumdepth\expandafter\endcsname\expandafter{%
-    \expandafter\bfseries\expandafter\color{red}\expandafter{\expandafter\asteriskitem\expandafter\originallabel}}%
-  \item
-  \expandafter\let\csname labelenum\romannumeral\@enumdepth\endcsname\originallabel
-}
-\def\hitem{%
-  \expandafter\let\expandafter\originallabel\csname labelenum\romannumeral\@enumdepth\endcsname
-  \expandafter\def\csname labelenum\romannumeral\@enumdepth\expandafter\endcsname\expandafter{%
-    \expandafter\bfseries\expandafter\expandafter{\expandafter\asteriskitem\expandafter\originallabel}}%
-  \item
-  \expandafter\let\csname labelenum\romannumeral\@enumdepth\endcsname\originallabel
-}
 
 \newcommand{\limit}[2]{\lim_{#1 \to #2}}
 \newcommand{\me}{\symrm{e}}
@@ -109,43 +82,145 @@
 
 \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
 
-\RequirePackage{amsthm}
+% 打印提示和答案列表, 并创建超链接
 
-\newtheoremstyle{hint}%⟨name⟩
-{3pt}%⟨Space above⟩1
-{3pt}%⟨Space below⟩1
-{\mdseries}%⟨Body font⟩
-{0pt}%⟨Indent amount⟩2
-{\bfseries}% ⟨Theorem head font⟩
-{:}%⟨Punctuation after theorem head⟩
-{.5em}%⟨Space after theorem head⟩3
-{}%⟨Theorem head spec (can be left empty, meaning ‘normal’)⟩
+\def\hitem{%
+  \letcs{\originallabel}{labeloriexercise\romannumeral\enit@depth}%
+  % the same as \@namedef
+  \csedef{labeloriexercise\romannumeral\enit@depth\expandafter}%
+    {\noexpand\textbf{*\expandonce\originallabel}}%
+  \item
+  \cslet{labeloriexercise\romannumeral\enit@depth}\originallabel
+}
 
-\theoremstyle{hint}
-\newtheorem*{orihint}{提示}
-\newtheorem*{orianswer}{答案}
+\def\sitem{%
+  \letcs{\originallabel}{labeloriexercise\romannumeral\enit@depth}%
+  % the same as \@namedef
+  \csedef{labeloriexercise\romannumeral\enit@depth\expandafter}%
+    {\noexpand\bfseries\noexpand\color{red}{*\expandonce\originallabel}}%
+  \item
+  \cslet{labeloriexercise\romannumeral\enit@depth}\originallabel
+}
 
-\NewDocumentEnvironment{hint}{ o +b }{%
-  \ifhint \IfNoValueTF{#1}%
-  {
-    \begin{orihint}
-      #2
-    \end{orihint}
-  }%
-  {
-    \begin{orihint}[#1]
-      #2
-    \end{orihint}
-  } %
-  \fi
-}{}
 
-\NewDocumentEnvironment{answer}{ +b }{%
-  \ifanswer%
-  {
-    \begin{orianswer}
-      #1
-    \end{orianswer}
-  }%
-  \fi
-}{}
+% \newcommand{\uselistlabel}[2]{%
+%   \stepcounter{oriexercisei}%
+%   \llap{#1}%
+%   % see https://github.com/jbezos/enumitem/blob/1bdcad0987823b3716c86b126b3863f895ea9c4a/enumitem.sty#L1371
+%   #2{\@nameuse{labeloriexercisei}}%
+% }
+
+\RequirePackage{verbatim}
+
+\newwrite\ltxex@ansfile
+\newwrite\ltxex@hintfile
+
+\def\ltxex@ansfilename{\jobname.ans}
+\def\ltxex@hintfilename{\jobname.hint}
+
+\newcommand\startexercise{%
+  \immediate\openout\ltxex@ansfile=\ltxex@ansfilename
+  \immediate\write\ltxex@ansfile{\noexpand\begin{answersheet}}
+  \immediate\openout\ltxex@hintfile=\ltxex@hintfilename
+  \immediate\write\ltxex@hintfile{\noexpand\begin{hintsheet}}}
+
+\newcommand\stopexercise{%
+  \immediate\write\ltxex@ansfile{\noexpand\end{answersheet}}%
+  \immediate\closeout\ltxex@ansfile
+  \immediate\write\ltxex@hintfile{\noexpand\end{hintsheet}}%
+  \immediate\closeout\ltxex@hintfile}
+
+\newcommand\printanswer{%
+  \InputIfFileExists{\ltxex@ansfilename}%
+    {\PackageInfo{latexexercise}{answer file `\ltxex@ansfilename' inputed.}}%
+    {\PackageWarning{latexexercise}%
+      {answer file `\ltxex@ansfilename' does not exsist.}}}
+
+\newcommand\printhint{%
+  \InputIfFileExists{\ltxex@hintfilename}%
+  {\PackageInfo{latexexercise}{hint file `\ltxex@hintfilename' inputed.}}%
+  {\PackageWarning{latexexercise}%
+    {hint file `\ltxex@hintfilename' does not exsist.}}}
+
+\newenvironment{answer}%
+{ 
+  \immediate\write\ltxex@ansfile{\noexpand\item[\noexpand\ref{\number\csname c@oriexercisei\endcsname:exer}.] \noexpand\GetRef{\number\csname c@oriexercisei\endcsname:answ}\noexpand\label{\number\csname c@oriexercisei\endcsname:answ}}%
+  \ltxex@startwriteans%
+}%
+{\ltxex@endwrite}
+
+\newenvironment{hint}%
+{ 
+  \immediate\write\ltxex@hintfile{\noexpand\item[\noexpand\ref{\number\csname c@oriexercisei\endcsname:exer}.] \noexpand\GetRef{\number\csname c@oriexercisei\endcsname:hint}\noexpand\label{\number\csname c@oriexercisei\endcsname:hint}}%
+  \ltxex@startwritehint%
+}%
+{\ltxex@endwrite}
+
+% \RequirePackage{letltxmacro}
+% \let\vb\symbfit
+\RequirePackage[shortlabels, inline]{enumitem} % 继承并扩展了enumerate宏包的功能
+\setlist[enumerate, 1]{leftmargin=*, label=\arabic*., widest=000, ref=\arabic*}
+\setlist[enumerate, 2]{leftmargin=*, label=(\arabic*)}
+\newlist{oriexercise}{enumerate}{2}
+\setlist[oriexercise, 1]{leftmargin=*, label=\arabic*., widest=000, ref=\arabic*}
+\setlist[oriexercise, 2]{leftmargin=*, label=(\arabic*)}
+\newlist{answersheet}{enumerate}{2}
+\setlist[answersheet, 1]{leftmargin=*, label=\arabic*., widest=000, ref=\arabic*}
+\setlist[answersheet, 2]{leftmargin=*, label=(\arabic*)}
+\newlist{hintsheet}{enumerate}{2}
+\setlist[hintsheet, 1]{leftmargin=*, label=\arabic*., widest=000, ref=\arabic*}
+\setlist[hintsheet, 2]{leftmargin=*, widest={方法一}, label=(\textbf{方法\chinese*})}
+
+\RequirePackage{letltxmacro}
+\LetLtxMacro{\it@m}{\item}
+
+\NewDocumentCommand{\GetRef}{ m }{\protected@edef\@currentlabel{\getrefnumber{#1}}}%
+
+  \def\asteriskitem{*}
+% https://tex.stackexchange.com/a/328393/180617
+\NewDocumentCommand{\new@item}{ o }{
+    \IfNoValueTF{#1}{\it@m}{\it@m[#1]\phantomsection\protected@edef\@currentlabel{#1}}}
+
+\let\item\new@item
+
+\NewDocumentEnvironment{exercise}{ o }{
+  \RenewDocumentCommand{\item}{ s s o }{
+    \IfNoValueTF{##3}{\it@m}{\it@m[##3]}%
+    \ifnum\enit@depth=\@ne
+      \expandafter\label\expandafter{\number\csname c@oriexercisei\endcsname:exer} 
+      \ifprint \else
+      \@ifundefined{r@\number\csname c@oriexercisei\endcsname:exer}{[提示]}{
+      \hyperref[\number\csname c@oriexercisei\endcsname:hint]{[提示]}}%        
+      \@ifundefined{r@\number\csname c@oriexercisei\endcsname:exer}{[答案]}{
+      \hyperref[\number\csname c@oriexercisei\endcsname:answ]{[答案]}}
+      \fi
+    \fi
+  }
+  % \let\hitem\item
+  % \let\sitem\item
+  \IfValueTF{#1}{%
+    \begin{oriexercise}[#1]
+  }{
+    \begin{oriexercise}
+  }
+}{\end{oriexercise}}
+
+\def\ltxex@startwriteans{%
+  \begingroup
+  \@bsphack
+  \let\do\@makeother \dospecials
+  \catcode`\^^M\active
+  \def\verbatim@processline{%
+    \immediate\write\ltxex@ansfile{\the\verbatim@line}}%
+  \verbatim@start}
+
+  \def\ltxex@startwritehint{%
+  \begingroup
+  \@bsphack
+  \let\do\@makeother \dospecials
+  \catcode`\^^M\active
+  \def\verbatim@processline{%
+    \immediate\write\ltxex@hintfile{\the\verbatim@line}}%
+  \verbatim@start}
+
+\def\ltxex@endwrite{\@esphack\endgroup}
