@@ -48,10 +48,6 @@
 \RequirePackage[colorlinks=true, linkcolor=blue]{hyperref}
 
 % https://tex.stackexchange.com/questions/307412/redefine-pi-to-pi-with-unicode-math
-\AtBeginDocument{%
-  \let\umathpi\pi
-  \renewcommand\pi{\symup\umathpi}%
-}
 
 \let\set\qty
 \let\emph\textbf
@@ -59,6 +55,8 @@
     \let\ge\geqslant
     \let\le\leqslant
     \let\hom\symscr
+    \let\umathpi\pi
+    \renewcommand\pi{\symup\umathpi}%
 }
 
 \def\grad{\symbf{\nabla}}
@@ -80,10 +78,14 @@
 \DeclareMathOperator{\Ker}{Ker}
 \DeclareMathOperator{\sgn}{sgn}
 
+% 修改 minipage 的脚注编号为 \arabic
 \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
 
 % 打印提示和答案列表, 并创建超链接
 
+% 添加红色加粗加星的 \item: \sitem 
+% 添加加粗加星的 \item: \hitem
+% https://github.com/jbezos/enumitem/issues/33#issuecomment-993449063 
 \def\hitem{%
   \letcs{\originallabel}{labeloriexercise\romannumeral\enit@depth}%
   % the same as \@namedef
@@ -102,34 +104,31 @@
   \cslet{labeloriexercise\romannumeral\enit@depth}\originallabel
 }
 
-
-% \newcommand{\uselistlabel}[2]{%
-%   \stepcounter{oriexercisei}%
-%   \llap{#1}%
-%   % see https://github.com/jbezos/enumitem/blob/1bdcad0987823b3716c86b126b3863f895ea9c4a/enumitem.sty#L1371
-%   #2{\@nameuse{labeloriexercisei}}%
-% }
-
 \RequirePackage{verbatim}
 
+% answerfile
 \newwrite\ltxex@ansfile
+% hintfile
 \newwrite\ltxex@hintfile
 
 \def\ltxex@ansfilename{\jobname.ans}
 \def\ltxex@hintfilename{\jobname.hint}
 
+% 遇到 \startexercise 时, 打开文件, 并向 .ans 与 .hint 中写入 answersheet 与 hintsheet 的环境头
 \newcommand\startexercise{%
   \immediate\openout\ltxex@ansfile=\ltxex@ansfilename
   \immediate\write\ltxex@ansfile{\noexpand\begin{answersheet}}
   \immediate\openout\ltxex@hintfile=\ltxex@hintfilename
   \immediate\write\ltxex@hintfile{\noexpand\begin{hintsheet}}}
 
+% 遇到 \stopexercise 时, 向 .ans 与 .hint 中写入 answersheet 与 hintsheet 的环境尾, 并关闭文件
 \newcommand\stopexercise{%
   \immediate\write\ltxex@ansfile{\noexpand\end{answersheet}}%
   \immediate\closeout\ltxex@ansfile
   \immediate\write\ltxex@hintfile{\noexpand\end{hintsheet}}%
   \immediate\closeout\ltxex@hintfile}
 
+% 从 .ans 与 .hint 中输出 answer 和 hint
 \newcommand\printanswer{%
   \InputIfFileExists{\ltxex@ansfilename}%
     {\PackageInfo{latexexercise}{answer file `\ltxex@ansfilename' inputed.}}%
@@ -142,6 +141,11 @@
   {\PackageWarning{latexexercise}%
     {hint file `\ltxex@hintfilename' does not exsist.}}}
 
+% 解决对 \item[\ref{}]\label{} 的引用问题
+% https://tex.stackexchange.com/a/625985/180617
+\NewDocumentCommand{\GetRef}{ m }{\protected@edef\@currentlabel{\getrefnumber{#1}}}%
+
+% 在 answer 环境开始时, 向 .ans 文件中写入 \item[\ref{2:exer}]\label{2:answ}, hint 环境同理
 \newenvironment{answer}%
 { 
   \immediate\write\ltxex@ansfile{\noexpand\item[\noexpand\ref{\number\csname c@oriexercisei\endcsname:exer}.] \noexpand\GetRef{\number\csname c@oriexercisei\endcsname:answ}\noexpand\label{\number\csname c@oriexercisei\endcsname:answ}}%
@@ -156,11 +160,10 @@
 }%
 {\ltxex@endwrite}
 
-% \RequirePackage{letltxmacro}
-% \let\vb\symbfit
+% 定义 oriexercise, answersheet, hintsheet 以及方法 method
 \RequirePackage[shortlabels, inline]{enumitem} % 继承并扩展了enumerate宏包的功能
-\setlist[enumerate, 1]{leftmargin=*, label=\arabic*., widest=000, ref=\arabic*}
-\setlist[enumerate, 2]{leftmargin=*, label=(\arabic*)}
+% \setlist[enumerate, 1]{leftmargin=*, label=\arabic*., widest=000, ref=\arabic*}
+% \setlist[enumerate, 2]{leftmargin=*, label=(\arabic*)}
 \newlist{oriexercise}{enumerate}{2}
 \setlist[oriexercise, 1]{leftmargin=*, label=\arabic*., widest=000, ref=\arabic*}
 \setlist[oriexercise, 2]{leftmargin=*, label=(\arabic*)}
@@ -169,41 +172,43 @@
 \setlist[answersheet, 2]{leftmargin=*, label=(\arabic*)}
 \newlist{hintsheet}{enumerate}{2}
 \setlist[hintsheet, 1]{leftmargin=*, label=\arabic*., widest=000, ref=\arabic*}
-\setlist[hintsheet, 2]{leftmargin=*, widest={方法一}, label=(\textbf{方法\chinese*})}
+\setlist[hintsheet, 2]{leftmargin=*, label=(\arabic*)}
+\newlist{method}{enumerate}{1}
+\setlist[method, 1]{leftmargin=0pt, labelindent = *, widest={方法二}, label=(\textbf{方法\chinese*})}
 
 \RequirePackage{letltxmacro}
 \LetLtxMacro{\it@m}{\item}
 
-\NewDocumentCommand{\GetRef}{ m }{\protected@edef\@currentlabel{\getrefnumber{#1}}}%
-
-  \def\asteriskitem{*}
+\def\asteriskitem{*}
 % https://tex.stackexchange.com/a/328393/180617
 \NewDocumentCommand{\new@item}{ o }{
     \IfNoValueTF{#1}{\it@m}{\it@m[#1]\phantomsection\protected@edef\@currentlabel{#1}}}
 
 \let\item\new@item
 
+% 在 oriexercise 的基础上定义 exercise 环境, 使得可以输出 [提示][答案], 并带有超链接
 \NewDocumentEnvironment{exercise}{ o }{
   \RenewDocumentCommand{\item}{ s s o }{
     \IfNoValueTF{##3}{\it@m}{\it@m[##3]}%
+    % 这里注意要判断一下是否在第一层
     \ifnum\enit@depth=\@ne
       \expandafter\label\expandafter{\number\csname c@oriexercisei\endcsname:exer} 
       \ifprint \else
-      \@ifundefined{r@\number\csname c@oriexercisei\endcsname:exer}{[提示]}{
+      \ifcsundef{r@\number\csname c@oriexercisei\endcsname:hint}{[提示]}{
       \hyperref[\number\csname c@oriexercisei\endcsname:hint]{[提示]}}%        
-      \@ifundefined{r@\number\csname c@oriexercisei\endcsname:exer}{[答案]}{
+      \ifcsundef{r@\number\csname c@oriexercisei\endcsname:answ}{[答案]}{
       \hyperref[\number\csname c@oriexercisei\endcsname:answ]{[答案]}}
       \fi
     \fi
   }
-  % \let\hitem\item
-  % \let\sitem\item
   \IfValueTF{#1}{%
     \begin{oriexercise}[#1]
   }{
     \begin{oriexercise}
   }
 }{\end{oriexercise}}
+
+% 下面就是我看不懂的文件写入的控制了
 
 \def\ltxex@startwriteans{%
   \begingroup
