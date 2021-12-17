@@ -169,13 +169,23 @@
     \item 如 \ref{item:AX=XB} 题, 可以进一步证明逆命题也成立, 即: 如果 $ AX = XB $ 只有零解, 则 $ A, B $ 无公共特征值.
     \item 设 $ A $ 是 4 阶方阵, 满足 $ \tr(A^{i}) = i\,(i = 1, 2, 3, 4) $, 求 $ \abs{A} $. 
     \item $ n $ 阶方阵可对角化的充分必要条件.
-    \item 设 $ f(x) $ 在 $ [0, 1] $ 上可积, 在 $ x = 1 $ 处左连续, 证明:
+    \hitem 设 $ f(x) $ 在 $ [0, 1] $ 上可积, 在 $ x = 1 $ 处左连续, 证明:
     \begin{align*}
         \limit{n}{\infty}\frac{\int_{0}^{1} x^{n} f(x) \dd{x}}{\int_{0}^{1} x^{n} \dd{x}} = f(1).
     \end{align*}
     \item 设 $ A \in \MM $, 若 $ A^{2} = AA' $, 证明 $ A $ 为实对称阵.
     \item 设 $ A, B \in \MM $, 若 $ A^{2} = A $, $ B^{2} = B $ 以及 $ (A + B)^{2} = A + B $, 证明 $ AB = BA = 0 $.  
     \item 设 $ A, B $ 都是 $ n $ 阶矩阵, 若 $ A^{k} = 0 $, 且 $ AB + BA = B $, 证明 $ B = 0 $. 
+    \begin{hint}
+        利用 $ A^{\ell}B = B(I - A)^{\ell} $, 与 $ A $ 的特征值全 $ 0 $ 可以得到 $ B = 0 $.
+    \end{hint}
+    \begin{answer}
+        将 $ AB + BA = B $ 移项可得 $ AB = B(I - A) $, 那么就有
+        \begin{align*}
+            A^{2}B = AAB = AB(I - A) = B(I - A)(I - A) = B(I - A)^{2}
+        \end{align*}
+        同理可得对于任意的 $ \ell \in \N $, 总有 $ A^{\ell}B = B(I - A)^{\ell} $, 特别地, 令 $ \ell = k $, 于是就有 $ B(I - A)^{k} = 0 $. 再注意到 $ A^{k} = 0 $, 那么 $ 1 $ 不是 $ A $ 的特征值, 故 $ \abs{I - A} \ne 0 $, 也即 $ (I - A)^{k} $ 可逆. 那么就有 $ B = 0 $.
+    \end{answer}
     \item $ A, B $ 是 $ n $ 阶方阵, $ A + B = AB $, 求证
     \begin{exercise}
         \item $ AB = BA $,
@@ -188,7 +198,8 @@
         \item 若 $ A $ 正定, 则存在实可逆阵 $ P $ 使得 $ P'AP $ 和 $ P'BP $ 同时为对角阵;
         \item 若 $ A, B $ 半正定, 则 $ \tr(AB) \ge 0 $, 并且等号成立当且仅当 $ AB = 0 $.
     \end{exercise}
-    \item $ A, B, C \in \MM $, 并且 $ A = B + C $, 其中 $ B $ 为对称阵, $ C $ 为反对称阵, 证明: 若 $ A^{2} = 0 $, 则 $ A = 0 $.
+    % FIXME \item $ A, B, C \in \MM $, 并且 $ A = B + C $, 其中 $ B $ 为对称阵, $ C $ 为反对称阵, 证明: 若 $ A^{2} = 0 $, 则 $ A = 0 $.
+    \item 
     \item 求极限 $ \limit{n}{\infty} \sin^{2}\qty(\pi \sqrt{n^{2} + n}) $.  
     \item $ f(x) $ 在 $ [a, b] $ 上二阶可导, 证明存在 $ \xi \in (a, b) $, 使得
     \begin{align*}
@@ -210,6 +221,19 @@
     \begin{align*}
         \limit{n}{\infty}\frac{a_{1} p_{1} + a_{2} p_{2} + \dots + a_{n} p_{n}}{p_{n}} = 0.
     \end{align*}
+    \begin{hint}
+        利用 Abel 变换与 Stolz 公式. 
+    \end{hint}
+    \begin{answer}
+        由 Abel 变换可得
+        \begin{align*}
+            \frac{\sum_{k = 1}^{n} a_{k}p_{k}}{p_{n}} = \frac{S_{n}p_{n} - \sum_{k = 1}^{n - 1}S_{k}(p_{k + 1} - p_{k})}{p_{n}} = S_{n} - \frac{\sum_{k = 1}^{n - 1}S_{k}(p_{k + 1} - p_{k})}{p_{n}}
+        \end{align*}
+        其中 $ S_{k} = \sum_{i = 1}^{k}a_{k} $, 由于 $ \sum_{n = 1}^{\infty}a_{n} $ 收敛, 那么由 Stolz 定理可得
+        \begin{align*}
+            \limit{n}{\infty}\frac{\sum_{k = 1}^{n} a_{k}p_{k}}{p_{n}} = \limit{n}{\infty}S_{n} - \limit{n}{\infty}\frac{S_{n - 1}(p_{n} - p_{n - 1})}{p_{n} - p_{n - 1}} = \limit{n}{\infty}S_{n} - \limit{n}{\infty}S_{n - 1} = 0.
+        \end{align*}
+    \end{answer}
     \item 如果级数 $ \sum_{n = 1}^{\infty} a_{n} $ 收敛, 证明极限
     \begin{align*}
         \limit{n}{\infty}\qty(n! a_{1} a_{2} \dots a_{n})^{1/n} = 0.
@@ -234,6 +258,16 @@
     \item 设正项级数 $ \sum_{n = 1}^{\infty} a_{n} $ 收敛, 数列 $ \set{y_{n}} : y_{1} = 1,\ 2y_{n + 1} = y_{n} + \sqrt{y_{n}^{2} + a_{n}} $\, $ (n = 1, 2, \dots) $. 证明 $ \set{y_{n}} $ 是单调递增的收敛数列. 
     \item 设数列 $ \set{x_{n}} $ 满足: 当 $ n < m $ 时, $ \abs{x_{n} - x_{m}} > 1/n $. 证明数列 $ \set{x_{n}} $ 无界.
     \item 设 $ f(x) $ 在闭区间 $ [0, 1] $ 上具有二阶导数, 且 $ f(0) = f'(0) = f(1) = 0 $, 证明: 存在 $ \xi \in (0, 1) $, 使得 $ f''(\xi) = f(\xi) $.
+    \begin{hint}
+        从结果入手, 即需要找 $ g(x) = \me^{x}(f'(x) - f(x)) $ 导数的零点, 那么由 Rolle 定理, 我们就需要找 $ g(x_{1}) = g(x_{2}) $, 我们已经有了 $ g(0) = 0 $, 那么只要找另一个 $ g(\xi) = 0 $ 即可, 也就等价于要找 $ \xi $ 使得 $ f'(\xi) = f(\xi) $.
+    \end{hint}
+    \begin{answer}
+        答案这里我们依然从结果入手, 提供一种思考的方式. 我们要说明 $ f''(x) - f(x) $ 存在零点, 那么就是要找
+        \begin{align*}
+            f''(x) - f'(x) + f'(x) - f(x) = (f'(x) - f(x))' + (f'(x) - f(x))
+        \end{align*}
+        的零点, 也就是找到 $ g(x) = \me^{x}(f'(x) - f(x)) $ 导数的零点, 那么只要找到不同的 $ x_{1} $ 和 $ x_{2} $ 使得 $ g(x_{1}) = g(x_{2}) $ 即可. 而我们又知道 $ g(0) = 0 $, 那么我们只要找 $ g(x) $ 的另外一个零点即可, 也就是要找 $ f'(x) - f(x) $ 的零点, 也就是要找 $ h(x) = f(x)/\me^{x} $ 的导数的零点, 而由题知 $ h(0) = h(1) = 0 $, 也就是存在 $ \eta\in(0, 1) $ 使得 $ h'(\eta) = 0 $, 即 $ g(\eta) = g(0) = 0 $, 那么就存在 $ \xi \in (0, \pi) $, 使得 $ g'(\xi) = 0 $, 即 $ f''(\xi) = f(\xi) $. 
+    \end{answer}
     \item $ n $ 阶方阵的每行之和与每列之和均为 0, 证明其所有代数余子式全相等.
     \item 设函数 $ f(x) $ 定义在 $ (a, +\infty) $, 且 $ f(x) $ 在每个有限区间 $ (a, b) $ 内都有界, 并满足
     \begin{align*}
@@ -293,6 +327,21 @@
     \begin{align*}
         \rank(A + B) \le \rank(A) + \rank(B) - \rank(AB)
     \end{align*}
+    \begin{hint}
+        分别设 $ (A + B)x = 0, Ax = 0, Bx = 0, ABx = 0, BAx = 0 $ 的解空间为 $ V_{A+B}, V_{A}, V_{B}, V_{AB}, V_{BA} $, 注意到 $ V_{AB} = V_{BA} $, 再利用这些解空间的包含关系即可得到结论.
+    \end{hint}
+    \begin{answer}
+        分别设 $ (A + B)x = 0, Ax = 0, Bx = 0, ABx = 0, BAx = 0 $ 的解空间为 $ V_{A+B}, V_{A}, V_{B}, V_{AB}, V_{BA} $, 由线性方程组的关系, 可以得到 $ V_{A} \cap V_{B} \subset V_{A + B} $, $ V_{A} \subset V_{BA}  $, $ V_{B} \subset V_{AB} $, 注意到 $ V_{AB} = V_{BA} $, 那么就有 $ V_{A} + V_{B} \subset V_{AB} $, 于是有
+        \begin{align*}
+            \dim(V_{A} + V_{B}) & = \dim V_{A} + \dim V_{B} - \dim(V_{A} \cap V_{B})\\
+            \dim V_{AB} & \ge  \dim V_{A} + \dim V_{B} - \dim V_{A + B}
+        \end{align*}
+        再利用解空间和系数矩阵的关系:
+        \begin{alignat*}{2}
+            & n - \rank (AB) && \le  n - \rank A + n - \rank B - n + \rank (A + B) \\
+            \implies & \rank(A + B) && \le \rank(A) + \rank(B) - \rank(AB)
+        \end{alignat*}
+    \end{answer}
     \item 设 $ B \in \MM[\C][n \times 2] $, 
     \begin{align*}
         C = \begin{pmatrix}
@@ -303,7 +352,7 @@
     若 $ A = BC $, 且 $ CB $ 的特征多项式为 $ x^{2} - 2x + 1 $, 求 $ A $ 的特征值, 并求 $ AX = 0 $ 的基础解系. 
     \item  计算 $ n $ 阶 $ b $ -- 循环行列式:
     \begin{align*}
-        A = \begin{vmatrix}
+        B = \begin{vmatrix}
             a_{1}   & a_{2} & a_{3} & \ldots    & a_{n} \\
             ba_{n}  & a_{1} & a_{2} & \ldots    & a_{n-1} \\
             ba_{n-1}    & ba_{n}    & a_{1} & \ldots & a_{n-1} \\
@@ -311,7 +360,81 @@
             ba_{2} & ba_{3} & ba_{4} & \ldots & a_{1}
         \end{vmatrix}
     \end{align*}
-    \sitem\label{item:反称加对角} 设 $ A $ 是 $ n $ 阶实反对称阵, $ D = \diag\qty{d_{1}, d_{2}, \dots, d_{n}} $ 是同阶的对角阵, 且 $ d_{i} > 0\,(i = 1, 2, \dots, n) $. 求证 $ \abs{A + D} > 0 $, 特别地, $ I_{n} + A $ 与 $ I_{n} - A $ 都是非异阵. 
+    \begin{hint}
+        利用多项式 $ f(x) = a_{1} + a_{2}x + \dots + a_{n}x^{n-1} $ 与 $ x^{n} = b $ 的根的特性来构造 Vandermonde 行列式. 
+    \end{hint}
+    \begin{answer}
+        设多项式 $ f(x) = a_{1} + a_{2}x + \dots + a_{n}x^{n-1} $, 再设 $ x^{n} = b $ 的根分别为 $ \omega_{1}, \omega_{2}, \dots, \omega_{n} $, 它们互不相同. 那么构造 Vandermonde 行列式
+        \begin{align*}
+            V = \begin{vmatrix}
+                1 & 1 & \dots & 1\\
+                \omega_{1} & \omega_{2} & \dots & \omega_{n}\\
+                \omega_{1}^{2} & \omega_{2}^{2} & \dots & \omega_{n}^{2}\\
+                \vdots & \vdots & \ddots & \vdots\\
+                \omega_{1}^{n-1} & \omega_{2}^{n-1} & \dots & \omega_{n}^{n-1}
+            \end{vmatrix}
+        \end{align*}
+        那么考虑行列式乘法:
+        \begin{align*}
+            BV = 
+            \begin{vmatrix}
+                a_{1}   & a_{2} & a_{3} & \ldots    & a_{n} \\
+                ba_{n}  & a_{1} & a_{2} & \ldots    & a_{n-1} \\
+                ba_{n-1}    & ba_{n}    & a_{1} & \ldots & a_{n-1} \\
+                \vdots  & \vdots & \vdots & \ddots & \vdots \\
+                ba_{2} & ba_{3} & ba_{4} & \ldots & a_{1}
+            \end{vmatrix}
+            \begin{vmatrix}
+                1 & 1 & \dots & 1\\
+                \omega_{1} & \omega_{2} & \dots & \omega_{n}\\
+                \omega_{1}^{2} & \omega_{2}^{2} & \dots & \omega_{n}^{2}\\
+                \vdots & \vdots & \ddots & \vdots\\
+                \omega_{1}^{n-1} & \omega_{2}^{n-1} & \dots & \omega_{n}^{n-1}
+            \end{vmatrix}
+        \end{align*}
+        可以计算得 $ BV $ 的第 $ (i, j) $ 元为:
+        \begin{align*}
+            BV(i, j) & = (ba_{n-i+2}, ba_{n-i+3}, \dots, ba_{n}, a_{1}, \dots, a_{n-i+1})\begin{pmatrix}
+                1 \\ \omega_{j} \\ \omega_{j}^{2} \\ \vdots \\ \omega_{j}^{n-1}
+            \end{pmatrix}\\
+            & = ba_{n-i+2} + b\omega_{j}a_{n-i+3} + \dots + b\omega_{j}^{i-2}a_{n} + \omega_{j}^{i-1}a_{1} + \dots + \omega_{j}^{n-1}a_{n-i+1}
+        \end{align*}
+        然后我们将 $ b $ 写为 $ \omega_{j}^{n} $, 并重新整理一下顺序, 就有
+        \begin{align*}
+            BV(i, j) & = \omega_{j}^{i-1}a_{1} + \omega_{j}^{i}a_{2} + \dots + \omega_{j}^{n-1}a_{n-i+1} + \omega_{j}^{n}a_{n-j+2} + \dots + \omega^{n+i-2}a_{n}\\
+            & = \omega_{j}^{i-1}(a_{1} + \omega_{j}a_{2} + \dots + \omega_{j}^{n-1}a_{n}) = \omega_{j}^{i-1}f(\omega_{j})
+        \end{align*}
+        那么我们可以重新写一份 $ BV $:
+        \begin{align*}
+            BV = \begin{vmatrix}
+                f(\omega_{1}) & f(\omega_{2}) & \dots & f(\omega_{n})\\
+                \omega_{1}f(\omega_{1}) & \omega_{2}f(\omega_{2}) & \dots & \omega_{n}f(\omega_{n})\\
+                \omega_{1}^{2}f(\omega_{1}) & \omega_{2}^{2}f(\omega_{2}) & \dots & \omega_{n}^{2}f(\omega_{n})\\
+                \vdots & \vdots & \ddots & \vdots\\
+                \omega_{1}^{n-1}f(\omega_{1}) & \omega_{2}^{n-1}f(\omega_{2}) & \dots & \omega_{n}^{n-1}f(\omega_{n})\\
+            \end{vmatrix} = \prod_{i = 1}^{n}f(\omega_{i}) 
+            \begin{vmatrix}
+                1 & 1 & \dots & 1\\
+                \omega_{1} & \omega_{2} & \dots & \omega_{n}\\
+                \omega_{1}^{2} & \omega_{2}^{2} & \dots & \omega_{n}^{2}\\
+                \vdots & \vdots & \ddots & \vdots\\
+                \omega_{1}^{n-1} & \omega_{2}^{n-1} & \dots & \omega_{n}^{n-1}
+            \end{vmatrix}= \prod_{i = 1}^{n}f(\omega_{i})V
+        \end{align*} 
+        由于 $ \omega_{1}, \omega_{2}, \dots, \omega_{n} $ 互不相同, 则 $ V \ne 0 $, 那么就有 $ B = \prod_{i = 1}^{n}f(\omega_{i}) $.
+    \end{answer}
+    \sitem\label{item:反称加对角} 设 $ A $ 是 $ n $ 阶实反对称阵, $ D = \diag\qty{d_{1}, d_{2}, \dots, d_{n}} $ 是同阶的对角阵, 且 $ d_{i} > 0\,(i = 1, 2, \dots, n) $. 求证 $ \abs{A + D} > 0 $, 特别地, 若 $ B = A + D $, 其中 $ A $ 是反对称阵, $ D $ 是正定对称阵, 则 $ B $ 是非异阵. 
+    \begin{hint}
+        考虑 $ (tA + D)x = 0 $ 的解的情况, 再利用 $ t = 0 $ 来判断符号. 
+    \end{hint}
+    \begin{answer}
+        设 $ t \ge 0 $, 记 $ M(t) = (tA + D) $, 考虑 $ x \in \R^{n} $ 使得 $ (tA + D)x = 0 $, 则有 $ x'(tA + D)x = 0 $, 对等式两侧取转置, 注意到 $ tA $ 也是反对称阵, 那么就有
+        \begin{align*}
+            x'(-tA + D)x = 0
+        \end{align*}
+        将两个等式相加, 就可以得到 $ 2x'Dx = 0 $, 显然 $ D $ 是一个正定矩阵, 那么可以得到 $ x = 0 $, 即 $ (tA + D)x = 0 $ 只有零解, 即 $ \abs{M(t)} $ 对任意 $ t $ 恒不为 $ 0 $, 而 $ \abs{M(t)} $ 是关于 $ t $ 的连续函数, 那么有连续函数的界值定理, 就有 $ \abs{M(t)} $ 恒正或恒负. 特别地, 考虑 $ t = 0 $, 由 $ d_{i} > 0 $ 可知 $ \abs{D} > 0 $, 这说明 $ \abs{M(t)} > 0 $, 那么取 $ t = 1 $, 就得到 $ \abs{M(1)} = \abs{A + D} > 0 $. 
+    \end{answer}
+    % TODO 主对角严格占优
     \item 如果 $ n $ 阶方阵 $ A = (a_{ij}) $ 适合条件:
     \begin{align*}
         \abs{a_{ii}} > \sum_{\mathclap{j = 1,\ j \ne i}}^{n} \abs{a_{ij}}, \quad i = 1, 2, \dots, n,
@@ -423,7 +546,24 @@
         \item 求 $ \limit{n}{\infty} n(n\pi + \pi/2 - x_{n}) $.  
     \end{exercise}
     \item 设 $ f $ 在 $ [0, +\infty) $ 上可微, 且 $ f(0) = 0 $, 并假设有实数 $ A $ 使得 $ \abs{f'(x)} \le A\abs{f(x)} $ 对 $ x \in (0, +\infty) $ 恒成立, 证明 $ f(x) \equiv 0\,(x \in (0, +\infty)) $.  
-    \item 设偶函数 $ f(x) $ 在 $ x = 0 $ 处二阶可导, 且 $ f(0) = 1 $, 证明级数 $ \sum_{n = 1}^{\infty} (f(1/n) - 1) $ 绝对收敛.
+    \item 设偶函数 $ f(x) $ 在 $ x = 0 $ 处二阶连续可导, 且 $ f(0) = 1 $, 证明级数 $ \sum_{n = 1}^{\infty} (f(1/n) - 1) $ 绝对收敛.
+    \begin{hint}
+        注意到 $ f(x) $ 为 $ x = 0 $ 处可导的偶函数, 那么 $ f'(0) = 0 $, 再利用比较判别法即可得到结论.
+    \end{hint}
+    \begin{answer}
+        首先我们证明 $ f'(0) = 0 $, 由 $ f(x) $ 为偶函数可得
+        \begin{align*}
+            f'(0) = \begin{dcases}
+                \limit{x}{0}\frac{f(x) - f(0)}{x} = \limit{x}{0}\frac{f(-x) - f(0)}{x} \\
+                \limit{x}{0} \frac{f(-x) - f(0)}{-x} = -\limit{x}{0}\frac{f(-x) - f(0)}{x}
+            \end{dcases}
+        \end{align*}
+        对比 $ f'(0) $ 的两种表示可知 $ f'(0) = 0 $, 再由 $ f(x) $ 在 $ x = 0 $ 处二阶连续可导, 那么在 $ x $ 的某个邻域 $ [x, x+1/n] $ 上二阶可导. 于是由带 Lagrange 余项的 Taylor 定理知存在 $ \xi \in (0, 1/n) $ 使得
+        \begin{align*}
+            f\qty(\frac{1}{n}) = f(0) + \frac{1}{n}f'(0) + \frac{1}{2n^{2}}f''(\xi) = 1 + \frac{1}{2n^{2}}f''(\xi), 
+        \end{align*}
+        那么 $ \abs{f(1/n) - 1} = \order{n^{-2}}\,(n \to \infty) $, 那么由比较判别法的极限形式可以知道 $ \sum_{n = 1}^{\infty} (f(1/n) - 1) $ 绝对收敛.
+    \end{answer}
     \item 设 $ f $ 在 $ [a, b] $ 上可导, 且 $ f' $ 在 $ [a, b] $ 上可积, $ f(a) = 0 $, 证明:
     \begin{align*}
         2\int_{a}^{b}(f(x))^{2} \dd{x} \le (b-a)^{2} \int_{a}^{b} (f'(x))^{2} \dd{x}.
@@ -525,6 +665,12 @@
     \end{align*}
     且 $ \deg v(x) < \deg f(x) $, $ \deg u(x) < \deg g(x) $.  
     \item 设 $ f(x) $ 是次数大于 $ 0 $ 的首一整系数多项式, 若 $ f(0), f(1) $ 都是奇数, 求证 $ f(x) $ 没有有理根.
+    \begin{hint}
+        首先可以知道如果 $ f(x) $ 有有理根, 那这个有理根必是整数根, 再考虑 $ f(x) \models 2 $. 
+    \end{hint}
+    \begin{answer}
+        首先可以知道, 如果 $ p/q $ 为 $ f(x) $ 的有理根, 其中 $ p, q $ 为互素的整数, 
+    \end{answer}
     \item 设 $ f(x) $ 是次数大于 $ 1 $ 的奇数次有理系数多项式, 且它在有理数域上不可约, 求证: 若 $ x_{1}, x_{2} $ 是 $ f(x) $ 在复数域上的两个不同的根, 则 $ x_{1} + x_{2} $ 必不是有理数.
     \item 设 $ A $ 是实矩阵, 又 $ I_{n} - A $ 的特征值的模长都小于 $ 1 $, 求证: $ 0<\abs{A}<2^{n} $. 
     \item 设
@@ -545,6 +691,27 @@
     \begin{align*}
         I = \int_{0}^{\pi/2} \frac{\sin x}{\sin x + \cos x} \dd{x}.
     \end{align*}
+    \begin{hint}
+        考虑以下两个积分的关系:
+        \begin{align*}
+            I = \int_{0}^{\pi/2} \frac{\sin x}{\sin x + \cos x} \dd{x}, \quad J = \int_{0}^{\pi/2} \frac{\cos x}{\sin x + \cos x} \dd{x}
+        \end{align*}
+    \end{hint}
+    \begin{answer}
+        设 
+        \begin{align*}
+            I = \int_{0}^{\pi/2} \frac{\sin x}{\sin x + \cos x} \dd{x}, \quad J = \int_{0}^{\pi/2} \frac{\cos x}{\sin x + \cos x} \dd{x}
+        \end{align*}
+        那么首先可以得到 
+        \begin{align*}
+            I + J = \int_{0}^{\pi/2} 1\dd{x} = \frac{\pi}{2},
+        \end{align*}
+        再对积分 $ I $ 用换元 $ t = \pi/2 - x $, 那么就有
+        \begin{align*}
+            I = \int_{0}^{\pi/2} \frac{\sin(\pi/2 - t)}{\sin(\pi/2 - t) + \cos(\pi/2 - t)} \dd{\qty(\frac{\pi}{2} - t)} = \int_{0}^{\pi/2} \frac{\cos t}{\cos t + \sin t} \dd{t} = J,
+        \end{align*}
+        于是 $ I = J = \pi/4 $. 
+    \end{answer}
     \item 讨论广义积分
     \begin{align*}
         \int_{1}^{+\infty} \frac{\sin x}{x^{p} + \sin x} \dd{x}
@@ -602,7 +769,36 @@
     \end{align*}
     若 $ \limit{x}{+\infty}f'(x) = c $, 证明 $ f'(x) = c $ 在 $ [a, +\infty) $ 上恒成立.
     \item 设 $ a_{n} > 0 $, $ \sum_{n=1}^{\infty}a_{n} < +\infty $, 对于 $ \alpha, \beta > 0 $, 且 $ \alpha + \beta > 1 $, 证明 $ \sum_{n=1}^{\infty} a_{n}^{\alpha}/n^{\beta} < +\infty $. 
-    \item 设 $ A \in \MM $, 对任意 $ 0\ne x \in \R^{n} $, 都有 $ x'Ax > 0 $, 利用 \ref{item:反称加对角} 题证明 $ \abs{A} > 0 $.
+    \item 设 $ A \in \MM $, 对任意 $ 0\ne x \in \R^{n} $, 都有 $ x'Ax > 0 $, 证明 $ \abs{A} > 0 $.
+    \begin{hint}
+        这里给出两种提示
+        \begin{method}
+            \item 将 $ A $ 分解为对称阵与反对称阵的和, 再利用 \ref{item:反称加对角} 题得出结论.
+            \item 注意到实矩阵 $ A $ 的虚特征值成对, 再利用 $ x'Ax > 0 $ 得到 $ A $ 的实特征值均为正, 那么 $ \abs{A} = \prod_{i = 1}^{n} \lambda_{i} > 0 $. 
+        \end{method}
+    \end{hint}
+    \begin{answer}
+        我们用两种方法进行证明
+        \begin{method}
+            \item 将 $ A $ 分解为 $ B + C $, 其中 $ B $ 是对称阵, $ C $ 是反对称阵, 那么
+            \begin{align*}
+                x'Ax = x'Bx + x'Cx > 0,
+            \end{align*}
+            另外注意到 $ x'Cx\in \R $, 那么应当有
+            \begin{align*}
+                x'Cx = (x'Cx)' = -x'Cx \implies x'Cx = 0,
+            \end{align*}
+            于是 $ x'Bx > 0\,(0 \ne x \in \R^{n}) $, 即 $ B $ 是正定阵, 那么由 \ref{item:反称加对角} 题可知 $ \abs{A} = \abs{B + C} > 0 $.
+            \item 设 $ A $ 的特征值 $ \lambda_{1}, \bar{\lambda}_{1}, \lambda_{2}, \bar{\lambda}_{2}, \dots, \lambda_{r}, \bar{\lambda}_{r}, \lambda_{2r + 1}, \dots, \lambda_{n} $, 其中前 $ 2r $ 个特征值为复特征值, 后 $ n - 2r $ 个为实数. 下面来说明 $ \lambda_{i} > 0\,(2r + 1 \le i \le n) $, 取 $ \lambda_{i} $ 的特征向量 $ \alpha_{i} \in \R^{n} $, 那么有
+            \begin{align*}
+                \alpha_{i}'A\alpha_{i} = \lambda_{i}\alpha_{i}'\alpha > 0,
+            \end{align*}
+            这说明 $ A $ 的全体实特征值全大于 $ 0 $, 于是
+            \begin{align*}
+                \abs{A} = \prod_{j = 1}^{r}\lambda_{j}\bar{\lambda}_{j}\prod_{i = 2r + 1}^{n} \lambda_{i} > 0.
+            \end{align*}
+        \end{method}
+    \end{answer}
     \item 设有 $ n $ 阶分块对角阵 
     \begin{align*}
         A = \begin{pmatrix}
@@ -1022,7 +1218,7 @@
             \begin{align*}
                 X'(I - A'A)X \ge 0,
             \end{align*}
-            即 $ I - A'A $ 为半正定矩阵, 那么存在 $ C \in \MM $, 使得 $ I - A'A = C'C $, 在等式两侧同时左乘 $ A' $, 右乘 $ A $, 就有
+            又因为 $ I - A'A $ 为对称阵, 所以 $ I - A'A $ 为半正定矩阵, 那么存在 $ C \in \MM $, 使得 $ I - A'A = C'C $, 在等式两侧同时左乘 $ A' $, 右乘 $ A $, 就有
             \begin{align*}
                 A'(I - A'A)A = A'C'CA \implies (CA)'(CA) = A'A - (A')^{2}A^{2} = A'A - A'A = 0,
             \end{align*}
@@ -1050,7 +1246,7 @@
         其中 $ S $ 是曲面 $ x^{2} + y^{2} = 2az\,(a > 0) $ 被曲面 $ z = \sqrt{x^{2} + y^{2}} $ 所截取的有限部分.
         \item 设 $ W = \set{A : \tr(A) = 0, A \in \MM} $, 证明 $ W $ 是 $ \MM $ 的子空间, 并且求它的一组基.
         \begin{hint}
-            首先每个 $ E_{ij}\,(i \ne j) $ 均是 $ W $ 的元素
+            首先每个 $ E_{ij}\,(i \ne j) $ 均是 $ W $ 的元素, 再考虑对角线元素的特点. 
         \end{hint}
         \begin{answer}
             $ W $ 是子空间是显然的. 下面求维数: 可知 $ W_{1} = \set{\sum_{i \ne j} x_{ij}E_{ij} : x_{ij} \in \R} $ 是 $ W $ 的 $ (n - 1)n $ 维的子空间, 而 $ W_{2} = \set{\sum_{i = 1}^{n} x_{i}E_{ii} : x_{1} + x_{2} + \dots + x_{n} = 0} $ 是 $ W  $ 的 $ n - 1 $ 维的子空间, 且 $ W_{2} \cap W_{1} = 0 $. 则
@@ -1059,6 +1255,96 @@
             \end{align*}
             又因为 $ W $ 是 $ \MM $ 的真子空间, 则 $ \dim W = n^{2} - 1 $, $ W = W_{1} \oplus W_{2} $. 
             $ W $ 是 $ \MM $ 的 $ n^{2} - 1 $ 维的子空间, 且 $ \set{E_{ij} : i \ne j} \cup \set{E_{11} - E_{kk} : k > 1} $ 是 $ W $ 的一组基.
+        \end{answer}
+        \item 已知 $ A, C $ 是 $ n $ 阶正定对称矩阵, 且矩阵方程 $ AX + XA = C $ 有唯一解 $ B $, 证明 $ B $ 也是正定实对称阵. 
+        \begin{hint}
+            将 $ AB + BA = C $ 两侧同时转置, 就可以得到 $ B $ 是对称阵, 再设 $ B $ 的特征值 $ \lambda $ 与特征向量 $ \alpha $, 考虑 $ \alpha'(AB + BA)\alpha > 0 $ 即可.
+        \end{hint}
+        \begin{answer}
+            将 $ AB + BA = C $ 两侧同时转置, 可以得到 $ B'A + AB' = C $, 由于 $ B $ 是该矩阵方程的唯一解, 那么就有 $ B = B' $, 也即 $ B $ 是对称阵. 那么要说明 $ B $ 是正定阵, 只要说明 $ B $ 的特征值全为正数. 设 $ B $ 的特征值 $ \lambda $ 与对应的特征向量 $ \alpha $, 于是由 $ C $ 的正定性可知
+            \begin{align*}
+                \alpha'(AB + BA)\alpha = \alpha'C\alpha > 0,
+            \end{align*}
+            也就是
+            \begin{align*}
+                \alpha'A\lambda\alpha + \alpha'\lambda A\alpha = 2\lambda\alpha' A\alpha > 0,
+            \end{align*}
+            那么由 $ A $ 的正定性可知 $ \alpha' A\alpha > 0 $, 那么 $ \lambda > 0 $, 这就说明了 $ B $ 是正定实对称阵. 
+        \end{answer}
+        \item 设 $ A \in \MM $, 定义 $ \MM $ 上的线性变换:
+        \begin{align*}
+            L_{A} : X \in \MM \mapsto AX;\\
+            R_{A} : X \in \MM \mapsto XA,
+        \end{align*}
+        证明存在 $ \MM $ 上的可逆线性变换 $ T $, 使得 $ L_{A} = TR_{A}T^{-1} $.
+        \begin{hint}
+            首先由 Jordan 标准型理论可知 $ A' $ 与 $ A $ 相似, 即 $ AT_{1} = T_{1}A' $, 定义 $ T(X) = T_{1}X' $, 然后验证即可. 
+        \end{hint}
+        \begin{answer}
+            我们断言 $ A \in \MM $ 与 $ A' $ 相似, 则存在可逆阵 $ T_{1} \in \MM $, 使得 $ AT_{1} = T_{1}A' $, 那么我们定义 $ T(X) = T_{1}X' $, 先说明 $ T(X) $ 是可逆变换: 令 $ T_{2} : X \mapsto (T^{-1}_{1}X)' $, 可以验证
+            \begin{align*}
+                T_{2}T(X) = T_{2}(T_{1}X') = (T_{1}^{-1}T_{1}X')' = X,
+            \end{align*}
+            对任意 $ X \in \MM $ 都成立, 于是 $ T_{2}T = I $, 其中 $ I $ 为恒等变换, 这说明 $ T $ 为可逆变换. 下面再验证 $ L_{A}T = TR_{A} $: 对任意的 $ X \in \MM $, 都有
+            \begin{align*}
+                L_{A}T(X) = L_{A}(T_{1}X') = AT_{1}X' = T_{1}A'X' = T_{1}(XA)' = T(XA) = TR_{A}(X),
+            \end{align*} 
+            这就说明了 $ L_{A}T = TR_{A} $, 即 $ L_{A} = TR_{A}T^{-1} $.
+
+            下面再来说明为什么 $ A \in \MM $ 与 $ A' $ 相似, 首先存在可逆阵 $ P $, 使得 $ A $ 相似于它的 Jordan 标准型 $ J_{A} $ , 即
+            \begin{align*}
+                P^{-1}AP = \mqty(\dmat{J_{r_{1}}(\lambda_{1}), J_{r_{2}}(\lambda_{2}), \ddots, J_{r_{s}}(\lambda_{s})})
+            \end{align*}
+            那么就有 $ A' $ 相似于 $ J_{A}' $: 
+            \begin{align*}
+                P'A'(P')^{-1} = \mqty(\dmat{J_{r_{1}}(\lambda_{1})', J_{r_{2}}(\lambda_{2})', \ddots, J_{r_{s}}(\lambda_{s})'})
+            \end{align*}
+            那么只需要说明 $ J_{r_{i}}(\lambda_{i})' $ 相似于 $ J_{r_{i}}(\lambda_{i}) $ 即可. 首先它的特征多项式为 $ (\lambda - \lambda_{i})^{r_{i}} $, 考虑
+            \begin{align*}
+                J_{r_{i}}(\lambda_{i})' = \begin{pmatrix}
+                    \lambda_{i} & & & \\
+                    1 & \lambda_{i} & & \\
+                    &  \ddots & \ddots & \\
+                    & & 1 & \lambda_{i}
+                \end{pmatrix}_{r_{i}}
+            \end{align*}
+            的 $ n-1 $ 阶行列式因子: 由于 $ \det J_{r_{i}}(\lambda_{i})'\smqty(2 & 3 & \dots & r_{i} \\ 1 & 2 & \dots & r_{i}-1) = 1 $, 于是它的 $ n - 1 $ 阶行列式因子 $ D_{n-1} = 1 $, 这说明它的 $ n $ 阶行列式因子 $ D_{n} $ 和它的第 $ n $ 个不变因子 $ d_{n} $ 相同, 均为它的特征多项式 $ (\lambda - \lambda_{i})^{r_{i}} $, 那么它的初等因子组只有一个元素 $ (\lambda - \lambda_{i})^{r_{i}} $, 即它的 Jordan 标准型只有一块 $ J_{r_{i}}(\lambda_{i}) $, 于是 $ A $ 与 $ A' $ 的 Jordan 标准型相同, $ A $ 与 $ A' $ 相似. 
+        \end{answer}
+        \item 设 $ \alpha > 0 $, $ x_{1} > 0 $, $ x_{n + 1} = \alpha(1 + x_{n})^{-1}\,(n = 1, 2, \dots) $, 证明数列 $ \set{x_{n}} $ 收敛, 并求其极限.
+        \begin{hint}
+            可以 ``先斩后奏''. 先假设极限存在, 并求得极限应该为 $ y = (-1 + \sqrt{1 + 4\alpha})/2 $. 再讨论 $ x_{1} $ 和 $ y $ 的大小关系来分别确定 $ \set{x_{n}} $ 的性质. 
+        \end{hint}
+        \begin{answer}
+            若 $ \set{x_{n}} $ 极限存在, 设极限为 $ x $, 那么在
+            \begin{align*}
+                x_{n + 1} = \frac{\alpha}{1 + x_{n}}
+            \end{align*}
+            两侧同时对 $ n $ 取极限, 可得 $ x^{2} + x - \alpha = 0 $. 解得
+            \begin{align*}
+                x = \frac{-1 + \sqrt{1 + 4\alpha}}{2} \ \ \text{或}\ \  x = \frac{-1 - \sqrt{1 + 4\alpha}}{2},
+            \end{align*}
+            由 $ x_{1}, \alpha > 0 $ 可知 $ x_{n} > 0 $, 那么可知, 如果 $ \set{x_{n}} $ 极限存在, 则一定为 $ x = (-1 + \sqrt{1 + 4\alpha})/2 $ , 下面讨论 $ \set{x_{n}} $ 的极限存在性. 
+            
+            下面研究 $ x_{n} $ 的分布情况. 若 $ x_{n} < x $, 则
+            \begin{align*}
+                x_{n + 1} = \frac{\alpha}{1 + x_{n}} > \frac{\alpha}{1 + x} = x.
+            \end{align*}
+            而若 $ x_{n} > x $, 则
+            \begin{align*}
+                x_{n + 1} = \frac{\alpha}{1 + x_{n}} < \frac{\alpha}{1 + x} = x.
+            \end{align*}
+            这说明 $ x_{n} $ 的值在 $ x $ 左右来回跳动, 不妨设 $ x_{1} > x $, $ x_{1} < x $ 的情况同理. 那么就有 $ \set{x_{2n + 1}} > x $, $ \set{x_{2n}} < x $, 并且, 若 $ \set{x_{2n + 1}} $, $ \set{x_{2n}} $ 收敛于 $ x $, 则 $ \set{x_{n}} $ 收敛于 $ x $. 那么可以猜想 $ \set{x_{2n}} $ 单调递增, $ \set{x_{2n + 1}} $ 单调递减, 下面考察 $ x_{n + 2} - x_{n} $ 的符号:
+            \begin{align*}
+                x_{n + 2} - x_{n} = \frac{\alpha}{1 + x_{n + 1}} - x_{n} = \frac{\alpha}{1 + \alpha(1 + x_{n})^{-1}} - x_{n} = \frac{\alpha - x_{n}^{2} - x_{n}}{1 + \alpha + x_{n}}\begin{cases}
+                    > 0 & x_{n} < x\\
+                    < 0 & x_{n} > x
+                \end{cases},
+            \end{align*}
+            这说明 $ \set{x_{2n}} $ 单调递增有上界, $ \set{x_{2n + 1}} $ 单调递减有下界, 那么就可以说明
+            \begin{align*}
+                \limit{n}{\infty}x_{2n} = \limit{n}{\infty}x_{2n + 1} = x
+            \end{align*} 
+            于是 $ \limit{n}{\infty}x_{n} = x $.
         \end{answer}
     \end{exercise}
     \stopexercise
