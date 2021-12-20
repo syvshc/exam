@@ -8,17 +8,27 @@
   \printtrue
 }
 
+\DeclareOption{showframe}{%
+  \RequirePackage{showframe}
+}
+
 \ProcessOptions
 
 \IfFontExistsTF{Source Han Serif SC}{
     \setCJKmainfont{Source Han Serif SC}
 }{}
 
+% \newfontfamily\cmu{CMU Serif}
+
 % \RequirePackage{showframe}
 
 % \ctexset{
 %     section/format  =   {\normalsize\raggedright\bfseries}
 % }
+
+\RequirePackage{fontawesome5} % 提供大拇指
+\RequirePackage{tasks}
+\NewTasksEnvironment[label={\faIcon{thumbs-up}}, item-indent=3.5em, label-offset=.5em]{THANKS}[*](4)
 
 \xeCJKsetup{CheckSingle=true}
 \RequirePackage{tcolorbox}
@@ -80,6 +90,11 @@
 
 % 修改 minipage 的脚注编号为 \arabic
 \renewcommand{\thempfootnote}{\arabic{mpfootnote}}
+
+\RequirePackage{amsthm}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{注}
 
 % 打印提示和答案列表, 并创建超链接
 
@@ -162,7 +177,7 @@
 
 % 定义 oriexercise, answersheet, hintsheet 以及方法 method
 \RequirePackage[shortlabels, inline]{enumitem} % 继承并扩展了enumerate宏包的功能
-% \setlist[enumerate, 1]{leftmargin=*, label=\arabic*., widest=000, ref=\arabic*}
+\setlist[enumerate, 1]{leftmargin=*, label=(\roman*)}
 % \setlist[enumerate, 2]{leftmargin=*, label=(\arabic*)}
 \newlist{oriexercise}{enumerate}{2}
 \setlist[oriexercise, 1]{leftmargin=*, label=\arabic*., widest=000, ref=\arabic*}
