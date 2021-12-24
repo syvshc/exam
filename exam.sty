@@ -42,8 +42,10 @@
     % lines before break=0
 }
 \RequirePackage{mathtools}
+\allowdisplaybreaks[4]
 \RequirePackage{unicode-math}
 \RequirePackage[mono=false]{libertinus-otf}
+% \RequirePackage{fourier-otf}
 % \setmainfont{TeX Gyre Pagella}
 % \setmathfont{TeX Gyre Pagella Math}
 % \setmathfont{NewCMMath-Book.otf}
@@ -95,6 +97,10 @@
 
 \theoremstyle{definition}
 \newtheorem*{remark}{注}
+\newtheorem{lemma}{引理}
+\let\proof\relax
+\let\endproof\relax
+\newtheorem*{proof}{证明}
 
 % 打印提示和答案列表, 并创建超链接
 
@@ -209,9 +215,9 @@
     \ifnum\enit@depth=\@ne
       \expandafter\label\expandafter{\number\csname c@oriexercisei\endcsname:exer} 
       \ifprint \else
-      \ifcsundef{r@\number\csname c@oriexercisei\endcsname:hint}{[提示]}{
+      \ifcsundef{r@\number\csname c@oriexercisei\endcsname:hint}{[暂无]}{
       \hyperref[\number\csname c@oriexercisei\endcsname:hint]{[提示]}}%        
-      \ifcsundef{r@\number\csname c@oriexercisei\endcsname:answ}{[答案]}{
+      \ifcsundef{r@\number\csname c@oriexercisei\endcsname:answ}{[暂无]}{
       \hyperref[\number\csname c@oriexercisei\endcsname:answ]{[答案]}}
       \fi
     \fi
