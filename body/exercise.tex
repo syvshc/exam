@@ -162,7 +162,7 @@
     \end{hint}
     \item 证明: 积分 
     \begin{align*}
-        \int_{0}^{+\infty} \me^{-(\alpha + u^{2})t} \sin(t) \dd{u},\quad \alpha > 0
+        \int_{1}^{+\infty} \me^{-(\alpha + u^{2})t} \sin(t) \dd{u},\quad \alpha > 0
     \end{align*}
     关于 $ t $ 在 $ [0, +\infty) $ 上一致收敛.
     \begin{hint}
@@ -193,16 +193,180 @@
         \end{align*}
     \end{answer}
     \item 计算积分 $ \int_{0}^{\pi/2} \tan^{\alpha}(x) \dd{x} $, 其中 $ \abs{\alpha} < 1 $. 
+    \begin{hint}
+        可以直接利用 $ \Beta $ 函数进行求解.  
+    \end{hint}
+    \begin{answer}
+        这里我们先给出 $ \Beta $ 函数的几种形式:
+        \begin{align*}
+            \Beta(p, q) = \int_{0}^{1} x^{p - 1}(1 - x)^{q - 1} \dd{x},\quad p > 0, q > 0
+        \end{align*}
+        如果令 $ x = \cos^{2} t $ 进行换元, 就可以得到
+        \begin{align*}
+            \Beta(p, q) = 2 \int_{0}^{\pi/2} \cos^{2p - 1}t \sin^{2q-1} t \dd{t},
+        \end{align*}
+        如果令 $ x = y/(1 + y) $ 换元, 就可以得到
+        \begin{align*}
+            \Beta(p, q) = \int_{0}^{+\infty} \frac{y^{p - 1}}{(1 + y)^{p + q}} \dd{y},
+        \end{align*}
+        如果把积分趋于拆成 $ (0, 1) $ 与 $ (1, +\infty) $, 那么在其中一个区间上令 $ y = 1/u $ 就有
+        \begin{align*}
+            \Beta(p, q) = \int_{0}^{1} \frac{u^{p - 1} + u^{q - 1}}{(1 + u)^{p + q}} \dd{u} = \int_{1}^{+\infty} \frac{u^{p - 1} + u^{q - 1}}{(1 + u)^{p + q}} \dd{u}
+        \end{align*}
+        并且余元公式
+        \begin{align*}
+            \Gamma(p)\Gamma(1 - p) = \Beta(p, 1 - p) = \frac{\pi}{\sin p\pi}
+        \end{align*}
+        于是就有
+        \begin{align*}
+            \int_{0}^{\pi/2} \tan^{\alpha}x \dd{x} & = \int_{0}^{\pi/2} \sin^{\alpha}x\cos^{-\alpha}x \dd{x} = \frac{1}{2}\Beta\qty(\frac{\alpha + 1}{2}, \frac{1 - \alpha}{2}) \\
+                                                   & = \frac{\pi}{2\sin\qty(\frac{\alpha + 1}{2}\pi)} = \frac{\pi}{2\cos(\alpha\pi/2)},
+        \end{align*}
+    \end{answer}
     \sitem\label{item:AX=XB} 设 $ \K $ 是数域, $ A \in \MM[\K][m] $, $ B \in \MM[\K][n] $, 且 $ A, B $ 没有相同的特征值, 证明矩阵方程 $ AX = XB $ 只有零解.
+    \begin{hint}
+        由题可知对任意多项式 $ f(x) $, 都有 $ f(A)X = Xf(B) $, 特别地令 $ f(x) $ 为 $ A $ 的特征多项式即可.
+    \end{hint}
+    \begin{answer}
+        由题目可知
+        \begin{align*}
+            A^{2}X = AAX = A(XB) = (AX)B = XB^{2},
+        \end{align*}
+        由数学归纳法可知对任意的 $ k \in \N $, 都有 $ A^{k}X = XB^{k} $, 也就是说对于任意的多项式 $ f(x) $, 总有 $ f(A)X = Xf(B) $, 那么特别地, 我们取 $ f(x) $ 为 $ A $ 的特征多项式, 那么由 Cayley -- Hamilton 定理可知 $ f(A) = 0 $, 那么就有 $ Xf(B) = 0 $, 下面我们说明 $ f(B) $ 可逆. 
+
+        如果 $ f(B) $ 不可逆, 那么 $ f(B) $ 有 $ 0 $ 特征值, 而对 $ B $ 的特征值 $ \lambda $, 有 $ f(B) $ 的特征值是 $ f(\lambda) $, 那么这就说明存在 $ B $ 的某个特征值 $ \lambda_{B} $ 满足 $ f(\lambda_{B}) = 0 $, 也就说 $ \lambda_{B} $ 是 $ f(x) $ 的一个根, 而 $ f(x) $ 的全体根都是 $ A $ 的特征值, 这说明 $ \lambda_{B} $ 也是 $ A $ 的特征值, 这与 $ A, B $ 没有公共特征值矛盾, 故 $ f(B) $ 可逆. 这样在 $ Xf(B) = 0 $ 两侧同时右乘 $ (f(B))^{-1} $ 即可得到 $ X = 0 $, 也就是说矩阵方程 $ AX = XB $ 只有零解.
+    \end{answer}
     \item 如 \ref{item:AX=XB} 题, 可以进一步证明逆命题也成立, 即: 如果 $ AX = XB $ 只有零解, 则 $ A, B $ 无公共特征值.
+    \begin{hint}
+        反证 $ A, B' $ 有公共特征值 $ \lambda $, 设特征向量分别为 $ \alpha, \beta $, 那么 $ X = \alpha\beta' $ 即为 $ AX = XB $ 的一个非零解. 
+    \end{hint}
+    \begin{answer}
+        先说明 $ B $ 与 $ B' $ 有相同的特征值: 对任意 $ B $ 的特征值 $ \lambda $ 都有 $ \abs{\lambda I - B} = 0 $, 取转置就有 $ \abs{\lambda I - B'} = 0 $, 即 $ \lambda $ 都是 $ B' $ 的特征值, 反过来同理. 
+
+        那么我们用反证法, 设 $ A, B' $ 有公共特征值 $ \lambda $, 对应的特征向量分别为 $ \alpha, \beta $, 也就是有
+        \begin{align*}
+            A\alpha = \lambda\alpha, B'\beta = \lambda\beta,
+        \end{align*}
+        于是我们令 $ X = \alpha\beta' \ne 0 $, 那么就有
+        \begin{align*}
+            AX & = A\alpha\beta' = \lambda\alpha\beta',\\
+            XB & = \alpha\beta B' = \alpha(B'\beta)' = \lambda\alpha\beta'
+        \end{align*}
+        这说明 $ AX = XB $ 有非零解, 矛盾. 故 $ A, B $ 没有公共特征值.
+    \end{answer}
     \item 设 $ A $ 是 4 阶方阵, 满足 $ \tr(A^{i}) = i\,(i = 1, 2, 3, 4) $, 求 $ \abs{A} $. 
+    \begin{hint}
+        用 Newton 公式, 题目条件为 $ s_{i} = i $, 要求 $ \sigma_{4} $. 
+    \end{hint}
+    \begin{answer}
+        首先来熟悉一下对称多项式与 Newton 公式: 设 $ x_{1}, x_{2}, \dots, x_{n} $ 为 $ n $ 个不定元, 那么初等对称多项式 $ \sigma_{k}\,(k \le n) $ 为:
+        \begin{align*}
+            \sigma_{k} = \sum_{\mathclap{1 \le r_{1} < r_{2} < \dots < r_{k} \le n}} x_{r_{1}}x_{r_{2}}\dotsm x_{r_{k}},
+        \end{align*} 
+        而对于任意的 $ k \in \N $, 有
+        \begin{align*}
+            s_{k} = \sum_{i = 1}^{n}x_{i}^{k},
+        \end{align*}
+        那么我们有 Newton 公式:
+        \begin{align*}
+            0 = \begin{cases}
+                s_{k} - s_{k - 1}\sigma_{1} + s_{k - 2}\sigma_{2} + \dots + (-1)^{k}k\sigma_{k} & , k \le n \\
+                s_{k} - s_{k - 1}\sigma_{1} + s_{k - 2}\sigma_{2} + \dots + (-1)^{n}s_{k - n}\sigma_{n} & , k > n\\
+            \end{cases}
+        \end{align*}
+        而在这道题中, 我们知道 $ \tr(A) $ 是矩阵 $ A $ 的特征值之和, 于是我们令 $ A $ 的 $ 4 $ 个特征值为 $ \lambda_{1}, \lambda_{2}, \lambda_{3}, \lambda_{4} $, 那么题目条件就可以转化为: 已知 $ s_{i} = i\,(i = 1, 2, 3, 4) $, 结论可以转化为: 求 $ \abs{A} = \lambda_{1}\lambda_{2}\lambda_{3}\lambda_{4} = \sigma_{4} $.
+        
+        那么我们依次来计算 $ \sigma_{1}, \sigma_{2}, \sigma_{3}, \sigma_{4} $, 注意到 $ s_{1} = \sigma_{1} = 1 $, 那么就有
+        \begin{align*}
+            s_{2} - s_{1}\sigma_{1} + 2\sigma_{2} = 0 & \implies \sigma_{2} = -\frac{1}{2}\\
+            s_{3} - s_{2}\sigma_{1} + s_{1}\sigma_{2} - 3\sigma_{3} = 0 & \implies \sigma_{3} = \frac{1}{6}\\
+            s_{4} - s_{3}\sigma_{1} + s_{2}\sigma_{2} - s_{1}\sigma_{3} + 4\sigma_{4} = 0 & \implies \sigma_{4} = \frac{1}{24}
+        \end{align*}
+    \end{answer}
     \item $ n $ 阶方阵可对角化的充分必要条件.
+    \begin{hint}
+        \begin{hintsheet}
+            \item $ A $ 有 $ n $ 个线性无关的特征向量
+            \item 复数域上的列向量空间 $ \C^{n} $ 可以分解为 $ A $ 的特征子空间的直和
+            \item $ A $ 有完全的特征向量系, 即对 $ A $ 的任一特征值, 其几何重数等于其代数重数
+            \item $ A $ 的极小多项式无重根
+            \item $ A $ 的 Jordan 块都是一阶的 (或 $ A $ 的初等因子都是一次多项式)
+        \end{hintsheet}
+    \end{hint}
     \hitem 设 $ f(x) $ 在 $ [0, 1] $ 上可积, 在 $ x = 1 $ 处左连续, 证明:
     \begin{align*}
         \limit{n}{\infty}\frac{\int_{0}^{1} x^{n} f(x) \dd{x}}{\int_{0}^{1} x^{n} \dd{x}} = f(1).
     \end{align*}
-    \item 设 $ A \in \MM $, 若 $ A^{2} = AA' $, 证明 $ A $ 为实对称阵.
+    \begin{hint}
+        注意到
+        \begin{align*}
+            f(1) = (n + 1) \int_{0}^{1} x^{n} f(1) \dd{x},
+        \end{align*}
+        然后使用拟合法在 $  x = 1 $ 附近分界. 
+    \end{hint}
+    \begin{answer}
+        因为
+        \begin{align*}
+            f(1) = \frac{\int_{0}^{1} x^{n} f(1) \dd{x}}{\int_{0}^{1} x^{n} \dd{x}},
+        \end{align*}
+        于是我们只要证明
+        \begin{align*}
+            \limit{n}{\infty} \frac{\int_{0}^{1} x^{n} (f(x) - f(1)) \dd{x}}{\int_{0}^{1} x^{n} \dd{x}} = \limit{n}{\infty} (n + 1) \int_{0}^{1} x^{n} (f(x) - f(1)) \dd{x} = 0,
+        \end{align*}
+        由于 $ f(x) $ 在 $ x = 1 $ 左连续, 那么对任意 $ \varepsilon > 0 $, 存在 $ \delta > 0 $, 使得 $ x \in (1 - \delta, 1) $ 时, 有
+        \begin{align*}
+            \abs{f(x) - f(1)} < \varepsilon,
+        \end{align*}
+        又因为 $ f(x) $ 在 $ (0, 1) $ 上可积, 那么 $ f(x) $ 在 $ (0, 1) $ 上有界, 设 $ \abs{f(x)} \le M $, 那么就有
+        \begin{align*}
+            \abs{f(x) - f(1)} \le \abs{f(x)} + \abs{f(1)} \le 2M
+        \end{align*}
+        \begin{align*}
+            (n + 1) \abs{\int_{0}^{1} x^{n} (f(x) - f(1)) \dd{x}} & \le (n + 1) \abs{\int_{0}^{1 - \delta} x^{n} (f(x) - f(1)) \dd{x}} + (n + 1) \abs{\int_{1 - \delta}^{1} x^{n} (f(x) - f(1)) \dd{x}}\\
+            & \le (n + 1) \int_{0}^{1 - \delta} x^{n} \abs{f(x) - f(1)} \dd{x} + (n + 1) \int_{1 - \delta}^{1} x^{n} \abs{f(x) - f(1)} \dd{x}\\
+            & \le 2M(n + 1)\int_{0}^{1 - \delta} x^{n} \dd{x} + \varepsilon (n + 1) \int_{0}^{1} x^{n} \dd{x}\\
+            & \le 2M(1 - \delta)^{n + 1} + \varepsilon,
+        \end{align*}
+        由于 $ 1 - \delta < 1 $, 那么对上述 $ \varepsilon $, 存在 $ N \in \N $, 使得当 $ n > N $ 时, $ (1 - \delta)^{n + 1} < \varepsilon/(2M) $, 于是就有
+        \begin{align*}
+            (n + 1) \abs{\int_{0}^{1} x^{n} (f(x) - f(1)) \dd{x}} \le 2M(1 - \delta)^{n + 1} + \varepsilon \le 2\varepsilon,
+        \end{align*}
+        这就说明了 $ \limit{n}{\infty} (n + 1) \int_{0}^{1} x^{n} (f(x) - f(1)) \dd{x} = 0 $.
+    \end{answer}
+    \item\label{item:A2=AA'} 设 $ A \in \MM $, 若 $ A^{2} = AA' $, 证明 $ A $ 为实对称阵.
+    \begin{hint}
+        对于 $ B \in \MM $, 如果有 $ \tr(BB') = 0 $, 就有 $ B = 0 $, 那么这里可以考虑用这种方法来证明 $ A - A' = 0 $. 
+    \end{hint}
+    \begin{answer}
+        我们先说明对于 $ B = (b_{ij}) \in \MM $, 如果 $ \tr(BB') = 0 $, 则 $ B = 0 $: 由矩阵乘法可知 $ BB' $ 的 $ (i, i) $ 元为
+        \begin{align*}
+            BB'(i, i) = b_{i1}^{2} + b_{i2}^{2} + \dots + b_{in}^{2}
+        \end{align*}
+        那么
+        \begin{align*}
+            \tr(BB') = \sum_{i = 1}^{n} BB'(i, i) = \sum_{i = 1}^{n}\sum_{j = 1}^{n} b_{ij}^{2} = 0
+        \end{align*}
+        这就说明 $ b_{ij} = 0 $, 即 $ B = 0 $. 那么考虑 $ \tr((A - A')(A - A')') $:
+        \begin{align*}
+            \tr((A - A')(A - A')') = \tr(A^{2} - AA' - A'A + (A')^{2}) = \tr(0) = 0,
+        \end{align*}
+        即说明 $ A - A' = 0 $, 也就是 $ A $ 为实对称阵.
+    \end{answer}
     \item 设 $ A, B \in \MM $, 若 $ A^{2} = A $, $ B^{2} = B $ 以及 $ (A + B)^{2} = A + B $, 证明 $ AB = BA = 0 $.  
+    \begin{hint}
+        这里要利用一个经典的递推: 若 $ AB = BA $, 则 $ A^{k}B = BA^{k}\,(k \in \N) $, 只是要进行一些小的改动.
+    \end{hint}
+    \begin{answer}
+        首先由 $ A^{2} = A, B^{2} = B $ 可以得到
+        \begin{align*}
+            (A + B)^{2} = A^{2} + AB + BA + B^{2} = A + B \implies AB + BA = 0 \implies AB = -BA,
+        \end{align*}
+        那么就有
+        \begin{align*}
+            A^{2}B = AAB = -ABA = -(AB)A = -(-BA)A = BA^{2} \implies AB = BA,
+        \end{align*}
+        上下对比即可得到 $ AB = BA = 0 $.
+    \end{answer}
     \item 设 $ A, B $ 都是 $ n $ 阶矩阵, 若 $ A^{k} = 0 $, 且 $ AB + BA = B $, 证明 $ B = 0 $. 
     \begin{hint}
         利用 $ A^{\ell}B = B(I - A)^{\ell} $, 与 $ A $ 的特征值全 $ 0 $ 可以得到 $ B = 0 $.
@@ -218,14 +382,90 @@
     \begin{exercise}
         \item $ AB = BA $,
         \item $ \rank(A) = \rank(B) $,
-        \item $ A $ 可对角化当且仅当 $ B $ 可对角化.
+        \item $ A $ 可相似对角化当且仅当 $ B $ 可相似对角化.
     \end{exercise}
-    \item 设 $ f(x), g(x) $ 为多项式, 且 $ (f(x), g(x)) = 1 $, $ A $ 是 $ n $ 阶方阵, 求证: $ f(A)g(A) = 0 $ 的充分必要条件为 $ \rank(f(A)) + \rank(g(A)) = n $.
+    \begin{hint}
+        \begin{hintsheet}
+            \item 使用 $ (I = A)(I - B) = I $ 来验证.
+            \item 移项得 $ A = (A - I)B $, 利用 $ A - I $ 可逆可得结论.
+            \item 注意到如果 $ A $ 可对角化, 则 $ A - I $ 可对角化, $ B $ 同理.
+        \end{hintsheet}
+    \end{hint}
+    \begin{answer}
+        \begin{answersheet}
+            \item 由题可知 $ I - A - B + AB = I $, 也就是 $ (I - A)(I - B) = I $, 这说明 $ I - A $ 与 $ I - B $ 互为逆矩阵, 那么就又有 $ (I - B)(I - A) = I $, 展开后即可得 $ A + B = BA $, 这就说明 $ AB = BA $.
+            \item 移项可得 $ A = (A - I)B $, 因为任意矩阵与可逆阵相乘都不改变秩, 又由上一问知道 $ I - A $ 可逆, 于是 $ \rank A = \rank B $.
+            \item 假设 $ A $ 可对角化, 即存在可逆阵 $ P $, 使得 $ P^{-1}AP $ 为对角阵, 于是 $ P^{-1}(A - I)P = P^{-1}AP - I $ 也为对角阵, 又因为 $ (A - I) $ 可逆, 所以 $ P^{-1}(A - I)^{-1}P $ 也为对角阵. 由上一问可知 $ (A - I)^{-1}A = B $, 那么
+            \begin{align*}
+                P^{-1}BP = P^{-1}(A - I)^{-1}PP^{-1}AP
+            \end{align*}
+            也为对角阵, 故 $ B $ 可相似对角化. 如果 $ B $ 可相似对角化, 讨论同上.
+        \end{answersheet}
+    \end{answer}
+    \sitem 设 $ f(x), g(x) $ 为多项式, 且 $ (f(x), g(x)) = 1 $, $ A $ 是 $ n $ 阶方阵, 求证: $ f(A)g(A) = 0 $ 的充分必要条件为 $ \rank(f(A)) + \rank(g(A)) = n $.
+    \begin{hint}
+        由互素可以得到
+        \begin{align*}
+            f(A)u(A) + g(A)v(A) = I,
+        \end{align*}
+        然后再对 $ \smqty(f(A) & \\ & g(A)) $ 进行初等变换得到秩的关系.
+    \end{hint}
+    \begin{answer}
+        由 $ (f(x), g(x)) = 1 $ 互素可知存在多项式 $ u(x), v(x) $, 使得
+        \begin{align*}
+            f(x)u(x) + g(x)v(x) = 1,
+        \end{align*}
+        用矩阵 $ A $ 代入, 可得
+        \begin{align*}
+            f(A)u(A) + g(A)v(A) = I,
+        \end{align*}
+        注意到矩阵 $ A $ 的多项式之间的乘法是可交换的, 于是考虑如下分块初等变换
+        \begin{align*}
+            \mqty(f(A) & \\ & g(A)) & \rightarrow \mqty(f(A) & g(A)v(A) \\ & g(A)) \rightarrow \mqty(f(A) & f(A)u(A) + g(A)v(A) \\ & g(A)) \\
+                                    & \rightarrow \mqty( & I \\ -f(A)g(A) & g(A)) \rightarrow \mqty( 0 & I \\ -f(A)g(A) & 0 )
+        \end{align*}
+        那么对两端的矩阵同时取秩, 可得
+        \begin{align*}
+            \rank(f(A)) + \rank(g(A)) = n + \rank(f(A)g(A)),
+        \end{align*}
+        那么显然有 $ f(A)g(A) = 0 $ 的充分必要条件为 $ \rank(f(A)) + \rank(g(A)) = n $.
+    \end{answer}
     \item 设 $ A, B $ 为实对称阵, 求证:
     \begin{exercise}
         \item 若 $ A $ 正定, 则存在实可逆阵 $ P $ 使得 $ P'AP $ 和 $ P'BP $ 同时为对角阵;
         \item 若 $ A, B $ 半正定, 则 $ \tr(AB) \ge 0 $, 并且等号成立当且仅当 $ AB = 0 $.
     \end{exercise}
+    \begin{hint}
+        \begin{hintsheet}
+            \item $ C'AC = I $, 而 $ C'BC $ 为对称阵, 可以正交相似于对角阵.
+            \item 利用 $ A = C'C,\ B = D'D $ 的分解来处理.
+        \end{hintsheet}
+    \end{hint}
+    \begin{answer}
+        \begin{answersheet}
+            \item 由于 $ A $ 正定, 故存在可逆阵 $ C $, 使得 $ C'AC = I $, 同时可知 $ C'BC $ 也是对称阵, 那么它可以正交相似于一个对角阵, 即存在正交阵 $ Q $, 使得
+            \begin{align*}
+                Q'C'BCQ = (CQ)'B(CQ) = \mqty(\dmat{\lambda_{1}, \lambda_{2}, \ddots, \lambda_{n}}).
+            \end{align*}
+            为对角阵, 同时由正交阵的性质可知
+            \begin{align*}
+                (CQ)'A(CQ) = Q'C'ACQ = Q'IQ = I.
+            \end{align*}
+            令 $ P = CQ $ 即可. 
+            
+            更进一步, $ \lambda_{1}, \lambda_{2}, \dots, \lambda_{n} $ 是 $ P'BP $ 的特征值, 也就是说
+            \begin{align*}
+                \abs{\lambda_{i}I - P'BP} = \abs{P'(\lambda_{i}A)P - P'BP} = \abs{P'}\abs{A}\abs{\lambda_{i} I - A^{-1}B}\abs{P} = 0, \quad i = 1, 2, \dots, n,
+            \end{align*}
+            这说明对任意 $ i = 1, 2, \dots, n $, 都有 $ \abs{\lambda_{i} I - A^{-1}B} = 0 $, 也就是说 $ \lambda_{i} $ 均为 $ A^{-1}B $ 的特征值. 
+            \item 由于 $ A, B $ 都是实半正定阵, 于是存在实矩阵 $ C $, $ D $, 使得 $ A = C'C,\ B = D'D $, 那么由迹的性质可知
+            \begin{align*}
+                \tr(AB) = \tr(C'CD'D) = \tr(CD'DC') = \tr((CD')(CD')') \ge 0,
+            \end{align*}
+            最后一个不等号可由 \ref{item:A2=AA'} 题的答案得知. 同时等号成立时 $ CD' = 0 $, 这可以得到 $ AB = C'CD'D = 0 $, 又当 $ AB = 0 $ 时, 显然有 $ \tr(AB) = 0 $, 故等号成立的充分必要条件为 $ AB = 0 $.
+        \end{answersheet}
+    \end{answer}
+    % TODO Duplicate of 83
     \item 设 $ f(x) $ 在 $ [a, b] $ 上二阶可导, 且 $ f''(x) > 0 $, 证明
     \begin{align*}
         f\qty(\frac{a + b}{2}) \le \frac{1}{b - a} \int_{a}^{b} f(x) \dd{x}.
@@ -255,7 +495,20 @@
             f\qty(\frac{a + b}{2}) \le \frac{1}{b - a} \int_{a}^{b} f(x) \dd{x}.
         \end{align*}
     \end{answer}
-    \item 求极限 $ \limit{n}{\infty} \sin^{2}\qty(\pi \sqrt{n^{2} + n}) $.  
+    \item 求极限 $ \limit{n}{\infty} \sin\qty(\pi \sqrt{n^{2} + n}) $.
+    \begin{hint}
+        注意 $ \sin x = \sin (x - n \pi) $.
+    \end{hint}
+    \begin{answer}
+        首先可以得到
+        \begin{align*}
+            \sin\qty(\pi \sqrt{n^{2} + n}) = \sin\qty(\pi \qty(\sqrt{n^{2} + n} - n)) = \sin\qty(\frac{n\pi}{\sqrt{n^{2} + n} + n})
+        \end{align*}
+        于是
+        \begin{align*}
+            \limit{n}{\infty}\sin\qty(\pi \sqrt{n^{2} + n}) = \sin\qty(\limit{n}{\infty}\frac{n\pi}{\sqrt{n^{2} + n} + n}) = \sin\qty(\frac{\pi}{2}) = 1.
+        \end{align*}
+    \end{answer}
     \item $ f(x) $ 在 $ [a, b] $ 上二阶可导, 证明存在 $ \xi \in (a, b) $, 使得
     \begin{align*}
         f(b) - 2f\qty(\frac{a + b}{2}) + f(a) = \frac{1}{4} (b - a)^{2} f''(\xi),
@@ -377,7 +630,25 @@
         \end{pmatrix},
     \end{align*}
     求证 $ BA = 9 I $. 
-    \item 设幂等矩阵 $ A \in \MM $, 即 $ A^{2} = A $, 若对任意列向量 $ x $, 都有 $ x'A'Ax \le x'x $, 证明 $ A' = A $.    
+    \item $ A\in \MM $, 假设 $ A^{2} = A $, 且对任意的 $ x \in \R^{n} $, 有 $ x'A'Ax \le x'x $, 证明 $ A $ 为对称阵.
+    \begin{hint}
+        移项后可得 $ I - A'A $ 为半正定阵, 故存在 $ C \in \MM $, 使得 $ I - A'A = C'C $, 可得出 $ CA = 0 $, 即 $ C'CA = 0 $. 再利用 $ A^{2} = A $ 即可得出结论.
+    \end{hint}
+    \begin{answer}
+        将不等式移项, 可得出对任意 $ x \in \R^{n} $, 都有
+        \begin{align*}
+            x'(I - A'A)x \ge 0,
+        \end{align*}
+        又因为 $ I - A'A $ 为对称阵, 所以 $ I - A'A $ 为半正定矩阵, 那么存在 $ C \in \MM $, 使得 $ I - A'A = C'C $, 在等式两侧同时左乘 $ A' $, 右乘 $ A $, 就有
+        \begin{align*}
+            A'(I - A'A)A = A'C'CA \implies (CA)'(CA) = A'A - (A')^{2}A^{2} = A'A - A'A = 0,
+        \end{align*}
+        那么由 $ \tr((CA)'(CA)) = \tr(0) = 0 $ 可得 $ CA = 0 $, 也就是
+        \begin{align*}
+            0 = CA = C'CA = (I - A'A)A = A - A'A \implies A = A'A,
+        \end{align*}
+        再两侧同时取转置, 就有 $ A' = A'A = A $, 即 $ A $ 是对称阵.
+    \end{answer}  
     \item 设 $ A \in \MM[\R][m \times n] $, 都有 $ \rank(AA') = \rank(A) $.  
     \item $ f(x) \in C[a, b] $, 证明函数 $ m(x) = \min\limits_{a \le \xi \le x}f(\xi) $ 在 $ [a, b] $ 连续.
     \item 设 $ f(x) $ 是 $ [0, 1] $ 上的单调增函数, 且$ f(0) > 0 $, $ f(1) < 1 $, $ k \in \N $, 证明存在 $ x_{0} \in (0, 1) $, 使得 $ f(x_{0}) = x_{0}^{k} $. 
@@ -404,8 +675,23 @@
         \frac{f(x + h) - f(x)}{h} = f'\qty(x + \frac{h}{2})
     \end{align*}
     求证: $ f(x) $ 为次数至多为 2 的多项式.
-    \item 设 $ A' = A $, 证明 $ A $ 可逆当且仅当存在矩阵 $ B $ 使得 $ AB + B'A $ 正定.
-    \item 设 $ f(x) $ 在 $ [a, b] $ 上可微, $ f(a) = 0 $, 并且存在实数 $ A > 0 $, 使得对任意 $ x \in [a, b] $, 都有 $ \abs{f'(x)} \le A \abs{f(x)} $, 证明在 $ [a, b] $ 上, $ f(x) \equiv 0 $. 
+    \item 设实矩阵 $ A = A' $, 证明 $ A $ 可逆当且仅当存在实矩阵 $ B $ 使得 $ AB + B'A $ 正定.
+    \begin{hint}
+        $ (\implies) $ 取 $ B = A^{-1} $ 即可
+
+        $ (\impliedby) $ 反证 $ A $ 不可逆, 则考虑 $ x'(AB + B'A)x $, 其中 $ x $ 满足 $ Ax = 0 $. 
+    \end{hint}
+    \begin{answer}
+        $ (\implies) $ 若 $ A $ 可逆, 直接取 $ B = A^{-1} $, 就有 $ AB + B'A = 2I $ 为正定阵. 
+
+        $ (\impliedby) $ 用反证法. 若 $ A $ 不可逆, 则存在非零向量 $ x $ 使得 $ Ax = 0 $, 那么就有
+        \begin{align*}
+            x'(AB + B'A)x = (A'x)'B + B'(Ax) = 0,
+        \end{align*}
+        这与 $ AB + B'A $ 正定矛盾, 故 $ A $ 可逆.
+    \end{answer}
+    % TODO Duplicate of 75
+    \item 
     \item 设 $ f(x) $ 在 $ [1, +\infty) $ 上一阶连续可导, 且
     \begin{align*}
         f'(x) = \frac{1}{1 + f^{2}(x)}\qty(\frac{1}{\sqrt{x}} - \sqrt{\ln\qty(1 + \frac{1}{x})})
@@ -425,7 +711,7 @@
             \begin{align}\label{eq:f2x+1f'x}
                 (f^{2}(x) + 1)f'(x) = \frac{1}{\sqrt{x}} - \sqrt{\ln\qty(1 + \frac{1}{x})}
             \end{align}
-            我们把右侧记为 $ h(x) $. 由于 $ 1/x > \ln(1 + 1/x) $, 所以 $ h(x) > 0 $, 下面来计算 $ h(x) $ 当 $ x \to +\infty $ 时的阶数, 由 Taylor 定理可知
+            我们把右侧记为 $ h(x) $. 由于 $ 1/x > \ln(1 + 1/x) $, 所以 $ h(x) > 0 $, 下面来确定 $ h(x) $ 当 $ x \to +\infty $ 时的阶数, 由 Taylor 定理可知
             \begin{align*}
                 \frac{1}{\sqrt{x}} - \sqrt{\ln\qty(1 + \frac{1}{x})} & = \frac{1}{\sqrt{x}} - \sqrt{\frac{1}{x} - \frac{1}{2x^{2}} + o(x^{-2})} \\
                 & = \frac{1}{\sqrt{x}}\qty(1 - \sqrt{1 - \frac{1}{2x} + o(x^{-1})})\\
@@ -470,7 +756,7 @@
         \end{align*}
         那么取 $ N = \max_{1 \le i \le k} N(x_{i}) $, 则对任意的 $ x \in [0, 1] $, 总存在 $ 1 \le i \le k $, 使得 $ x \in (x_{i} - \delta, x_{i} + \delta) $, 那么当 $ n \ge N \ge N(x_{i}) $ 时, 有
         \begin{align}\label{eq:absfx+n}
-            \abs{f(x + n)} < 2\varepsilon
+            \abs{f(x + n)} < 2\varepsilon,
         \end{align}
         于是我们任取 $ y > N $, 有 $ [y] \in \N $, 这里 $ [y] $ 为取整函数, 并且 $ [y] \ge N $, $ y - [y] \in [0, 1] $, 于是令 \eqref{eq:absfx+n} 中的 $ x = y - [y] $, $ n = [y] $, 就可以得到
         \begin{align*}
@@ -498,8 +784,40 @@
     \begin{remark}
         本题不需要一致连续的条件也可以证明, 过程略为繁琐, 而 \ref{item:fx+n} 题如果没有一致连续的条件, 则有反例 $ f(x) = \frac{x\sin \pi x}{1 + x^{2} \sin^{2} \pi x} $ 
     \end{remark}
-    \item 设 $ f(x) $ 在 $ \R $ 上一致连续, 则存在正实数 $ a, b $, 使得 $ \abs{f(x)} \le a\abs{x} + b $. 
-    \item 设 $ f(x) $ 在 $ [1, +\infty) $ 上一致连续, 证明 $ \abs{f(x)/x} $ 在 $ [1, +\infty) $ 有界. 
+    \item\label{item:一致连续可以被控制} 设 $ f(x) $ 在 $ \R $ 上一致连续, 则存在正实数 $ a, b $, 使得 $ \abs{f(x)} \le a\abs{x} + b $. 
+    \begin{hint}
+        由一致连续可以得到当 $ \abs{x - y} < \delta $ 时, $ \abs{f(x) - f(y)} < 1 $, 那么对任意 $ x \in \R $, 把 $ x $ 和 $ 0 $ 之间的距离分成 $ n(x) $ 个小区间, 使得每个区间的长度都小于 $ \delta $ 即可.
+    \end{hint}
+    \begin{answer}
+        由 $ f(x) $ 在 $ \R $ 上一致连续可知, 对 $ \varepsilon_{0} = 1 $, 存在 $ \delta > 0 $, 使得当 $ \abs{x - y} < \delta $ 时, $ \abs{f(x) - f(y)} < 1 $, 那么对任意 $ x \in \R $, 将 $ x $ 到 $ 0 $ 的这个区间分为 $ n $ 个小区间, 其中
+        \begin{align*}
+            n = \frac{[\abs{x}]}{\delta} + 1
+        \end{align*}
+        这样每个小区间的长度 $ \abs{x}/n < \delta $, 于是就有
+        \begin{align*}
+            \abs{f(x)} & \le \abs{f(x) - f\qty(\frac{n - 1}{n}x)} + \abs{f\qty(\frac{n - 1}{n}x) - f\qty(\frac{n - 2}{n}x)} + \dots + \abs{f\qty(\frac{1}{n}x) - f(0)} + \abs{f(0)}\\
+            & \le n + \abs{f(0)}
+        \end{align*}
+        而由 $ n $ 的定义可知
+        \begin{align*}
+            n = \frac{[\abs{x}]}{\delta} + 1 \le \frac{\abs{x}}{\delta} + 1,
+        \end{align*}
+        于是令 $ a = 1/\delta $, $ b = 1 + \abs{f(0)} $, 就有
+        \begin{align*}
+            \abs{f(x)} \le n + \abs{f(0)} \le \frac{\abs{x}}{\delta} + 1 + f(0) = a\abs{x} + b.
+        \end{align*}
+    \end{answer}
+    \item 设 $ f(x) $ 在 $ [1, +\infty) $ 上一致连续, 证明 $ \abs{f(x)/x} $ 在 $ [1, +\infty) $ 有界.
+    \begin{hint}
+        这道题是 \ref{item:一致连续可以被控制} 题的直接推论. 
+    \end{hint}
+    \begin{answer}
+        由 \ref{item:一致连续可以被控制} 题可知存在 $ a, b > 0 $, 使得 $ \abs{f(x)} \le a\abs{x} + b $, 那么就有
+        \begin{align*}
+            \abs{\frac{f(x)}{x}} \le a + \frac{b}{\abs{x}} \le a + b,\quad x > 1.
+        \end{align*}
+        即 $ \abs{f(x)/x} $ 在 $ [1, +\infty) $ 上有界.
+    \end{answer}
     \item 证明欧式空间中两标准正交基的过渡矩阵为正交阵.
     \hitem 设 $ \alpha $ 是欧式空间 $ V $ 中的一个非零向量, $ \alpha_{1}, \alpha_{2}, \dots, \alpha_{p} $ 是 $ V $ 中的 $ p $ 个向量, 满足
     \begin{align*}
@@ -554,7 +872,7 @@
             \end{align*}
             由于 $ \beta, \alpha_{1}, \alpha_{2}, \dots, \alpha_{n} $ 均为确定的向量, 那么只要取满足
             \begin{align*}
-                t^{2} < \frac{\min_{i, j}(\alpha_{i}, \alpha_{j})}{(\beta, \beta)}
+                t^{2} < \abs{\frac{\min_{i, j}(\alpha_{i}, \alpha_{j})}{(\beta, \beta)}}
             \end{align*}
             的 $ t $, 就能使 \eqref{eq:betaalpha1-tbeta} 这 $ n + 1 $ 个向量互为钝角.
         \end{answersheet}
@@ -581,11 +899,59 @@
     \item 设 $ B \in \MM[\C][n \times 2] $, 
     \begin{align*}
         C = \begin{pmatrix}
-            1 & 1 & \dots & 1\\
-            1 & 2 & \dots & n
+            1 & 1 & \cdots & 1\\
+            1 & 2 & \cdots & n
         \end{pmatrix}
     \end{align*}
-    若 $ A = BC $, 且 $ CB $ 的特征多项式为 $ x^{2} - 2x + 1 $, 求 $ A $ 的特征值, 并求 $ AX = 0 $ 的基础解系. 
+    若 $ A = BC $, 且 $ CB $ 的特征多项式为 $ x^{2} - 2x + 1 $, 求 $ A $ 的特征值, 并求线性方程组 $ Ax = 0 $ 的基础解系. 
+    \begin{hint}
+        由 $ \abs{\lambda I_{n} - BC} = \lambda^{n - 2}\abs{\lambda I_{2} - CB} $ 可求得 $ A $ 的特征值, 又因为 $ B $ 列满秩可知 $ BCx=0 $ 的解就是 $ Cx = 0 $ 的解.
+    \end{hint}
+    \begin{answer}
+        先证明一个引理
+        \begin{lemma}
+            设 $ m \le n $, $ M $ 是 $ m \times n $ 阶矩阵, $ N $ 是 $ n \times m $ 阶矩阵, $ I_{n}, I_{m} $ 分别为 $ n $ 阶和 $ m $ 阶的单位阵, 则对于 $ \lambda \ne 0 $, 有 $ \abs{\lambda I_{n} - NM} = \lambda^{n - m}\abs{\lambda I_{m} - MN} $. 
+        \end{lemma}
+        \begin{proof}
+            对分块行列式做初等变换:
+            \begin{align*}
+                \begin{vmatrix}
+                    \lambda I_{n} - NM & 0_{n \times m} \\ 0_{m \times n} & I_{m} 
+                \end{vmatrix} 
+                =
+                \begin{vmatrix}
+                    \lambda I_{n} - NM & N \\ 0_{m \times n} & I_{m} 
+                \end{vmatrix}
+                =
+                \begin{vmatrix}
+                    \lambda I_{n} & N \\ M & I_{m} 
+                \end{vmatrix}
+                =
+                \begin{vmatrix}
+                    \lambda I_{n} & 0_{n \times m} \\ M & I_{m} - \frac{1}{\lambda} MN
+                \end{vmatrix},
+            \end{align*}
+            于是就有 $ \abs{\lambda I_{n} - NM} = \lambda^{n - m}\abs{\lambda I_{m} - MN} $. \qed
+        \end{proof}
+
+        将这个结论应用到这道题, 就可以得到
+        \begin{align*}
+            \abs{\lambda I_{n} - A} = \lambda^{n - 2}\abs{\lambda I_{2} - CB} = \lambda^{n - 2}(\lambda^{2} - 2\lambda + 1),
+        \end{align*}
+        可以解得 $ A $ 的特征值有 $ 1 $ ( $ 2 $ 重) 与 $ 0 $ ( $ n - 2 $ 重).
+
+        首先由
+        \begin{align*}
+            2 = \rank(CB) \le \rank B \le 2
+        \end{align*} 
+        可知 $ \rank B = 2 $, 即 $ B $ 是一个列满秩阵, 那么对于任意的 $ y \in \R^{2} $, 线性方程组 $ By = 0 $ 的解空间的维数为 $ 2 - \rank B = 0 $, 即 $ By = 0 $ 只有零解, 那么对线性方程组 $ B(Cx) = 0 $ 来说, 其与 $ Cx = 0 $ 同解, 那么它的解空间的一组基为
+        \begin{align*}
+            & (-1, 2, 1, 0, 0, \dots, 0)'\\
+            & (-2, 3, 0, 1, 0, \dots, 0)'\\
+            & \phantom{(-2, 3, 0, } \vdots \\
+            & (2 - n, n - 1, 0, \dots, 0, 1)'.
+        \end{align*}
+    \end{answer}
     \item  计算 $ n $ 阶 $ b $ -- 循环行列式:
     \begin{align*}
         B = \begin{vmatrix}
@@ -714,6 +1080,15 @@
         \end{method}
     \end{answer}
     \item 设 $ f(x) $ 在 $ (0, +\infty) $ 上可导, 且 $ \limit{x}{+\infty} \qty(f(x) + f'(x)) = A $, 证明 $ \limit{x}{+\infty} f(x) = A $, 其中 $ A \in \R\cup{\pm\infty} $. 
+    \begin{hint}
+        对 $ \limit{x}{+\infty} (\me^{x} f(x))/\me^{x} $ 用 L'Hospital 法则. 
+    \end{hint}
+    \begin{answer}
+        因为 $ \limit{x}{+\infty} \qty(f(x) + f'(x)) = A $ 存在, 那么由 L'Hospital 法则可知
+        \begin{align*}
+            \limit{x}{+\infty} f(x) = \limit{x}{+\infty} \frac{\me^{x} f(x)}{\me^{x}} = \limit{x}{+\infty} \frac{\me^{x}(f(x) + f'(x))}{\me^{x}} = \limit{x}{+\infty} (f(x) + f'(x)) = A.
+        \end{align*}
+    \end{answer}
     \item 已知 $ A \in \MM[\K] $, 且 $ \tr(A) = 0 $, 证明
     \begin{exercise}
         \item 存在数域 $ \K $ 上的可逆阵 $ C $, 使得 $ C^{-1}AC $ 为主对角元全为 $ 0 $ 的矩阵.
@@ -734,8 +1109,52 @@
         \Image \varphi^{m} = \Image \varphi^{m+1},\quad \Ker \varphi^{m} = \Ker \varphi^{m+1}, \quad V = \Image \varphi^{m} \oplus \Ker \varphi^{m+1}.
     \end{align*}
     \item 使用 Jordan 标准型证明迹非 $ 0 $ 的秩 1 矩阵可对角化.
-    \item 设 $ A $ 是 $ n $ 阶实对称阵, 证明: $ A $ 可逆的充分必要条件为存在矩阵 $ B $, 使得 $ AB + B'A $ 正定.
-    \item 设 $ A, B \in \MM[\C] $, 其中 $ A $ 是幂零阵, 且 $ AB = BA $, 求证: $ \abs{B} = \abs{A + B} $. 
+    \item 已知 $ f(x) = \frac{1 + 2x + x^{2}}{1 - x + x^{2}} $, 求 $ f^{(4)}(0) $.
+    \begin{hint}
+        直接求解也不是不行, 这里可以用幂级数展开的唯一性来解决. 
+    \end{hint}
+    \begin{answer}
+        首先我们知道 
+        \begin{align*}
+            f(x) = f(0) + f'(0)x + \frac{1}{2!}f''(0)x^{2} + \frac{1}{3!}f^{(3)}(0)x^{3} + \frac{1}{4!}f^{(4)}(0)x^{4} + o(x^{4}),\quad x \to 0
+        \end{align*}
+        这个分解是唯一的, 那么我们只要找到某一种分解式的 $ x^{4} $ 的系数, 就可以得到 $ f^{(4)}(0) $ 的值. 
+
+        先进行化简:
+        \begin{align*}
+            f(x) = 1 + \frac{3x}{1-(x - x^{2})},
+        \end{align*}
+        利用 $ (1 - x)^{-1} = \sum_{n = 0}^{\infty} x^{n} $ 可以得到
+        \begin{align*}
+            f(x) = 1 + 3x (1 + (x - x^{2}) + (x - x^{2})^{2} + (x - x^{2})^{3}) + o(x^{5}), \quad x \to 0,
+        \end{align*}
+        计算得 $ x^{4} $ 的系数为 $ 3 \times (-2 + 1) = -3 $, 于是 $ f^{(4)}(0) = -3 \times 4! = -72 $.
+    \end{answer}
+    \item 设 $ A, B \in \MM[\C] $, 其中 $ A $ 是幂零阵, 且 $ AB = BA $, 求证: $ \abs{B} = \abs{A + B} $.
+    \begin{hint}
+        先设 $ B $ 可逆, 然后再用摄动法得到一般性的结论.
+    \end{hint}
+    \begin{answer}
+        先设 $ B $ 可逆, 那么就有 $ \abs{A + B} = \abs{B}\abs{I + B^{-1}A} $, 也就是要证明
+        \begin{align*}
+            1 = \abs{I + B^{-1}A},
+        \end{align*}
+        由 $ AB = BA $ 可知 $ AB^{-1} = B^{-1}A $, 于是有
+        \begin{align*}
+            (B^{-1}A)^{n} = B^{-1}AB^{-1}A\dotsm B^{-1}A = A^{n}B^{-n} = 0,
+        \end{align*}
+        也即 $ B^{-1}A $ 是幂零阵, 它只有 $ 0 $ 特征值, 那么存在可逆阵 $ P $, 使得 $ P^{-1}(B^{-1}A)P = J $, 其中 $ J $ 是 $ B^{-1}A $ 的 Jordan 标准型, 对角线全为 $ 0 $, 于是有
+        \begin{align*}
+            \abs{I + B^{-1}A} = \abs{P^{-1}}\abs{I + B^{-1}A}\abs{P} = \abs{I + P^{-1}(B^{-1}A)P} = \abs{I + J},
+        \end{align*} 
+        其中 $ I + J $ 是对角线全为 $ 1 $ 的上三角阵, 于是有 $ \abs{I + B^{-1}A} = 1 $, 结论成立. 
+
+        再假设 $ B $ 不可逆, 因为 $ \abs{B + tI} $ 这个关于 $ t $ 的 $ n $ 次多项式至多只有 $ n $ 个根, 设所有非零根中模长最小值为 $ t_{0} $, 那么取 $ 0 < t < t_{0} $, 就有 $ B + tI $ 可逆, 并且 $ (B + tI)A = A(B + tI) $, 所以有
+        \begin{align*}
+            \abs{B + tI} = \abs{A + B + tI},
+        \end{align*}
+        上面的等式两侧是关于 $ t $ 的连续函数, 那么令 $ t \to 0+ $, 就有 $ \abs{B} = \abs{A + B} $.
+    \end{answer}
     \item 设函数 $ f $ 在 $ x = 0 $ 连续, 并且
     \begin{align*}
         \limit{x}{0}\frac{f(2x) - f(x)}{x} = A,
@@ -781,7 +1200,65 @@
         \item 求证 $ \limit{n}{\infty}(n\pi + \pi/2 - x_{n}) = 0 $,
         \item 求 $ \limit{n}{\infty} n(n\pi + \pi/2 - x_{n}) $.  
     \end{exercise}
-    \item 设 $ f $ 在 $ [0, +\infty) $ 上可微, 且 $ f(0) = 0 $, 并假设有实数 $ A $ 使得 $ \abs{f'(x)} \le A\abs{f(x)} $ 对 $ x \in (0, +\infty) $ 恒成立, 证明 $ f(x) \equiv 0\,(x \in (0, +\infty)) $.  
+    \begin{hint}
+        \begin{hintsheet}
+            \item 首先可以确定 $ n\pi + \pi/2 - x_{n} \in (0, \pi/2) $, 那么只要说明 $ \limit{n}{\infty} \tan(n\pi + \pi/2 - x_{n}) = 0 $ 就可以说明原极限为 $ 0 $.
+            \item 已经知道了上问的极限为 $ 0 $, 那么利用 $ t \sim \tan t\,(t \to 0) $ 就可以得到答案.
+        \end{hintsheet}
+    \end{hint}
+    \begin{answer}
+        \begin{answersheet}
+            \item 首先可以确定 $ x_{n} \in (n\pi, n\pi + \pi/2) $, 于是当 $ n \to \infty $ 时, $ x_{n} \to +\infty $. 注意到 $ \tan x $ 的周期性, 以及 $ \tan x_{n} = x_{n} $ 
+            \begin{align*}
+                \tan\qty(n \pi + \frac{\pi}{2} - x_{n}) = \tan\qty(\frac{\pi}{2} - x_{n}) = \frac{1}{\tan x_{n}} = \frac{1}{x_{n}}
+            \end{align*}
+            注意到 $ \limit{n}{\infty}x_{n} = +\infty $, 于是就有
+            \begin{align*}
+                \limit{n}{\infty}\tan\qty(n \pi + \frac{\pi}{2} - x_{n}) = \limit{n}{\infty}\frac{1}{x_{n}} = 0,
+            \end{align*}
+            又因为对于 $ y \in (0, \pi/2) $, $ y = \arctan(\tan y) $, 且 $ n\pi + \pi/2 - x_{n} \in (0, \pi/2) $, 于是
+            \begin{align*}
+                \limit{n}{\infty}\qty(n \pi + \frac{\pi}{2} - x_{n}) = \limit{n}{\infty} \arctan\tan\qty(n \pi + \frac{\pi}{2} - x_{n}) = \arctan \limit{n}{\infty} \tan\qty(n \pi + \frac{\pi}{2} - x_{n}) = \arctan 0 = 0.
+            \end{align*}
+            \item 由上问可知 $ \limit{n}{\infty}(n\pi + \pi/2 - x_{n}) = 0 $, 于是就有
+            \begin{align*}
+                \limit{n}{\infty} n\qty(n\pi + \frac{\pi}{2} - x_{n}) & = \limit{n}{\infty} n \frac{n\pi + \pi/2 - x_{n}}{\tan(n\pi + \pi/2 - x_{n})}\tan\qty(n\pi + \frac{\pi}{2} - x_{n})\\
+                & = \limit{n}{\infty} n \tan\qty(n\pi + \frac{\pi}{2} - x_{n}) = \limit{n}{\infty} \frac{n}{\tan x_{n}} \\
+                & = \limit{n}{\infty} \frac{n}{x_{n}} = \limit{n}{\infty} \frac{n}{n \pi + \pi/2} \frac{n \pi + \pi/2}{x_{n}},
+            \end{align*}
+            又因为
+            \begin{align*}
+                \limit{n}{\infty} \frac{n\pi + \pi/2 - x_{n}}{x_{n}} = \limit{n}{\infty} \frac{n \pi + \pi/2}{x_{n}} - 1 = 0 \implies \limit{n}{\infty} \frac{n\pi + \pi/2}{x_{n}} = 1,
+            \end{align*}
+            于是
+            \begin{align*}
+                \limit{n}{\infty} n\qty(n\pi + \frac{\pi}{2} - x_{n}) = \limit{n}{\infty} \frac{n}{n \pi + \pi/2} \frac{n \pi + \pi/2}{x_{n}} = \frac{1}{\pi}.
+            \end{align*}
+        \end{answersheet}
+    \end{answer}
+    \item 设 $ f $ 在 $ [0, +\infty) $ 上可微, 且 $ f(0) = 0 $, 并假设有实数 $ A $ 使得 $ \abs{f'(x)} \le A\abs{f(x)} $ 对 $ x \in (0, +\infty) $ 恒成立, 证明 $ f(x) \equiv 0\,(x \in [0, +\infty)) $.
+    \begin{hint}
+        将 $ [0, +\infty) $ 分成很多区间长度是 $ 1/(2A) $ 的小区间, 取每个小区间上的最大值来用题目条件说明矛盾, 再分别证明每个小区间上的函数值为 $ 0 $ 即可.
+    \end{hint}
+    \begin{answer}
+        我们将 $ [0, +\infty) $ 分为无数个长度是 $ 1/(2A) $ 的小区间的并:
+        \begin{align*}
+            [0, +\infty) = \bigcup_{n = 0}^{\infty}\qty[\frac{n}{2A}, \frac{n + 1}{2A}] := \bigcup_{n = 0}^{\infty}\Delta_{n},
+        \end{align*}
+        然后对 $ n $ 用数学归纳法说明每个小区间上的函数值都为 $ 0 $. 当 $ n = 0 $ 时, 由于 $ \abs{f(x)} $ 在 $ \Delta_{0} $ 上连续, 那么有最大值, 设为 $ \abs{f(x_{0})} $, 于是由 Lagrange 中值定理, 就存在 $ \xi_{0} \in [0, x_{0}] $, 使得 $ f(x_{0}) - f(0) = f'(\xi_{0})x_{0} $, 那么由题目条件可知
+        \begin{align*}
+            \abs{f(x_{0})} = \abs{f'(\xi_{0})}x_{0} \le A\abs{f(\xi_{0})}\frac{1}{2A} = \frac{1}{2}\abs{f(\xi_{0})} \le \frac{1}{2}\abs{f(x_{0})} 
+        \end{align*}
+        这就说明 $ \abs{f(x_{0})} = 0 $, 也就是 $ f(x) = 0 $ 在 $ \Delta_{0} $ 上成立. 归纳假设 $ f(x) = 0 $ 在 $ \Delta_{n - 1} $ 上成立, 那么对于 $ \Delta_{n} $, 同样有最大值 $ \abs{f(x_{n})} $, 由 Lagrange 中值定理可知存在 $ \xi_{n} \in [n/(2A), x_{n}] $, 使得
+        \begin{align*}
+            f(x_{n}) - f\qty(\frac{n}{2A}) = f'(\xi_{n})\qty(x_{n} - \frac{n}{2A}),
+        \end{align*}
+        注意到 $ f(n/(2A)) = 0 $, $ x_{n} - n/(2A) < 1/(2A) $, 于是和上面一样的讨论可知
+        \begin{align*}
+            \abs{f(x_{n})} = \abs{f'(\xi_{n})}\qty(x_{n} - \frac{n}{2A}) \le \frac{1}{2}\abs{f(x_{n})}
+        \end{align*}
+        即 $ f(x) = 0 $ 在 $ \Delta_{n} $ 上也成立. 于是由数学归纳法可知 $ f(x) = 0 $ 在 $ [0, +\infty) $ 上恒成立.
+    \end{answer}
     \item 设偶函数 $ f(x) $ 在 $ x = 0 $ 处二阶连续可导, 且 $ f(0) = 1 $, 证明级数 $ \sum_{n = 1}^{\infty} (f(1/n) - 1) $ 绝对收敛.
     \begin{hint}
         注意到 $ f(x) $ 为 $ x = 0 $ 处可导的偶函数, 那么 $ f'(0) = 0 $, 再利用比较判别法即可得到结论.
@@ -876,6 +1353,9 @@
         \limit{\lambda}{\infty} \int_{a}^{b} f(x)g(\lambda x) \dd{x}
     \end{align*}
     \sitem 设 $ f(x) $ 是实多项式, 且对任意实数 $ r $, 都有 $ f(r) \ge 0 $. 证明存在实多项式 $ g(x), h(x) $ 使得 $ f(x) = g^{2}(x) + h^{2}(x) $, 更进一步可以要求 $ \deg g(x) > \deg h(x) $.   
+    \begin{hint}
+        $ f(r) \ge 0 $ 说明 $ f(x) $ 的实根均成对, 也就是只需要处理形如 $ x^{2} + bx + c $ 的不可约多项式即可. 
+    \end{hint}
     \begin{answer}
         \begin{answersheet}
             \item 首先可以说明 $ f(x) $ 的实根的重数都是偶数, 且首项系数 $ k > 0 $ 即
@@ -919,10 +1399,24 @@
     且 $ \deg v(x) < \deg f(x) $, $ \deg u(x) < \deg g(x) $.  
     \item 设 $ f(x) $ 是次数大于 $ 0 $ 的首一整系数多项式, 若 $ f(0), f(1) $ 都是奇数, 求证 $ f(x) $ 没有有理根.
     \begin{hint}
-        首先可以知道如果 $ f(x) $ 有有理根, 那这个有理根必是整数根, 再考虑 $ f(x) \models 2 $. 
+        首先可以知道如果 $ f(x) $ 有有理根, 那这个有理根必是整数根, 再考虑该根的奇偶性. 
     \end{hint}
     \begin{answer}
-        首先可以知道, 如果 $ p/q $ 为 $ f(x) $ 的有理根, 其中 $ p, q $ 为互素的整数, 
+        设
+        \begin{align*}
+            f(x) = x^{n} + a_{n - 1}x^{n - 1} + \dots + a_{1}x + a_{0},
+        \end{align*}        
+        那么可以知道, 如果 $ p/q $ 为 $ f(x) $ 的有理根, 其中 $ p, q $ 为互素的整数, 那么应该有 $ p \mid a_{0} $, $ q \mid 1 $, 也就是说 $ p/q $ 只能为整数 $ p $ , 那么只要说明 $ f(x) $ 没有整数根就可以了.
+        
+        因为 $ f(0) $ 为奇数, 所以 $ a_{0} $ 为奇数, 用系数的奇偶来重写 $ f(x) $:
+        \begin{align*}
+            f(x) = \sum_{i = 1}^{s}a_{r_{i}}x^{r_{i}} + \sum_{j = 1}^{\mathclap{n + 1 - s}}a_{t_{j}}x^{t_{j}} := g(x) + h(x),
+        \end{align*}
+        其中 $ a_{r_{i}} \equiv 1 \pmod{2} $, $ a_{t_{j}} \equiv 0 \pmod{2} $ 因为 $ f(1) $ 为奇数, 那么就有 $ s $ 为奇数, 于是若 $ p $ 为奇数, 则 $ g(p) \equiv 1 \pmod{2} $, 而 $ h(p) \equiv 0 \pmod{2} $, 这说明 $ f(p) \equiv 1 \pmod{2} $, 这说明奇数不能作为 $ f(x) = 0 $ 的解. 若 $ p $ 为偶数, 那么 
+        \begin{align*}
+            x^{n} + a_{n - 1}x^{n - 1} + \dots + a_{1}x \equiv 0 \pmod{2},
+        \end{align*}
+        而 $ a_{0} \equiv 1 \pmod{2} $, 同样说明 $ f(p) \equiv 1 \pmod{2} $, 那么偶数也不能作为 $ f(x) = 0 $ 的解. 这就说明了 $ f(x) $ 不存在整数解.
     \end{answer}
     \item 设 $ f(x) $ 是次数大于 $ 1 $ 的奇数次有理系数多项式, 且它在有理数域上不可约, 求证: 若 $ x_{1}, x_{2} $ 是 $ f(x) $ 在复数域上的两个不同的根, 则 $ x_{1} + x_{2} $ 必不是有理数.
     \item 设 $ A $ 是实矩阵, 又 $ I_{n} - A $ 的特征值的模长都小于 $ 1 $, 求证: $ 0<\abs{A}<2^{n} $. 
@@ -936,7 +1430,16 @@
         \varphi(\alpha_{i}) = \alpha_{i + 1}\,(i = 1, 2, \dots, n-1), \quad \varphi(\alpha_{n}) = -a_{n}\alpha_{1} - a_{n-1}\alpha_{2} - \dots - a_{1}\alpha_{n}.
     \end{align*}
     证明 $ \set{\alpha_{1}, \alpha_{2}, \dots, \alpha_{n}} $ 是 $ V $ 的一组基. 
-    \item\label{item:CtoR} 设 $ A, B \in \MM $, 存在可逆复矩阵 $ P $, 使得 $ P^{-1}AP = B $, 证明存在可逆实矩阵 $ Q $ 使得 $ Q^{-1}AQ = B $.   
+    \item\label{item:CtoR} 设 $ A, B \in \MM $, 存在可逆复矩阵 $ P $, 使得 $ P^{-1}AP = B $, 证明存在可逆实矩阵 $ Q $ 使得 $ Q^{-1}AQ = B $.
+    \begin{hint}
+        设 $ P = M + \mi N $, 那么就有 $ AM = MB, AN = NB $, 又知存在 $ t \in \R $ 使得 $ M + tN $ 可逆, 即可得出结论.
+    \end{hint}
+    \begin{answer}
+        设 $ P = M + \mi N $, 其中 $ M, N \in \MM $, 那么在 $ A(M + \mi N) = (M + \mi N)B $ 中分别对应实部和虚部, 即可得到 $ AM = MB,\ AN = NB $. 而 $ \abs{M + tN} = 0 $ 这个关于 $ t $ 的 $ n $ 次多项式至多只有 $ n $ 个解, 那么一定存在 $ t_{0} \in \R $ 使得 $ \abs{M + t_{0}N} \ne 0 $, 于是令 $ Q = M + t_{0}N $, 就有
+        \begin{align*}
+            AQ = AM + t_{0}AN = MB + t_{0}NB = (M + t_{0}N)B = QB \implies Q^{-1}AQ = B.
+        \end{align*}
+    \end{answer}
     \item 设 $ A, B $ 为 $ n $ 阶方阵, 满足 $ \rank(ABA) = \rank(A) $, 求证: $ AB $ 与 $ BA $ 相似.
     \item 设 $ A, B $ 为 $ n $ 阶方阵, 则 $ AB $ 与 $ BA $ 相似的充要条件是 $ \rank((AB)^{i}) = \rank((BA)^{i})\,(1 \le i \le n - 1) $.
     \item 设 $ f $ 在 $ \R $ 上连续, 又 $ \varphi(x) = f(x)\int_{0}^{x} f(t) \dd{t} $ 单调递减, 证明 $ f(x) \equiv 0, x\in\R $.
@@ -1329,7 +1832,8 @@
         其中 $ L $ 是曲面 $ x^{2} + y^{2} + z^{2} = 4x $ 与 $ x^{2} + y^{2} = 2x $ 的交线的 $ z \ge 0 $ 的部分, 曲线方向为从 $ z $ 轴上方向下看是顺时针方向.
         \item 计算曲线积分 $ I = \int_{L} z^{2} \dd{s} $, 其中 $ L $ 为 $ x^{2} + y^{2} + z^{2} = 1 $ 与 $ x + y = 1 $ 的交线.
         \item 设矩阵 $ A \in \MM[\Q] $, 其中 $ n\ge 2 $, 设 $ f(\lambda) = \lambda^{n} + 2\lambda^{n-1} + 2 $, 若有 $ f(A) = 0 $, 证明 $ f(\lambda) $ 是 $ A $ 的特征多项式.
-        \item 设函数 $ f(x) $ 在 $ (0, 1] $ 上可导, $ \limit{x}{0+} \sqrt{x}f'(x) = A\in \R $, 证明 $ f(x) $ 在 $ (0, 1] $ 上一致连续.
+        % TODO Duplicate of 95 奇数维 V 实, AB = BA
+        \item 
         \item (中科院 2019) 设有 $ n + 1 $ 个列向量 $ \alpha_{1}, \alpha_{2}, \dots, \alpha_{n}, \beta \in \R^{n} $, $ A $ 是一个 $ n $ 阶实对称正定阵, $ \alpha_{i}' $ 为 $ \alpha_{i} $ 的转置, 如果满足下列条件: 
         \begin{exercise}
             \item $ \alpha_{j} \ne 0\, (j = 1, 2, \dots, n) $;
@@ -1475,29 +1979,6 @@
             \item 矩阵 $ A + XX' $ 可逆,
             \item $ 0 < X'(A + XX')^{-1}X < 1 $. 
         \end{exercise}
-        \item $ A\in \MM $, 假设 $ A^{2} = A $, 且对任意的 $ X \in \R^{n} $, 有
-        \begin{align*}
-            X'A'AX \le X'X,
-        \end{align*}
-        证明 $ A $ 为对称阵.
-        \begin{hint}
-            移项后可得 $ I - A'A $ 为半正定阵, 故存在 $ C \in \MM $, 使得 $ I - A'A = C'C $, 可得出 $ CA = 0 $, 即 $ C'CA = 0 $. 再利用 $ A^{2} = A $ 即可得出结论.
-        \end{hint}
-        \begin{answer}
-            将不等式移项, 可得出对任意 $ X \in \R^{n} $, 都有
-            \begin{align*}
-                X'(I - A'A)X \ge 0,
-            \end{align*}
-            又因为 $ I - A'A $ 为对称阵, 所以 $ I - A'A $ 为半正定矩阵, 那么存在 $ C \in \MM $, 使得 $ I - A'A = C'C $, 在等式两侧同时左乘 $ A' $, 右乘 $ A $, 就有
-            \begin{align*}
-                A'(I - A'A)A = A'C'CA \implies (CA)'(CA) = A'A - (A')^{2}A^{2} = A'A - A'A = 0,
-            \end{align*}
-            那么由 $ \tr((CA)'(CA)) = \tr(0) = 0 $ 可得 $ CA = 0 $, 也就是
-            \begin{align*}
-                0 = CA = C'CA = (I - A'A)A = A - A'A \implies A = A'A,
-            \end{align*}
-            再两侧同时取转置, 就有 $ A' = A'A = A $, 即 $ A $ 是对称阵.
-        \end{answer}
         \item (中科院 2021) 设 $ \hom{A} $ 是线性空间 $ V $ 上的可逆线性变换, $ v_{1}, v_{2}, \dots, v_{m} $ 张成 $ V $, 且
         \begin{align*}
             \hom{A}(v_{i}) \in \set{v_{1}, v_{2}, \dots, v_{m}}, \quad i = 1, 2, \dots, m,
