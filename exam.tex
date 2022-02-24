@@ -2,7 +2,7 @@
 \usepackage[]{exam}
 \begin{document}
 
-{\bfseries 其中标红加星的题, 如\  ``{\bfseries\color{red}*3.}'',  为较重要的题, 可以简化一些其他的证明. 不标红只加星的题, 如\ ``{\bfseries*3.}'', 为折磨题, 记一下结论就好了. 题目序号后蓝色的\ {\color{blue}\mdseries [提示] [答案]} 均可以点击, 点击提示或答案前的蓝色序号\ {\color{blue} 3.} 也可以跳转回题目.}
+{\bfseries 其中\ifprint \else 红色 \fi 加星的题, 如\  ``{\bfseries\ifprint \else \color{red} \fi *3.}'',  为较重要的题, 可以简化一些其他的证明. 加点 ``\textbullet'' 的题, 如\ ``{\bfseries\textbullet 3.}'', 为折磨题, 想记结论的记一下结论就好了. \ifprint \else 题目序号后蓝色的\ {\color{blue}\mdseries [提示] [答案]} 均可以点击, 点击提示或答案前的蓝色序号\ {\color{blue} 3.} 也可以跳转回题目.\fi}
 
 \input{./body/exercise.tex}
 

@@ -57,7 +57,11 @@
 
 \RequirePackage[notrig]{physics}
 \RequirePackage{nicematrix}
-\RequirePackage[colorlinks=true, linkcolor=blue]{hyperref}
+\RequirePackage{hyperref}
+\ifprint%
+\else%
+  \hypersetup{colorlinks=true, linkcolor=blue}
+\fi
 
 % https://tex.stackexchange.com/questions/307412/redefine-pi-to-pi-with-unicode-math
 
@@ -104,14 +108,16 @@
 
 % 打印提示和答案列表, 并创建超链接
 
+\newcommand{\printcolor}{\ifprint \else \color{red} \fi}
+
 % 添加红色加粗加星的 \item: \sitem 
-% 添加加粗加星的 \item: \hitem
+% 添加 \textbullet 加星的 \item: \hitem
 % https://github.com/jbezos/enumitem/issues/33#issuecomment-993449063 
 \def\hitem{%
   \letcs{\originallabel}{labeloriexercise\romannumeral\enit@depth}%
   % the same as \@namedef
   \csedef{labeloriexercise\romannumeral\enit@depth\expandafter}%
-    {\noexpand\textbf{*\expandonce\originallabel}}%
+    {\noexpand\textbf{\expandonce\textbullet\expandonce\originallabel}}%
   \item
   \cslet{labeloriexercise\romannumeral\enit@depth}\originallabel
 }
@@ -120,7 +126,7 @@
   \letcs{\originallabel}{labeloriexercise\romannumeral\enit@depth}%
   % the same as \@namedef
   \csedef{labeloriexercise\romannumeral\enit@depth\expandafter}%
-    {\noexpand\bfseries\noexpand\color{red}{*\expandonce\originallabel}}%
+    {\noexpand\bfseries\noexpand\printcolor{*\expandonce\originallabel}}%
   \item
   \cslet{labeloriexercise\romannumeral\enit@depth}\originallabel
 }

@@ -821,7 +821,7 @@
     \item 证明欧式空间中两标准正交基的过渡矩阵为正交阵.
     \hitem 设 $ \alpha $ 是欧式空间 $ V $ 中的一个非零向量, $ \alpha_{1}, \alpha_{2}, \dots, \alpha_{p} $ 是 $ V $ 中的 $ p $ 个向量, 满足
     \begin{align*}
-        (a_{i}, a_{j}) \le 0,\ (\alpha_{i}, \alpha) > 0, \quad i, j = 1, 2, \dots, p, i \ne j
+        (\alpha_{i}, \alpha_{j}) \le 0,\ (\alpha_{i}, \alpha) > 0, \quad i, j = 1, 2, \dots, p, i \ne j
     \end{align*}
     证明
     \begin{exercise}
@@ -1685,7 +1685,7 @@
                 \item (\emph{Cholesky 分解})存在主对角线上元素全为正(非负)的上三角阵 $ C $, 使得 $ A = C'C $. 
             \end{exercise}
             \item (\emph{QR 分解}) 设 $ A $ 是 $ n $ 阶实(复)矩阵, 则 $ A $ 可以分解为 $ A = QR $, 其中 $ Q $ 是正交(酉)矩阵, $ R $ 是一个上三角阵, 且主对角线上的元素非负, 若 $ A $ 可逆, 则这样的分解唯一.
-            \item (\emph{极分解}) 设 $ V $ 是 $ n $ 维酉(欧式)空间, $ \varphi $ 是 $ V $ 上的任一线性算子, 则存在 $ V $ 上的酉(正交)算子 $ \omega $ 以及 $ V $ 上的半正定自伴随算子 $ \psi $, 使得 $ \varphi = \omega\psi $, 其中 $ \psi $ 是唯一的, 并且若 $ \varphi $ 是非异线性算子, 则 $ \omega $ 也唯一 \footnote{ $ \varphi $ 也可以做这样的分解: $ \varphi = \psi_{1}\omega_{1} $ 其中 $ \omega_{1} $ 为酉(正交)算子, $ \psi_{1} $ 为半正定自伴随算子, 这样的分解也叫极分解, 下面矩阵版本的同理.}. 
+            \item (\emph{极分解}) 设 $ V $ 是 $ n $ 维酉(欧式)空间, $ \varphi $ 是 $ V $ 上的任意一个线性算子, 则存在 $ V $ 上的酉(正交)算子 $ \omega $ 以及 $ V $ 上的半正定自伴随算子 $ \psi $, 使得 $ \varphi = \omega\psi $, 其中 $ \psi $ 是唯一的, 并且若 $ \varphi $ 是非异线性算子, 则 $ \omega $ 也唯一 \footnote{ $ \varphi $ 也可以做这样的分解: $ \varphi = \psi_{1}\omega_{1} $ 其中 $ \omega_{1} $ 为酉(正交)算子, $ \psi_{1} $ 为半正定自伴随算子, 这样的分解也叫极分解, 下面矩阵版本的同理.}. 
             \item \label{item:矩阵极分解}(\emph{极分解}) 设 $ A \in \MM $, 则存在 $ n $ 阶正交阵 $ Q $ 以及 $ n $ 阶半正定对称阵 $ S $, 使得 $ A = QS $. 又设 $ B \in \MM[\C] $, 则存在 $ n $ 阶酉矩阵 $ U $, 以及 $ n $ 阶半正定 Hermite 阵 $ H $, 使得 $ B = UH $, 上述分解式当 $ A, B $ 为非异阵的时候被唯一确定.
             \item (\emph{谱分解}) 设 $ V $ 是 $ n $ 维欧式(酉)空间, $ \varphi $ 为 $ V $ 上的自伴随(正规)算子. $ \lambda_{1}, \lambda_{2}, \dots, \lambda_{k} $ 为 $ \varphi $ 的全体不同特征值, $ W_{i} $ 为属于 $ \lambda_{i} $ 的特征子空间, 则 $ V $ 是 $ W_{i}\,(i = 1, 2, \dots, k) $ 的正交直和. 这时若设 $ E_{i} $ 是 $ V $ 到 $ W_{i} $ 的正交投影, 则 $ \varphi $ 有如下分解式:
             \begin{align*}
