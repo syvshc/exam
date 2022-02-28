@@ -56,6 +56,26 @@
 \RequirePackage[margin=1.5cm]{geometry}
 
 \RequirePackage[notrig]{physics}
+
+\NewDocumentCommand { \dx } { s }
+  {
+    \IfBooleanTF { #1 } 
+      { \dd{x} } { \dd x }
+  }
+\NewDocumentCommand { \dy } { s }
+  {
+    \IfBooleanTF { #1 } 
+      { \dd{y} } { \dd y }
+  }
+\NewDocumentCommand { \dz } { s }
+  {
+    \IfBooleanTF { #1 } 
+      { \dd{z} } { \dd z }
+  }
+
+\RequirePackage{tabularray}
+\UseTblrLibrary{amsmath}
+
 \RequirePackage{nicematrix}
 \RequirePackage{hyperref}
 \ifprint%
