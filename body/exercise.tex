@@ -238,57 +238,110 @@
       再分成 $ [0, 1]\cup[1, +\infty) $ 进行讨论.
   \end{hint}
   \begin{answer}
-      当 $ 0 < p < 2 $ 时收敛, $ p \ge 2 $ 时发散.
+    先做换元 $ t = 1/x $ 把 $ \sin(1/x) $ 变成 $ \sin t $, 于是
+    \begin{align*}
+        x =\frac{1}{t}, \quad \dx* = - \frac{1}{t^{2}} \dd{t},
+    \end{align*}
+    那么就有
+    \begin{align*}
+        \int_{0}^{+\infty} \frac{\sin(1/x)}{x^{p}} \dx* = \int_{0}^{+\infty} \frac{\sin t}{t^{2 - p}} \dd{t}
+    \end{align*}
+    这是一个无穷积分, 也可能是一个瑕积分, 我们分段来看. 
+    先考虑
+    \begin{align*}
+        I_{1} = \int_{0}^{1} \frac{\sin t}{t^{2 - p}} \dd{t}
+    \end{align*}
+    当 $ p \ge 2 $ 的时候, 这是一个常义积分, 当然收敛. 当 $ 1 \le p < 2 $ 时, 由于
+    \begin{align*}
+        \limit{t}{0}\frac{\sin t}{t^{2 - p}} = 0,
+    \end{align*}
+    故它还是一个常义积分, 也收敛. 当 $ 0 < p < 1 $ 时, 有
+    \begin{align*}
+        \limit{t}{0} \frac{t^{p - 2} \sin t }{t^{p - 1}} = \limit{t}{0} \frac{\sin t}{t} = 1,
+    \end{align*}
+    故 $ I_{1} $ 与 $ \int_{0}^{1} t^{p - 1} \dd{t} $ 同敛散 那么可知当 $ p > 0 $ 时 $ I_{1} $ 恒收敛, 并且恒绝对收敛,
+    这是因为在 $ [0, 1] $ 上, $ t^{p - 2} \sin t \ge 0 $.
+
+    再考虑
+    \begin{align*}
+        I_{2} = \int_{1}^{+\infty} \frac{\sin t}{t^{2 - p}} \dd{t},
+    \end{align*} 
+    首先可以看出当 $ p \ge 2 $ 时, $ I_{2} $ 发散, 否则若 $ I_{2} $ 收敛, 就应该存在充分大的 $ A', A'' $, 使得
+    \begin{align}\label{eq:absintA'A''le1}
+        \abs{\int_{A'}^{A''} t^{p - 2} \sin t \dd{t}} \le 1
+    \end{align}
+    那我们令 $ A' = 2k \pi,\ A'' = (2k + 1) \pi $, 由于 $ \sin t $ 在 $ [2k\pi, (2k + 1)\pi] $ 上非负, 
+    那么当 $ k $ 充分大的时候就有
+    \begin{align*}
+        \abs{\int_{2k\pi}^{(2k + 1)\pi} t^{p - 2} \sin t \dd{t}} & \ge (2k\pi)^{p - 2} \int_{0}^{\pi} \sin t \dd{t}  \\
+        & = 2(2k \pi)^{p - 2} \ge 2,
+    \end{align*} 
+    这与不等式 \eqref{eq:absintA'A''le1} 矛盾. 又由于
+    \begin{align*}
+      \abs{\frac{\sin t}{t^{2 - p}}} \le \frac{1}{t^{2 - p}},
+    \end{align*}
+    于是有 $ 2 - p < 1 $ 时, 即 $ 0 < p < 1 $ 时, $ I_{2} $ 绝对收敛. 而当 $ 2 - p > 0 $ 时, 即 $ 0 < p < 2 $ 时, 由于 $ t \to +\infty $ 时, $ t^{p - 2} $ 单调递减趋于 $ 0 $, 并且对于任意 $ M > 1 $, 总有
+    \begin{align*}
+      \abs{\int_{1}^{M} \sin t \dd{t}} = \abs{\cos M - \cos 1} \le 2,
+    \end{align*}
+    于是由 Dirichlet 判别法可知此时 $ I_{2} $ 收敛, 下面判断 $ 1 \le p < 2 $ 时 $ I_{2} $ 是否绝对收敛. 
+    由于 $ \abs{\sin t} \le 1 $, 于是
+    \begin{align*}
+      \abs{\frac{\sin t}{t^{2 - p}}} & \ge \frac{\sin^{2}(t)}{t^{2 - p}} = \frac{1}{2t^{2 - p}} - \frac{\cos(2t)}{2t^{2 - p}},
+    \end{align*}
+    同样由 Dirichlet 判别法可知无穷积分 $ \int_{1}^{+\infty} t^{p - 2} \cos (2t)/2 \dx* $ 收敛, 而 $ 2 - p < 1 $, 于是 $ \int_{1}^{+\infty} t^{p - 2}/2 \dx* $ 发散, 故 $ I_{2} $ 不绝对收敛. 
+
+    综上所述, 当 $ 0 < p < 1 $ 时原积分绝对收敛, $ 1 \le p < 2 $ 时原积分条件收敛, $ p \ge 2 $ 时原发散.
   \end{answer}
   \item 求积分 $ \int_{0}^{+\infty} \sin(x)/x \dx* $.
   \begin{hint}
-      用积分因子构造含参变量反常积分:
-      \begin{align*}
-          H(t) = \int_{0}^{+\infty} \me^{-tx}\frac{\sin x}{x} \dx*, \quad t\in [0, A],
-      \end{align*}
-      求出 $ H'(t) $, 再利用 $ \int_{0}^{+\infty}H'(t)\dd{t} $ 来计算 $ H(0) $.
+    用积分因子构造含参变量反常积分:
+    \begin{align*}
+      H(t) = \int_{0}^{+\infty} \me^{-tx}\frac{\sin x}{x} \dx*, \quad t\in [0, A],
+    \end{align*}
+    求出 $ H'(t) $, 再利用 $ \int_{0}^{+\infty}H'(t)\dd{t} $ 来计算 $ H(0) $.
   \end{hint}
   \begin{answer}
-      这里先回忆一下含参变量反常积分求导的定理:
+    这里先回忆一下含参变量反常积分求导的定理:
 
-      如果函数 $ f $ 和 $ \pdv{f}{t} $ 都在 $ [a, +\infty) \times [\alpha, \beta] $ 上连续, 且积分 $ \int_{a}^{+\infty} \pdv{f(x, t)}{t} \dx* $ 在 $ [\alpha, \beta] $ 上一致收敛, 那么 $ H(t) = \int_{a}^{+\infty}f(x, t)\dx* $ 在 $ [\alpha, \beta] $ 上可微, 且
-      \begin{align*}
-          H'(t) = \int_{a}^{+\infty}\pdv{f(x, t)}{x}\dx*,\quad \alpha \le u \le \beta.
-      \end{align*}
+    如果函数 $ f $ 和 $ \pdv{f}{t} $ 都在 $ [a, +\infty) \times [\alpha, \beta] $ 上连续, 且积分 $ \int_{a}^{+\infty} \pdv{f(x, t)}{t} \dx* $ 在 $ [\alpha, \beta] $ 上一致收敛, 那么 $ H(t) = \int_{a}^{+\infty}f(x, t)\dx* $ 在 $ [\alpha, \beta] $ 上可微, 且
+    \begin{align*}
+      H'(t) = \int_{a}^{+\infty}\pdv{f(x, t)}{x}\dx*,\quad \alpha \le u \le \beta.
+    \end{align*}
 
-      对于任意 $ A > 0 $, 我们利用积分因子构造含参变量反常积分:
-      \begin{align*}
-          H(t) = \int_{0}^{+\infty} \me^{-tx}\frac{\sin x}{x} \dx* = \int_{0}^{+\infty} f(x, t) \dx*,\quad t \in [0, A],
-      \end{align*}
-      然后我们依次来验证条件来求得 $ H'(t) $, 首先
-      \begin{align*}
-          f(x, t) = \me^{-tx}\frac{\sin x}{x}, \quad \pdv{f(x, t)}{t} = -\me^{-tx}\sin x
-      \end{align*}
-      在 $ (x, t) \in [0, +\infty)\times [0, A] $ 上连续, 其次可以用 Weierstrass 判别法验证
-      \begin{align*}
-          \int_{0}^{+\infty} \pdv{f(x, t)}{t} \dx* = - \int_{0}^{+\infty} \me^{-tx}\sin x \dx*
-      \end{align*}
-      在任意 $ t \in [\alpha, \beta] \subset (0, A) $, 那么 $ H(t) $ 在 $ [\alpha, \beta] $ 上可微, 并且
-      \begin{align*}
-          H'(t) = - \int_{0}^{+\infty} \me^{-tx}\sin x \dx*, \quad t \in [\alpha, \beta] \subset (0, A)
-      \end{align*}
-      那么由 $ \alpha $ 和 $ \beta $ 的任意性可知该结果在 $ t\in (0, A) $ 上均成立, 而对于这个反常积分的计算, 可以使用分部积分:
-      \begin{align*}
-          I(t) & = \int_{0}^{+\infty} \me^{-tx}\sin x \dx* = -\frac{1}{t}\int_{0}^{+\infty} \sin x\dd{\me^{-tx}}\\
-          & = -\frac{1}{t}\sin x\me^{-tx}\Big|_{x = 0}^{+\infty} + \frac{1}{t} \int_{0}^{+\infty} \me^{-tx}\cos x \dx* = -\frac{1}{t^{2}} \cos x\dd{\me^{-tx}}\\
-          & = -\frac{1}{t^{2}}\cos x\me^{-tx}\Big|_{x = 0}^{+\infty} + \frac{1}{t^{2}}\int_{0}^{+\infty} -\me^{-tx}\sin x \dx* = \frac{1}{t^{2}} - \frac{1}{t^{2}} I(t),
-      \end{align*}
-      可以解得 $ I(t) = (1 + t^{2})^{-1} $, 所以 $ H'(t) = -(1 + t^{-2})^{-1} $. 或者用\footnote{这种写法我不确定是否标准, 或者是否有足够的理论依据} $ \sin x = (\me^{\mi x} - \me^{-\mi x})/(2\mi) $. 然后我们要说明 $ H(t) $ 在 $ t = 0 $ 与 $ t = A $ 处均是连续的, 因为这样才可以利用 Newton -- Leibniz 公式来求得 $ H(0) $.
+    对于任意 $ A > 0 $, 我们利用积分因子构造含参变量反常积分:
+    \begin{align*}
+      H(t) = \int_{0}^{+\infty} \me^{-tx}\frac{\sin x}{x} \dx* = \int_{0}^{+\infty} f(x, t) \dx*,\quad t \in [0, A],
+    \end{align*}
+    然后我们依次来验证条件来求得 $ H'(t) $, 首先
+    \begin{align*}
+      f(x, t) = \me^{-tx}\frac{\sin x}{x}, \quad \pdv{f(x, t)}{t} = -\me^{-tx}\sin x
+    \end{align*}
+    在 $ (x, t) \in [0, +\infty)\times [0, A] $ 上连续, 其次可以用 Weierstrass 判别法验证
+    \begin{align*}
+      \int_{0}^{+\infty} \pdv{f(x, t)}{t} \dx* = - \int_{0}^{+\infty} \me^{-tx}\sin x \dx*
+    \end{align*}
+    在任意 $ t \in [\alpha, \beta] \subset (0, A) $, 那么 $ H(t) $ 在 $ [\alpha, \beta] $ 上可微, 并且
+    \begin{align*}
+      H'(t) = - \int_{0}^{+\infty} \me^{-tx}\sin x \dx*, \quad t \in [\alpha, \beta] \subset (0, A)
+    \end{align*}
+    那么由 $ \alpha $ 和 $ \beta $ 的任意性可知该结果在 $ t\in (0, A) $ 上均成立, 而对于这个反常积分的计算, 可以使用分部积分:
+    \begin{align*}
+      I(t) & = \int_{0}^{+\infty} \me^{-tx}\sin x \dx* = -\frac{1}{t}\int_{0}^{+\infty} \sin x\dd{\me^{-tx}}\\
+      & = -\frac{1}{t}\sin x\me^{-tx}\Big|_{x = 0}^{+\infty} + \frac{1}{t} \int_{0}^{+\infty} \me^{-tx}\cos x \dx* = -\frac{1}{t^{2}} \cos x\dd{\me^{-tx}}\\
+      & = -\frac{1}{t^{2}}\cos x\me^{-tx}\Big|_{x = 0}^{+\infty} + \frac{1}{t^{2}}\int_{0}^{+\infty} -\me^{-tx}\sin x \dx* = \frac{1}{t^{2}} - \frac{1}{t^{2}} I(t),
+    \end{align*}
+    可以解得 $ I(t) = (1 + t^{2})^{-1} $, 所以 $ H'(t) = -(1 + t^{-2})^{-1} $. 或者用\footnote{这种写法我不确定是否标准, 或者是否有足够的理论依据} $ \sin x = (\me^{\mi x} - \me^{-\mi x})/(2\mi) $. 然后我们要说明 $ H(t) $ 在 $ t = 0 $ 与 $ t = A $ 处均是连续的, 因为这样才可以利用 Newton -- Leibniz 公式来求得 $ H(0) $.
 
-      首先由 $ \limit{x}{0+}\sin x/x = 1 $ 可知 $ x = 0 $ 不是 $ \int_{0}^{+\infty}\sin x/x \dx* $ 的瑕点, 又因为 $ \int_{0}^{M}\sin x\dx* $ 有界, 且 $ x^{-1} $ 在 $ x \to +\infty $ 的过程中单调递减趋于 $ 0 $, 所以由 Dirichlet 判别法可知 $ \int_{0}^{+\infty} \sin x/x \dx* $ 在收敛, 由于它不含有 $ t $, 那么它就关于 $ t\in [0, A] $ 一致收敛, 并且对于每个固定的 $ x \in [0, +\infty) $, $ \me^{-tx} $ 在 $ t\in[0, A] $ 是单调函数, 且 $ \abs{\me^{-tx}} \le 1 $ 对 $ t \in [0, A] $ 恒成立, 那么可以用 Abel 判别法说明 $ H(t) $ 关于 $ t \in [0, A] $ 一致收敛, 则有 $ H(t) \in C[0, A] $. 那么我们就有
-      \begin{align}\label{eq:sinx/xarctanA}
-          H(A) - H(0) = \int_{0}^{A} -\frac{1}{1 + t^{2}} \dd{t} = -\arctan A,
-      \end{align}
-      而我们又有
-      \begin{align*}
-          0 \le H(t) \le \int_{0}^{+\infty} \me^{-tx}\abs{\frac{\sin x}{x}} \dx* \le \int_{0}^{+\infty} \me^{-tx} \dx* = \frac{1}{t},
-      \end{align*}
-      于是 $ \limit{A}{+\infty} H(A) = 0 $, 那么对等式 \eqref{eq:sinx/xarctanA} 两侧同时令 $ A \to +\infty $, 就有 $ H(0) = \pi/2 $.
+    首先由 $ \limit{x}{0+}\sin x/x = 1 $ 可知 $ x = 0 $ 不是 $ \int_{0}^{+\infty}\sin x/x \dx* $ 的瑕点, 又因为 $ \int_{0}^{M}\sin x\dx* $ 有界, 且 $ x^{-1} $ 在 $ x \to +\infty $ 的过程中单调递减趋于 $ 0 $, 所以由 Dirichlet 判别法可知 $ \int_{0}^{+\infty} \sin x/x \dx* $ 在收敛, 由于它不含有 $ t $, 那么它就关于 $ t\in [0, A] $ 一致收敛, 并且对于每个固定的 $ x \in [0, +\infty) $, $ \me^{-tx} $ 在 $ t\in[0, A] $ 是单调函数, 且 $ \abs{\me^{-tx}} \le 1 $ 对 $ t \in [0, A] $ 恒成立, 那么可以用 Abel 判别法说明 $ H(t) $ 关于 $ t \in [0, A] $ 一致收敛, 则有 $ H(t) \in C[0, A] $. 那么我们就有
+    \begin{align}\label{eq:sinx/xarctanA}
+      H(A) - H(0) = \int_{0}^{A} -\frac{1}{1 + t^{2}} \dd{t} = -\arctan A,
+    \end{align}
+    而我们又有
+    \begin{align*}
+      0 \le H(t) \le \int_{0}^{+\infty} \me^{-tx}\abs{\frac{\sin x}{x}} \dx* \le \int_{0}^{+\infty} \me^{-tx} \dx* = \frac{1}{t},
+    \end{align*}
+    于是 $ \limit{A}{+\infty} H(A) = 0 $, 那么对等式 \eqref{eq:sinx/xarctanA} 两侧同时令 $ A \to +\infty $, 就有 $ H(0) = \pi/2 $.
   \end{answer}
   \item 设 $ f(x) \in C[0, 1] $, 证明
   \begin{align*}
