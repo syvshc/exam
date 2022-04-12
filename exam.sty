@@ -57,21 +57,31 @@
 
 \RequirePackage[notrig]{physics}
 
-\NewDocumentCommand { \dx } { s }
+\ExplSyntaxOn
+\NewDocumentCommand \DV { } { \derivative }
+% \let\dv\relax
+% 定义 \dx ...
+\clist_new:N \l_cf_diff_clist
+\clist_set:Nn \l_cf_diff_clist { x, y, z, t, s, u, r, v }
+\cs_set_eq:NN \DeclareDocumentCommand:Nnn \DeclareDocumentCommand
+\cs_generate_variant:Nn \DeclareDocumentCommand:Nnn { cnn }
+\clist_map_inline:Nn \l_cf_diff_clist 
   {
-    \IfBooleanTF { #1 } 
-      { \dd{x} } { \dd x }
+    \DeclareDocumentCommand:cnn { d #1 } { s }
+      {
+        \IfBooleanTF { ##1 }
+        { \dd #1 }
+        { \dd{#1} }
+      }
   }
-\NewDocumentCommand { \dy } { s }
+
+\clist_new:N \l_cf_bb_clist
+\clist_set:Nn \l_cf_bb_clist { N, Z, Q, J, R, C, K }
+\clist_map_inline:Nn \l_cf_bb_clist 
   {
-    \IfBooleanTF { #1 } 
-      { \dd{y} } { \dd y }
+    \DeclareDocumentCommand:cnn { #1 } { } { \symbb{#1} }
   }
-\NewDocumentCommand { \dz } { s }
-  {
-    \IfBooleanTF { #1 } 
-      { \dd{z} } { \dd z }
-  }
+\ExplSyntaxOff
 
 \RequirePackage{tabularray}
 \UseTblrLibrary{amsmath}
@@ -101,11 +111,7 @@
 \newcommand{\limit}[2]{\lim_{#1 \to #2}}
 \newcommand{\me}{\symrm{e}}
 \newcommand{\mi}{\symrm{i}}
-\newcommand{\R}{\ensuremath{\symbb{R}}}
-\newcommand{\K}{\ensuremath{\symbb{K}}}
-\newcommand{\N}{\ensuremath{\symbb{N}}}
-\newcommand{\C}{\ensuremath{\symbb{C}}}
-\newcommand{\Q}{\ensuremath{\symbb{Q}}}
+
 % 可以用 D(){} 来做定界符
 \NewDocumentCommand{\MM}{ O{\R} O{n} }{ \ensuremath{\symup{M}_{#2}(#1)} }
 \DeclareMathOperator{\diag}{diag} 

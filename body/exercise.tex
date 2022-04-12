@@ -345,15 +345,39 @@
   \end{answer}
   \item 设 $ f(x) \in C[0, 1] $, 证明
   \begin{align*}
-      \limit{n}{\infty} \frac{1}{n} \sum_{k=1}^{n} (-1)^{k+1} f\qty(\frac{k}{n}) = 0.
+    \limit{n}{\infty} \frac{1}{n} \sum_{k=1}^{n} (-1)^{k+1} f\qty(\frac{k}{n}) = 0.
   \end{align*}
   \begin{hint}
-      由 $ f \in C[0, 1] $ 可知 $ f $ 在 $ [0, 1] $ 上一致连续, 则当 $ \abs{x - y} $ 足够小的时候 $ \abs{f(x) - f(y)} $ 也足够小, 再考虑 $ n $ 为偶数时
-      \begin{align*}
-          \frac{1}{n} \abs{\sum_{k=1}^{n} (-1)^{k+1} f\qty(\frac{k}{n})} & = \frac{1}{n}\abs{\sum_{k = 1}^{n/2}f\qty(\frac{2k-1}{n}) - f\qty(\frac{2k}{n})} \le \frac{1}{n}\cdot\frac{n}{2}\varepsilon.
-      \end{align*}
-      $ n $ 为奇数时只需要增加一项 $ f(1)/n $.
+    由 $ f \in C[0, 1] $ 可知 $ f $ 在 $ [0, 1] $ 上一致连续, 则当 $ \abs{x - y} $ 足够小的时候 $ \abs{f(x) - f(y)} $ 也足够小, 再考虑 $ n $ 为偶数时
+    \begin{align*}
+      \frac{1}{n} \abs{\sum_{k=1}^{n} (-1)^{k+1} f\qty(\frac{k}{n})} & = \frac{1}{n}\abs{\sum_{k = 1}^{n/2}f\qty(\frac{2k-1}{n}) - f\qty(\frac{2k}{n})} \le \frac{1}{n}\cdot\frac{n}{2}\varepsilon.
+    \end{align*}
+    $ n $ 为奇数时只需要增加一项 $ f(1)/n $.
   \end{hint}
+  \begin{answer}
+    首先由 Cantor 定理可知 $ f(x) $ 在 $ [0, 1] $ 上一致连续, 于是对于任意 $ \varepsilon > 0 $, 都存在 $ N \in \N $, 使得对于 $ n > N $, 当 $ \abs{x - y} \le 1/n $ 时, 就有 $ \abs{f(x) - f(y)} < \varepsilon $. 那么考虑 $ n $ 为偶数时:
+    \begin{align*}
+      \frac{1}{n} \abs{\sum_{k=1}^{n} (-1)^{k+1} f\qty(\frac{k}{n})} 
+      & = \frac{1}{n}\abs{\sum_{k = 1}^{n/2}f\qty(\frac{2k-1}{n}) - f\qty(\frac{2k}{n})} \\
+      & \le \frac{1}{n}\sum_{k = 1}^{n/2}\abs{f\qty(\frac{2k-1}{n}) - f\qty(\frac{2k}{n})} \\
+      & \le \frac{1}{n}\cdot\frac{n}{2}\varepsilon \le \frac{\varepsilon}{2}.
+    \end{align*}
+    再考虑 $ n $ 为奇数时:
+    \begin{align*}
+        \frac{1}{n} \abs{\sum_{k=1}^{n} (-1)^{k+1} f\qty(\frac{k}{n})} 
+        & = \frac{1}{n}\abs{\sum_{k = 1}^{(n - 1)/2}f\qty(\frac{2k-1}{n}) - f\qty(\frac{2k}{n}) + f(1)} \\
+        & \le \frac{1}{n}\sum_{k = 1}^{(n - 1)/2}\abs{f\qty(\frac{2k-1}{n}) - f\qty(\frac{2k}{n})} + \frac{f(1)}{n} \\
+        & \le \frac{1}{n} \frac{n - 1}{2} \varepsilon + \frac{f(1)}{n},
+    \end{align*}
+    而对上述 $ \varepsilon $, 存在 $ N' > N $, 使得 $ n > N' $ 时, $ \abs{f(1)/n} < \varepsilon $, 这样就有 $ n > N' $ 时
+    \begin{align*}
+        \frac{1}{n} \abs{\sum_{k=1}^{n} (-1)^{k+1} f\qty(\frac{k}{n})} \le \qty(\frac{n - 1}{2n} + 1) \varepsilon < 2 \varepsilon,
+    \end{align*}
+    综上所述, 有
+    \begin{align*}
+        \limit{n}{\infty} \frac{1}{n} \sum_{k=1}^{n} (-1)^{k+1} f\qty(\frac{k}{n}) = 0.
+    \end{align*}
+  \end{answer}
   \item 证明: 积分
   \begin{align*}
       \int_{0}^{+\infty} \me^{-(\alpha + u^{2})t} \sin(t) \dd{t},\quad \alpha > 0
@@ -362,16 +386,29 @@
   \begin{hint}
       $ \abs{\me^{-(\alpha + u^{2})t} \sin(t)} \le \me^{-\alpha t} $
   \end{hint}
+  \begin{answer}
+      直接放缩:
+      \begin{align*}
+          \abs{\me^{-(\alpha + u^{2})t} \sin(t)} \le \me^{-\alpha t},
+      \end{align*}
+      由于 $ \alpha > 0 $, 所以 $ \int_{0}^{+\infty} \me^{-\alpha t} \dd{t} $ 收敛, 于是由 Weierstrass 判别法可知
+      \begin{align*}
+          \int_{0}^{+\infty} \me^{-(\alpha + u^{2}) t} \sin(t) \dd{t}
+      \end{align*}
+      关于 $ u $ 在 $ [0, +\infty] $ 上一致收敛.
+  \end{answer}
   \item 证明: 积分
   \begin{align*}
       \int_{1}^{+\infty} \me^{-(\alpha + u^{2})t} \sin(t) \dd{u},\quad \alpha > 0
   \end{align*}
   关于 $ t $ 在 $ [0, +\infty) $ 上一致收敛.
   \begin{hint}
+    注意到 $ u = 0 $ 不是被积函数的瑕点, 所以只要考虑 $ \int_{1}^{+\infty} $ 关于 $ t $ 在 $ [0, +\infty) $ 上的一直收敛性. 
       \begin{align*}
           \abs{\me^{-(\alpha + u^{2})t} \sin(t)} \le \abs{\frac{t}{\me^{(\alpha + u^{2})t}}} \le \frac{t}{1 + u^{2}t} \le \frac{1}{u^{2}}
       \end{align*}
   \end{hint}
+
   \hitem 计算 Fresnel 积分 $ \int_{0}^{+\infty} \sin(x^{2}) \dx* $.
   \item 计算积分 $ \int_{0}^{+\infty} \exp(-a x^{2})\cos(bx) \dx* $, 其中 $ a > 0,\ b\in \R $.
   \begin{hint}
@@ -1916,10 +1953,7 @@
           \int_{0}^{+\infty} \frac{x^{p-1}}{1+x} \dx* = \frac{\pi}{\sin p\pi}\quad (0<p<1).
       \end{align*}
       \item 判断含参变量反常积分 $ \int_{0}^{+\infty}\sqrt{u}\me^{-ux^{2}} \dx* $ 对于 $ u \in [0, +\infty) $ 的一致收敛性.
-      \item 计算积分
-      \begin{align*}
-          I(r) = \int_{0}^{\pi} \ln(1 - 2r\cos x + r^{2}) \dx*
-      \end{align*}
+    % TODO duplicated of 5
       \item 设 $ f(x)\in C^{1}[a, b] $, 记
       \begin{align*}
           A = \frac{1}{b - a}\int_{a}^{b} f(x) \dx*
@@ -2278,7 +2312,7 @@
       \end{align*}
       由 $ x_{1}, \alpha > 0 $ 可知 $ x_{n} > 0 $, 那么可知, 如果 $ \set{x_{n}} $ 极限存在, 则一定为 $ x = (-1 + \sqrt{1 + 4\alpha})/2 $ , 下面讨论 $ \set{x_{n}} $ 的极限存在性.
 
-      下面研究 $ x_{n} $ 的分布情况. 若 $ x_{n} < x $, 则
+      我们研究 $ x_{n} $ 的分布情况. 若 $ x_{n} < x $, 则
       \begin{align*}
           x_{n + 1} = \frac{\alpha}{1 + x_{n}} > \frac{\alpha}{1 + x} = x.
       \end{align*}
