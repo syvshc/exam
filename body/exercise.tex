@@ -734,18 +734,18 @@
           f\qty(\frac{a + b}{2}) \le \frac{1}{b - a} \int_{a}^{b} f(x) \dx*.
       \end{align*}
   \end{answer}
-  \item 求极限 $ \limit{n}{\infty} \sin\qty(\pi \sqrt{n^{2} + n}) $.
+  \item 求极限 $ \limit{n}{\infty} \sin^{2}\qty(\pi \sqrt{n^{2} + n}) $.
   \begin{hint}
-      注意 $ \sin x = \sin (x - n \pi) $.
+      注意 $ \sin x = (-1)^n \sin (x - n \pi) $.
   \end{hint}
   \begin{answer}
       首先可以得到
       \begin{align*}
-          \sin\qty(\pi \sqrt{n^{2} + n}) = \sin\qty(\pi \qty(\sqrt{n^{2} + n} - n)) = \sin\qty(\frac{n\pi}{\sqrt{n^{2} + n} + n})
+          \sin^{2}\qty(\pi \sqrt{n^{2} + n}) = \sin^{2}\qty(\pi \qty(\sqrt{n^{2} + n} - n)) = \sin^{2}\qty(\frac{n\pi}{\sqrt{n^{2} + n} + n})
       \end{align*}
       于是
       \begin{align*}
-          \limit{n}{\infty}\sin\qty(\pi \sqrt{n^{2} + n}) = \sin\qty(\limit{n}{\infty}\frac{n\pi}{\sqrt{n^{2} + n} + n}) = \sin\qty(\frac{\pi}{2}) = 1.
+          \limit{n}{\infty}\sin^{2}\qty(\pi \sqrt{n^{2} + n}) = \sin^{2}\qty(\limit{n}{\infty}\frac{n\pi}{\sqrt{n^{2} + n} + n}) = \sin^{2}\qty(\frac{\pi}{2}) = 1.
       \end{align*}
   \end{answer}
   \item $ f(x) $ 在 $ [a, b] $ 上二阶可导, 证明存在 $ \xi \in (a, b) $, 使得
@@ -764,6 +764,48 @@
   \begin{align*}
       x_{n} = \frac{n}{n^{2} + 1} + \frac{n}{n^{2} + 2^{2}} + \dots + \frac{n}{n^{2} + n^{2}}.
   \end{align*}
+  \begin{hint}
+    将积分写成Riemann和的形式, 然后使用中值定理即可
+  \end{hint}
+  \begin{answer}
+    更加一般地，我们令
+    \begin{align*}
+      x_{n}=\frac{1}{n} \sum_{k=1}^{n} f\left(\frac{k}{n}\right)  
+    \end{align*}
+
+   计算(其中 $f(x)$ 在 $(0,1)$ 连续)
+  \begin{align*}
+    \limit{n}{\infty} n\left(\int_{0}^{1} f(x) \mathrm{d} x-\frac{1}{n} \sum_{k=1}^{n} f\left(\frac{k}{n}\right)\right)
+  \end{align*}
+  我们有
+  \begin{align*}
+    \int_{0}^{1} f(x) \mathrm{d} x &=\sum_{k=1}^{n} \int_{\frac{k-1}{n}}^{\frac{k}{n}} f(x) \mathrm{d} x \\
+    \frac{1}{n} \sum_{k=1}^{n} f\left(\frac{k}{n}\right) &=\sum_{k=1}^{n} \int_{\frac{k-1}{n}}^{\frac{k}{n}} f\left(\frac{k}{n}\right) \mathrm{d} x
+  \end{align*}
+  于是
+  \begin{align*}
+    \int_{0}^{1} f(x) \mathrm{d} x-\frac{1}{n} \sum_{k=1}^{n} f\left(\frac{k}{n}\right) 
+    &=\sum_{k=1}^{n} \int_{\frac{k-1}{n}}^{\frac{k}{n}}\left[f(x)-f\left(\frac{k}{n}\right)\right] \mathrm{d} x \\
+    &=\sum_{k=1}^{n} \int_{\frac{k-1}{n}}^{\frac{k}{n}} f^{\prime}\left(\xi_{k}\right)\left(x-\frac{k}{n}\right) \mathrm{d} x \quad \xi_{k} \in\left(x, \frac{k}{n}\right) \\
+    &=\sum_{k=1}^{n} f^{\prime}\left(\eta_{k}\right) \int_{\frac{k-1}{n}}^{\frac{k}{n}}\left(x-\frac{k}{n}\right) \mathrm{d} x \quad \eta_{k} \in\left(\frac{k-1}{n}, \frac{k}{n}\right) \\
+    &=\sum_{k=1}^{n} f^{\prime}\left(\eta_{k}\right)\left(-\frac{1}{2 n^{2}}\right)
+  \end{align*}
+  再有
+  \begin{align*}
+    \limit{n}{\infty} n\left(\int_{0}^{1} f(x) \mathrm{d} x-\frac{1}{n} \sum_{k=1}^{n} f\left(\frac{k}{n}\right)\right) 
+    &=-\frac{1}{2 n} \sum_{k=1}^{n} f^{\prime}\left(\eta_{k}\right) \\
+    & \rightarrow-\frac{1}{2} \int_{0}^{1} f^{\prime}(x) \mathrm{d} x \quad(n \rightarrow \infty) \\
+    &=\frac{1}{2}(f(0)-(1))
+  \end{align*}
+  本题只需令
+  \begin{align*}
+    f(x)=\frac{1}{1+x^{2}}
+  \end{align*}
+  即可得到
+  \begin{align*}
+    n\left(\frac{\pi}{4}-x_{n}\right) \to \frac{1}{4} \quad(n \to \infty)
+  \end{align*}
+  \end{answer}
   \item 如果级数 $ \sum_{n = 1}^{\infty} a_{n} $ 收敛, $ \limit{n}{\infty} p_{n} = \infty $, 证明极限
   \begin{align*}
       \limit{n}{\infty}\frac{a_{1} p_{1} + a_{2} p_{2} + \dots + a_{n} p_{n}}{p_{n}} = 0.
