@@ -733,19 +733,25 @@
       \begin{align*}
           f\qty(\frac{a + b}{2}) \le \frac{1}{b - a} \int_{a}^{b} f(x) \dx*.
       \end{align*}
+      \textcolor{red}{*}本题亦可采用换元 $x \to a+b-x$, 于是
+      \begin{align*}
+        \int_{a}^{b} f(x) \dx* &= \int_{a}^{b} \frac{f(x)+f(a+b-x)}{2} \dx* \\
+        &\ge \int_{a}^{b} f\qty(\frac{a+b}{2}) \dx*\\
+        &=(b-a) f\qty(\frac{a+b}{2})
+      \end{align*}
   \end{answer}
-  \item 求极限 $ \limit{n}{\infty} \sin\qty(\pi \sqrt{n^{2} + n}) $.
+  \item 求极限 $ \limit{n}{\infty} \sin^{2}\qty(\pi \sqrt{n^{2} + n}) $.
   \begin{hint}
-      注意 $ \sin x = \sin (x - n \pi) $.
+      注意 $ \sin x = (-1)^n \sin (x - n \pi) $.
   \end{hint}
   \begin{answer}
       首先可以得到
       \begin{align*}
-          \sin\qty(\pi \sqrt{n^{2} + n}) = \sin\qty(\pi \qty(\sqrt{n^{2} + n} - n)) = \sin\qty(\frac{n\pi}{\sqrt{n^{2} + n} + n})
+          \sin^{2}\qty(\pi \sqrt{n^{2} + n}) = \sin^{2}\qty(\pi \qty(\sqrt{n^{2} + n} - n)) = \sin^{2}\qty(\frac{n\pi}{\sqrt{n^{2} + n} + n})
       \end{align*}
       于是
       \begin{align*}
-          \limit{n}{\infty}\sin\qty(\pi \sqrt{n^{2} + n}) = \sin\qty(\limit{n}{\infty}\frac{n\pi}{\sqrt{n^{2} + n} + n}) = \sin\qty(\frac{\pi}{2}) = 1.
+          \limit{n}{\infty}\sin^{2}\qty(\pi \sqrt{n^{2} + n}) = \sin^{2}\qty(\limit{n}{\infty}\frac{n\pi}{\sqrt{n^{2} + n} + n}) = \sin^{2}\qty(\frac{\pi}{2}) = 1.
       \end{align*}
   \end{answer}
   \item $ f(x) $ 在 $ [a, b] $ 上二阶可导, 证明存在 $ \xi \in (a, b) $, 使得
@@ -764,6 +770,63 @@
   \begin{align*}
       x_{n} = \frac{n}{n^{2} + 1} + \frac{n}{n^{2} + 2^{2}} + \dots + \frac{n}{n^{2} + n^{2}}.
   \end{align*}
+  \begin{hint}
+    将积分写成Riemann和的形式, 然后使用中值定理即可
+  \end{hint}
+  \begin{answer}
+    更加一般地，我们令
+    \begin{align*}
+      x_{n}=\frac{1}{n} \sum_{k=1}^{n} f\left(\frac{k}{n}\right)  
+    \end{align*}
+   计算(其中 $f(x)$ 在 $[a,b]$ 上有连续的导数)
+  \begin{align*}
+    \limit{n}{\infty} n\left(\int_{0}^{1} f(x) \dx*-\frac{1}{n} \sum_{k=1}^{n} f\left(\frac{k}{n}\right)\right)
+  \end{align*}
+  我们有
+  \begin{align*}
+    \int_{0}^{1} f(x) \dx* &=\sum_{k=1}^{n} \int_{\frac{k-1}{n}}^{\frac{k}{n}} f(x) \dx* \\
+    \frac{1}{n} \sum_{k=1}^{n} f\left(\frac{k}{n}\right) &=\sum_{k=1}^{n} \int_{\frac{k-1}{n}}^{\frac{k}{n}} f\left(\frac{k}{n}\right) \dx*
+  \end{align*}
+  于是
+  \begin{align*}
+    \int_{0}^{1} f(x) \dx*-\frac{1}{n} \sum_{k=1}^{n} f\left(\frac{k}{n}\right) 
+    &=\sum_{k=1}^{n} \int_{\frac{k-1}{n}}^{\frac{k}{n}}\left[f(x)-f\left(\frac{k}{n}\right)\right] \dx* \\
+    &=-\sum_{k=1}^{n} \int_{\frac{k-1}{n}}^{\frac{k}{n}} f^{\prime}\left(\xi_{k}\right)\left(\frac{k}{n}-x\right) \dx* \quad \xi_{k} \in\left(x, \frac{k}{n}\right) 
+  \end{align*}
+  再由 $f'(x)$ 的连续性可知, 存在 $m_k,M_k$ 使得 
+  \begin{align*}
+    m_k \le f'(x) \le M_k 
+  \end{align*}
+  那么 
+  \begin{align*}
+    \int_{\frac{k-1}{n}}^{\frac{k}{n}} m_k \left(\frac{k}{n}-x\right) \dx* \le \int_{\frac{k-1}{n}}^{\frac{k}{n}} f^{\prime}\left(\xi_{k}\right)\left(\frac{k}{n}-x\right) \dx* \le  \int_{\frac{k-1}{n}}^{\frac{k}{n}} M_k \left(\frac{k}{n}-x\right) \dx*
+  \end{align*}
+  也即
+  \begin{align*}
+    m_k \le \frac{\int_{\frac{k-1}{n}}^{\frac{k}{n}} f^{\prime}\left(\xi_{k}\right)\left(\frac{k}{n}-x\right) \dx*}{\frac{1}{2n^2}} \le M_k
+  \end{align*}
+  存在 $\eta_k$ 使得 
+  \begin{align*}
+    &-\sum_{k=1}^{n} \int_{\frac{k-1}{n}}^{\frac{k}{n}} f^{\prime}\left(\xi_{k}\right)\left(\frac{k}{n}-x\right) \dx* \quad \xi_{k} \in\left(x, \frac{k}{n}\right) \\
+    =&-\sum_{k=1}^{n} f^{\prime}\left(\eta_{k}\right) \int_{\frac{k-1}{n}}^{\frac{k}{n}}\left(\frac{k}{n}-x\right) \dx* \quad \eta_{k} \in\left(\frac{k-1}{n}, \frac{k}{n}\right) \\
+    =&-\sum_{k=1}^{n} f^{\prime}\left(\eta_{k}\right)\left(\frac{1}{2 n^{2}}\right)
+  \end{align*}
+  再有
+  \begin{align*}
+    \limit{n}{\infty} n\left(\int_{0}^{1} f(x) \dx*-\frac{1}{n} \sum_{k=1}^{n} f\left(\frac{k}{n}\right)\right) 
+    &=-\frac{1}{2 n} \sum_{k=1}^{n} f^{\prime}\left(\eta_{k}\right) \\
+    & \rightarrow-\frac{1}{2} \int_{0}^{1} f^{\prime}(x) \dx* \quad(n \rightarrow \infty) \\
+    &=\frac{1}{2}(f(0)-(1))
+  \end{align*}
+  本题只需令
+  \begin{align*}
+    f(x)=\frac{1}{1+x^{2}}
+  \end{align*}
+  即可得到
+  \begin{align*}
+    n\left(\frac{\pi}{4}-x_{n}\right) \to \frac{1}{4} \quad(n \to \infty)
+  \end{align*}
+  \end{answer}
   \item 如果级数 $ \sum_{n = 1}^{\infty} a_{n} $ 收敛, $ \limit{n}{\infty} p_{n} = \infty $, 证明极限
   \begin{align*}
       \limit{n}{\infty}\frac{a_{1} p_{1} + a_{2} p_{2} + \dots + a_{n} p_{n}}{p_{n}} = 0.
@@ -785,6 +848,27 @@
   \begin{align*}
       \limit{n}{\infty}\qty(n! a_{1} a_{2} \dots a_{n})^{1/n} = 0.
   \end{align*}
+  \begin{hint}
+    先证明 $na_n$ 是无穷小, 再取对数 stolz 即可
+  \end{hint}
+  \begin{answer}
+    由于 $ \sum_{n = 1}^{\infty} a_{n} $ 收敛, 易知 $na_n $ 极限为零, 理由如下
+
+    反证法, 若 $\limit{n}{\infty}na_n = a(a\neq 0)$, 那么 
+    \begin{align*}
+        a_n =O\qty(\frac{1}{n}) \quad n\to \infty
+    \end{align*}
+    由调和级数的敛散性可知矛盾.
+
+    设 
+    \begin{align*}
+        x_n = \ln \qty(n! a_{1} a_{2} \dots a_{n})^{1/n} = \frac{\ln{a_1}+\ln{2a_2}+\cdots+\ln{na_n}}{n} \to -\infty \quad n\to \infty
+    \end{align*}
+    也即
+    \begin{align*}
+        \limit{n}{\infty}\qty(n! a_{1} a_{2} \dots a_{n})^{1/n} = \limit{n}{\infty}\exp{(x_n)} = 0
+    \end{align*}
+  \end{answer}
   \item \emph{面积原理}
   \begin{exercise}
       \item 设 $ f $ 是一个非负的递增函数, 则当 $ \xi \ge m $ 时有
